@@ -39,7 +39,6 @@ const Login = () => {
             Cookies.set('helperzz-jwt-auth-token', response.token, {
                 secure: true,
                 sameSite: 'Lax',
-                httpOnly: true,
             });
             navigate('/')
             toast.success(response.message)
