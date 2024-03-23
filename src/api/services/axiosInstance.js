@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://helperzz-api.vercel.app/api',
+    baseURL: 'https://develons.site/api',
     headers: {
         'Content-Type': 'application/json',
     },
