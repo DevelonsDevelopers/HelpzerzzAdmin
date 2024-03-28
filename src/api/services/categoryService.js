@@ -17,6 +17,14 @@ const categoryService = {
             throw error.response.data
         }
     },
+    fetchAllActive: async () => {
+        try {
+            const response = await axiosInstance.get('/categories/allActive');
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     delete: async (id) => {
         try {
             const response = await axiosInstance.delete('/categories/delete/' + id)

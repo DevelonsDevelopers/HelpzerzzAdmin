@@ -24,7 +24,7 @@ const PortalLayout = ({ children }) => {
                     <Sidebar />
                 </Transition>
                 <main
-                    className={`bg-gray-100 pt-6 transition-all duration-[400ms] ${showNav ? "pl-56" : ""
+                    className={`bg-gray-100 pt-6 transition-all duration-[400ms] ${showNav ? "pl-64" : ""
                     }`}>
                     <div className="bg-gray-100 px-4 md:px-16 min-h-screen max-h-[100%] pb-[4rem] ">{children}</div>
                 </main>

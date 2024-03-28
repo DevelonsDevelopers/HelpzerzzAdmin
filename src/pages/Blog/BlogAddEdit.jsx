@@ -88,7 +88,7 @@ const BlogAddEdit = ({edit = false}) => {
     }
 
     return (
-        <PortalLayout>
+        <>
             {/* <center>
             <div className="flex justify-center items-center h-screen">
                 <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
@@ -128,9 +128,6 @@ const BlogAddEdit = ({edit = false}) => {
                                     <option>Guide</option>
                                     <option>Improvement</option>
                                     <option>Design</option>
-                                    {/*{countryResponse.countries.map(value => (*/}
-                                    {/*    <option value={value.id}>{value.name}</option>*/}
-                                    {/*))}*/}
                                 </select>
                             </div>
 
@@ -196,7 +193,7 @@ const BlogAddEdit = ({edit = false}) => {
                     </div>
                 </div>
             </div>
-        </PortalLayout>
+        </>
     );
 };
 

@@ -2,16 +2,48 @@ import axiosInstance from "./axiosInstance";
 
 const contractorService = {
     create: async (payload) => {
-      try {
+        try {
           const response = await axiosInstance.post('/contractors/create', payload)
           return response.data
-      } catch (error) {
+        } catch (error) {
           throw error.response.data
-      }
+        }
+    },
+    details: async (id) => {
+        try {
+            const response = await axiosInstance.get('/contractors/details/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    createDetails: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/createDetails', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    updateDetails: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/contractors/updateDetails', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
     },
     fetchAll: async () => {
         try {
             const response = await axiosInstance.get('/contractors/all');
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    fetchAllActive: async () => {
+        try {
+            const response = await axiosInstance.get('/contractors/active');
             return response.data
         } catch (error) {
             throw error.response.data

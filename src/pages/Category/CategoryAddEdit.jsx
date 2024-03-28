@@ -82,7 +82,7 @@ const CategoryAddEdit = ({ edit = false }) => {
 
 
     return (
-        <PortalLayout>
+        <>
             {response.categoryLoading ?
                 <Loading/>
                 :
@@ -143,7 +143,7 @@ const CategoryAddEdit = ({ edit = false }) => {
                     </div>
                 </div>
             }
-        </PortalLayout>
+        </>
     );
 };
 

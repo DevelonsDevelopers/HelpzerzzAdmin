@@ -12,6 +12,9 @@ import {
 import DeleteModal from "../../components/DeleteModal";
 import {FaCircleCheck} from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
+import {FormControlLabel} from "@mui/material";
+import {Android12Switch, BpCheckbox} from "../../utils/components";
+import {IoAdd} from "react-icons/io5";
 
 const CostGuideList = () => {
     const [open, setOpen] = useState(false)
@@ -54,42 +57,40 @@ const CostGuideList = () => {
     }
 
     return (
-        <PortalLayout>
+        <>
 
             {response.loading ?
                 <Loading/>
                 :
                 <div>
                     <DeleteModal open={open} setOpen={setOpen} deleteFunction={handleDelete} deleting={response.deleting}/>
-                    <h1 className='text-center text-[25px] font-[800] mt-5 uppercase'>Cost Guides</h1>
                     <div className="w-full flex flex-col justify-center">
-                        <div className="flex justify-center mt-[3rem] w-[90%] m-auto">
-                            <input type="search" name="search" id="search" placeholder="Search Here"
-                                   className="border-2 border-gray-600 pl-[1rem] pr-[1rem] rounded-[1rem] py-2 w-[20rem] mr-auto focus:outline-none focus:ring-0 focus:border-gray-900 peer"/>
-                            <button onClick={() => navigate('/costGuides/add')} className="w-[150px] bg-black cursor-pointer py-2 px-[1rem] text-white font-[600] rounded-[1.5rem] ml-auto">ADD NEW</button>
+                        <div className="flex justify-center w-[90%] m-auto">
+                            <h1 className='text-[25px] font-[700] uppercase'>Cost guides</h1>
+                            <button onClick={() => navigate('/costGuides/add')} className="flex w-[220px] bg-[#0D14FD] cursor-pointer py-2 px-[1rem] text-white font-[500] rounded-xl ml-auto items-center justify-center hover:scale-110">Add Category<IoAdd className="ml-3"/></button>
                         </div>
                         <table className="rounded-xl p-5 bg-white w-[90%] m-auto mt-6">
                             <thead>
 
                             <tr className="uppercase text-sm leading-normal w-full">
-                                <th className="py-[2%] border-r-[1px] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>
-                                <th className="py-[2%] border-r-[1px] border-b-[2px] border-b-black text-center text-[13px] w-[5%]">Name</th>
-                                <th className="py-[2%] border-r-[1px] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Subtitle</th>
-                                <th className="py-[2%] border-r-[1px] border-b-[2px] border-b-black text-center text-[13px] w-[1%]">Featured</th>
-                                <th className="py-[2%] border-r-[1px] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Status</th>
-                                <th className="py-[2%] border-r-[1px] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Actions</th>
+                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>
+                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[5%]">Name</th>
+                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Subtitle</th>
+                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]">Featured</th>
+                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Status</th>
+                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Actions</th>
                                 <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]"></th>
                             </tr>
                             </thead>
                             <tbody>
                             {response?.costGuides.map((value) => (
                                 <tr className="text-[#000000] text-sm w-[100%]">
-                                    <td className="py-[2%] w-[2%] border-r-[1px] border-t-[1px] text-center font-bold text-blue-500">{value?.id}</td>
-                                    <td className="py-[2%] w-[5%] border-r-[1px] border-t-[1px] text-center text-[12px] font-bold">{value.title}</td>
-                                    <td className="py-[2%] w-[2%] border-r-[1px] border-t-[1px] text-center text-[10px] font-medium">{value?.subtitle}</td>
-                                    <td onClick={() => handleFeatured(value.id, value.featured)} className={`py-[2%] w-[1%] border-r-[1px] border-t-[1px] justify-center text-[15px] font-bold cursor-pointer hover:scale-125 ${value.featured === 1 ? "text-green-800" : "text-red-700"}`}>{value.featured === 1 ? <FaCircleCheck className="mx-auto"/> : <IoIosCloseCircle className="mx-auto"/>}</td>
-                                    <td onClick={() => handleStatus(value.id, value.status)} className="py-[2%] w-[2%] border-r-[1px] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-110"><span className={`rounded-2xl py-1 px-2 text-white ${value.status === 1 ? "bg-green-600" : "bg-red-500"}`}>{value.status === 1 ? "Enabled" : "Disabled" }</span></td>
-                                    <td className="py-[2%] w-[2%] border-r-[1px] border-t-[1px]">
+                                    <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-blue-500">{value?.id}</td>
+                                    <td className="py-[2%] w-[5%] border-t-[1px] text-center text-[12px] font-bold">{value.title}</td>
+                                    <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[10px] font-medium">{value?.subtitle}</td>
+                                    <td onClick={() => handleFeatured(value.id, value.featured)} className={`py-[2%] w-[1%] border-t-[1px] justify-center text-[15px] font-bold cursor-pointer hover:scale-105 items-center ${value.featured === 1 ? "text-green-800" : "text-red-700"}`}><center><BpCheckbox className="mx-auto" checked={value.featured}/></center></td>
+                                    <td onClick={() => handleStatus(value.id, value.status)} className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"><FormControlLabel className={"mx-auto"} control={<Android12Switch checked={value.status}/>}/></td>
+                                    <td className="py-[2%] w-[2%] border-t-[1px]">
                                         <div className="flex items-center justify-center">
                                             <div className="w-4 mr-2 cursor-pointer hover:scale-125"  >
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="blue">
@@ -103,7 +104,7 @@ const CostGuideList = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="py-[2%] w-[1%] border-r-[1px] border-t-[1px]">
+                                    <td className="py-[2%] w-[1%] border-t-[1px]">
                                         <div className="flex items-center justify-center">
                                             <div className="w-4 hover:scale-125 cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
@@ -120,7 +121,7 @@ const CostGuideList = () => {
                     </div>
                 </div>
             }
-        </PortalLayout>
+        </>
     );
 };
 

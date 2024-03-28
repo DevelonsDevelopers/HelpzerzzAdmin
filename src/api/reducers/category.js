@@ -1,4 +1,5 @@
 import {
+    ACTIVE_CATEGORIES,
     ALL_CATEGORIES,
     CATEGORY_REDUCER,
     CREATE_CATEGORY, DELETE_CATEGORY, FEATURE_CATEGORY, STATUS_CATEGORY,
@@ -14,7 +15,9 @@ const initialState = {
     noData: false,
     success: false,
     fetched: false,
+    activeFetched: false,
     categories: [],
+    activeCategories: [],
     category: null,
     error: '',
     categoryError: '',
@@ -30,6 +33,10 @@ export const addCategory = createAsyncThunk(CREATE_CATEGORY, (data) => {
 
 export const getCategories = createAsyncThunk(ALL_CATEGORIES, () => {
     return categoryService.fetchAll()
+})
+
+export const getActiveCategories = createAsyncThunk(ACTIVE_CATEGORIES, () => {
+    return categoryService.fetchAllActive()
 })
 
 export const deleteCategory = createAsyncThunk(DELETE_CATEGORY, (id) => {
@@ -85,6 +92,18 @@ const category = createSlice({
             state.loading = false
             state.categories = []
             state.error = action.error.message
+        })
+
+        //ACTIVE CATEGORIES ///////////////////////////
+        builder.addCase(getActiveCategories.pending, state => {
+
+        })
+        builder.addCase(getActiveCategories.fulfilled, (state, action) => {
+            state.activeCategories = action.payload.categories
+            state.activeFetched = true
+        })
+        builder.addCase(getActiveCategories.rejected, (state, action) => {
+
         })
 
         //ADD CATEGORY /////////////////////////////////////////

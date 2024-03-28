@@ -29,7 +29,7 @@ const Topbar = ({showNav, setShowNav}) => {
 
     return (
         <div
-            className={`w-full h-16 flex bg-white justify-between items-center transition-all duration-[400ms] ${showNav ? 'pl-[13rem] max-sm:pl-[14rem]' : ""}`}>
+            className={`w-full h-16 flex bg-white justify-between items-center transition-all duration-[400ms] ${showNav ? 'pl-[15rem] max-sm:pl-[13rem]' : ""}`}>
             <div className='pl-4 md:pl-16'>
                 <HiMenuAlt2 className='h-8 w-10 max-md:h-[20px] max-md:w-[20px] text-gray-700 cursor-pointer'
                             onClick={() => setShowNav(!showNav)}/>

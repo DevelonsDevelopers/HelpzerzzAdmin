@@ -6,14 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import {Toaster} from "react-hot-toast";
 import {Provider} from "react-redux";
 import store from "./api/store/store";
+import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <App/>
-            <Toaster/>
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App/>
+                <Toaster/>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>
 );
 

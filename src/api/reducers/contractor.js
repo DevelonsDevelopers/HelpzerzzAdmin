@@ -1,8 +1,15 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
+    ACTIVE_CONTRACTORS,
     ALL_CONTRACTORS,
     CONTRACTOR_REDUCER,
-    CREATE_CONTRACTOR, DELETE_CONTRACTOR, FEATURE_CONTRACTOR, STATUS_CONTRACTOR,
+    CREATE_CONTRACTOR,
+    CREATE_DETAILS,
+    DELETE_CONTRACTOR,
+    DETAILS_CONTRACTOR,
+    FEATURE_CONTRACTOR,
+    STATUS_CONTRACTOR,
+    UPDATE_DETAILS,
 } from "../../utils/constants";
 import contractorService from "../services/contractorService";
 import uploadService from "../services/uploadService";
@@ -10,14 +17,20 @@ import uploadService from "../services/uploadService";
 const initialState = {
     loading: false,
     contractorLoading: false,
+    detailsLoading: false,
     deleting: false,
     noData: false,
     success: false,
+    detailSuccess: false,
     fetched: false,
+    activeFetched: false,
     contractors: [],
+    activeContractors: [],
     contractor: null,
+    contractorDetails: null,
     error: '',
     contractorError: '',
+    detailsError: '',
 }
 
 export const addContractor = createAsyncThunk(CREATE_CONTRACTOR, (data) => {
@@ -28,8 +41,26 @@ export const addContractor = createAsyncThunk(CREATE_CONTRACTOR, (data) => {
     })
 })
 
+export const addContractorDetails = createAsyncThunk(CREATE_DETAILS, (data) => {
+    return contractorService.createDetails(data)
+})
+
+export const editContractorDetails = createAsyncThunk(UPDATE_DETAILS, (data) => {
+    return contractorService.updateDetails(data).then(response => {
+        return !!response.success;
+    })
+})
+
 export const getContractors = createAsyncThunk(ALL_CONTRACTORS, () => {
     return contractorService.fetchAll()
+})
+
+export const getActiveContractors = createAsyncThunk(ACTIVE_CONTRACTORS, () => {
+    return contractorService.fetchAllActive()
+})
+
+export const contractorDetails = createAsyncThunk(DETAILS_CONTRACTOR, (id) => {
+    return contractorService.details(id)
 })
 
 export const deleteContractor = createAsyncThunk(DELETE_CONTRACTOR, (id) => {
@@ -68,6 +99,9 @@ const contractor = createSlice({
     reducers: {
         successListener: (state) => {
             state.success = false
+        },
+        detailsSuccessListener: (state) => {
+            state.detailSuccess = false
         }
     },
     extraReducers: builder => {
@@ -87,6 +121,33 @@ const contractor = createSlice({
             state.error = action.error.message
         })
 
+        //ACTIVE CONTRACTORS ////////////////////////
+        builder.addCase(getActiveContractors.pending, state => {
+
+        })
+        builder.addCase(getActiveContractors.fulfilled, (state, action) => {
+            state.activeContractors = action.payload.contractors
+            state.activeFetched = true
+        })
+        builder.addCase(getActiveContractors.rejected, (state, action) => {
+
+        })
+
+        //CONTRACTOR DETAILS ///////////////////////////
+        builder.addCase(contractorDetails.pending, state => {
+            state.detailsLoading = true
+        })
+        builder.addCase(contractorDetails.fulfilled, (state, action) => {
+            state.detailsLoading = false
+            state.contractorDetails = action.payload.data
+            state.detailsError = ''
+        })
+        builder.addCase(contractorDetails.rejected, (state, action) => {
+            state.detailsLoading = false
+            state.contractorDetails = null
+            state.detailsError = action.error.message
+        })
+
         //ADD CONTRACTOR /////////////////////////////////////////
         builder.addCase(addContractor.pending, state => {
             state.success = false
@@ -102,7 +163,29 @@ const contractor = createSlice({
             state.success = false
         })
 
-        //DELETE CATEGORY ////////////////////////////////////////
+        //ADD CONTRACTOR DETAILS /////////////////////////////////////////
+        builder.addCase(addContractorDetails.pending, state => {
+            state.detailSuccess = false
+        })
+        builder.addCase(addContractorDetails.fulfilled, (state, action) => {
+            state.detailSuccess = true
+        })
+        builder.addCase(addContractorDetails.rejected, (state, action) => {
+            state.detailSuccess = false
+        })
+
+        //UPDATE CONTRACTOR DETAILS /////////////////////////////////////////
+        builder.addCase(editContractorDetails.pending, state => {
+            state.detailSuccess = false
+        })
+        builder.addCase(editContractorDetails.fulfilled, (state, action) => {
+            state.detailSuccess = true
+        })
+        builder.addCase(editContractorDetails.rejected, (state, action) => {
+            state.detailSuccess = false
+        })
+
+        //DELETE CONTRACTOR ////////////////////////////////////////
         builder.addCase(deleteContractor.pending, state => {
             state.deleting = true
         })
@@ -114,7 +197,7 @@ const contractor = createSlice({
             state.deleting = false
         })
 
-        //STATUS CATEGORY ////////////////////////////////////////
+        //STATUS CONTRACTOR ////////////////////////////////////////
         builder.addCase(updateContractorStatus.pending, state => {
 
         })
@@ -132,7 +215,7 @@ const contractor = createSlice({
 
         })
 
-        //FEATURE CATEGORY ////////////////////////////////////////
+        //FEATURE CONTRACTOR ////////////////////////////////////////
         builder.addCase(updateContractorFeature.pending, state => {
 
         })
@@ -153,4 +236,4 @@ const contractor = createSlice({
 })
 
 export default contractor.reducer
-export const { successListener } = contractor.actions
+export const { successListener, detailsSuccessListener } = contractor.actions
