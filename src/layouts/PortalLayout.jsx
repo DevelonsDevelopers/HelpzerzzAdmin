@@ -2,13 +2,17 @@ import React, {Fragment, useState} from 'react';
 import Topbar from "./Topbar";
 import {Transition} from "@headlessui/react";
 import Sidebar from "./Sidebar";
+import {useLocation} from "react-router-dom";
 
 const PortalLayout = ({ children }) => {
 
+    const location = useLocation()
     const [showNav, setShowNav] = useState(true)
 
     return (
         <div>
+            {location.pathname === "/login" ? children
+                :
             <div>
                 <Topbar showNav={showNav} setShowNav={setShowNav} />
                 <Transition
@@ -29,6 +33,7 @@ const PortalLayout = ({ children }) => {
                     <div className="bg-gray-100 px-4 md:px-16 min-h-screen max-h-[100%] pb-[4rem] ">{children}</div>
                 </main>
             </div>
+            }
         </div>
     )
 };
