@@ -81,8 +81,8 @@ const RequestList = () => {
                                 <td className="py-[2%] w-[2%] border-t-[1px] text-center text-md font-bold">{value.name}</td>
                                 <td className="py-[2%] w-[3%] border-t-[1px] text-center text-md font-medium">{value.home_type}</td>
                                 <td className="py-[2%] w-[2%] border-t-[1px] text-center text-md font-medium">{value.time}</td>
-                                <td className='py-[2%] w-[2%] border-t-[1px] text-center font-bold text-md cursor-pointer hover:scale-110'>
-                                    <FormControlLabel control={<Android12Switch className={"ml-5"} checked={value.status}/>} label=''/>
+                                <td className='py-[2%] w-[2%] border-t-[1px] text-center font-bold text-md hover:scale-110'>
+                                    <p className={`w-[100px] mx-auto rounded-2xl py-1 px-2 text-white ${value.status === 1 ? "bg-green-600" : "bg-gray-500"}`}>{value.status === 1 ? "Active" : "Pending" }</p>
                                 </td>
                                 <td className="py-[2%] w-[2%] border-t-[1px]">
                                     <div className="flex items-center justify-center">

@@ -94,27 +94,6 @@ const Sidebar = forwardRef(({}, ref) => {
                                 }}
                                    className="cursor-pointer flex items-center p-2 text-[13px] text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 bg-gray-100 w-[84%] m-auto hover:font-bold">Add Category</a>
                             </li>
-
-                        </ul>
-
-                    </div>
-
-                    <div>
-                        <button type="button" onClick={() => handleSelection(2)}
-                                className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"
-                                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                            <MdCategory className={`text-2xl`}/>
-                            <span
-                                className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Subcategories</span>
-                            <svg className={`w-3 h-3 ${open[2] ? '-rotate-180 duration-300' : 'rotate-0 duration-300'}`}
-                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 10 6">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                      d="m1 1 4 4 4-4"/>
-                            </svg>
-                        </button>
-
-                        <ul id="dropdown-example" className={`${open[2] ? '' : 'hidden'} py-2 space-y-2`}>
                             <li>
                                 <a onClick={(e) => {
                                     e.preventDefault()
@@ -133,6 +112,41 @@ const Sidebar = forwardRef(({}, ref) => {
                         </ul>
 
                     </div>
+
+                    {/*<div>*/}
+                    {/*    <button type="button" onClick={() => handleSelection(2)}*/}
+                    {/*            className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"*/}
+                    {/*            aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">*/}
+                    {/*        <MdCategory className={`text-2xl`}/>*/}
+                    {/*        <span*/}
+                    {/*            className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Subcategories</span>*/}
+                    {/*        <svg className={`w-3 h-3 ${open[2] ? '-rotate-180 duration-300' : 'rotate-0 duration-300'}`}*/}
+                    {/*             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"*/}
+                    {/*             viewBox="0 0 10 6">*/}
+                    {/*            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"*/}
+                    {/*                  d="m1 1 4 4 4-4"/>*/}
+                    {/*        </svg>*/}
+                    {/*    </button>*/}
+
+                    {/*    <ul id="dropdown-example" className={`${open[2] ? '' : 'hidden'} py-2 space-y-2`}>*/}
+                    {/*        <li>*/}
+                    {/*            <a onClick={(e) => {*/}
+                    {/*                e.preventDefault()*/}
+                    {/*                navigate('/subcategories')*/}
+                    {/*            }}*/}
+                    {/*               className="cursor-pointer flex items-center p-2 text-[13px] text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 bg-gray-100  w-[84%] m-auto hover:font-bold">Manage Subcategories </a>*/}
+                    {/*        </li>*/}
+                    {/*        <li>*/}
+                    {/*            <a onClick={(e) => {*/}
+                    {/*                e.preventDefault()*/}
+                    {/*                navigate('/subcategories/add')*/}
+                    {/*            }}*/}
+                    {/*               className="cursor-pointer flex items-center p-2 text-[13px] text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 bg-gray-100 w-[84%] m-auto hover:font-bold">Add Subcategory</a>*/}
+                    {/*        </li>*/}
+
+                    {/*    </ul>*/}
+
+                    {/*</div>*/}
 
                     <div>
                         <button type="button" onClick={() => handleSelection(3)}

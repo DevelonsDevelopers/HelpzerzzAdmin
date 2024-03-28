@@ -66,21 +66,38 @@ const ContractorList = () => {
                     <div className="w-full flex flex-col justify-center">
                         <div className="flex justify-center w-[90%] m-auto">
                             <h1 className='text-[25px] font-[700] uppercase'>Contractors</h1>
-                            <button onClick={() => navigate('/contractors/add')} className="flex w-[220px] bg-[#0D14FD] cursor-pointer py-2 px-[1rem] text-white font-[500] rounded-xl ml-auto items-center justify-center hover:scale-110">Add Category<IoAdd className="ml-3"/></button>
+                            <button onClick={() => navigate('/contractors/add')} className="flex w-[220px] bg-[#0D14FD] cursor-pointer py-2 px-[1rem] text-white font-[500] rounded-xl ml-auto items-center justify-center hover:scale-110">Add Contractor<IoAdd className="ml-3"/></button>
                         </div>
                         <table className="rounded-xl p-5 bg-white w-[90%] m-auto mt-6">
+                            {/*<thead>*/}
+
+                            {/*<tr className="uppercase text-sm leading-normal w-full">*/}
+                            {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>*/}
+                            {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[5%]">Name</th>*/}
+                            {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Email</th>*/}
+                            {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]">Featured</th>*/}
+                            {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Status</th>*/}
+                            {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Actions</th>*/}
+                            {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]"></th>*/}
+                            {/*</tr>*/}
+                            {/*</thead>*/}
+
                             <thead>
 
-                            <tr className="uppercase text-sm leading-normal w-full">
-                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>
-                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[5%]">Name</th>
-                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Email</th>
-                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]">Featured</th>
-                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Status</th>
-                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Actions</th>
-                                <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]"></th>
+                            <tr className="text-sm leading-normal w-full">
+                                <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center text-lg w-[2%]">ID
+                                </th>
+                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[3%]">Name
+                                </th>
+                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Email</th>
+                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Featured</th>
+                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Status</th>
+                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Actions</th>
+                                <th className="py-[2%] bg-gray-50 rounded-tr-xl text-center text-lg w-[1%]"></th>
                             </tr>
                             </thead>
+
+
                             <tbody>
                             {response?.contractors.map((value) => (
                                 <tr className="text-[#000000] text-sm w-[100%]">
@@ -88,7 +105,7 @@ const ContractorList = () => {
                                     <td className="py-[2%] w-[5%] border-t-[1px] text-center text-[12px] font-bold">{value.name}</td>
                                     <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[10px] font-medium">{value?.email}</td>
                                     <td onClick={() => handleFeatured(value.id, value.featured)} className={`py-[2%] w-[1%] border-t-[1px] justify-center text-[15px] font-bold cursor-pointer hover:scale-105 items-center ${value.featured === 1 ? "text-green-800" : "text-red-700"}`}><center><BpCheckbox className="mx-auto" checked={value.featured}/></center></td>
-                                    <td onClick={() => handleStatus(value.id, value.status)} className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"><FormControlLabel className={"mx-auto"} control={<Android12Switch checked={value.status}/>}/></td>
+                                    <td onClick={() => handleStatus(value.id, value.status)} className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"><FormControlLabel className={"mx-auto"} control={<Android12Switch checked={value.status} color={"success"}/>}/></td>
                                     <td className="py-[2%] w-[2%] border-t-[1px]">
                                         <div className="flex items-center justify-center">
                                             <div className="w-4 mr-2 cursor-pointer hover:scale-125"  >
