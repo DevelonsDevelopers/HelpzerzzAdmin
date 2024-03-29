@@ -9,6 +9,14 @@ const categoryService = {
           throw error.response.data
       }
     },
+    fetch: async (id) => {
+        try {
+            const response = await axiosInstance.get('/categories/single/' + id);
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     fetchAll: async () => {
         try {
             const response = await axiosInstance.get('/categories/all');

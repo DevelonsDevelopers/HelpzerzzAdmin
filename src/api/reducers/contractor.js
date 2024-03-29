@@ -7,7 +7,7 @@ import {
     CREATE_DETAILS,
     DELETE_CONTRACTOR,
     DETAILS_CONTRACTOR,
-    FEATURE_CONTRACTOR,
+    FEATURE_CONTRACTOR, SINGLE_CONTRACTOR,
     STATUS_CONTRACTOR,
     UPDATE_DETAILS,
 } from "../../utils/constants";
@@ -53,6 +53,10 @@ export const editContractorDetails = createAsyncThunk(UPDATE_DETAILS, (data) => 
 
 export const getContractors = createAsyncThunk(ALL_CONTRACTORS, () => {
     return contractorService.fetchAll()
+})
+
+export const getContractor = createAsyncThunk(SINGLE_CONTRACTOR, (id) => {
+    return contractorService.fetch(id)
 })
 
 export const getActiveContractors = createAsyncThunk(ACTIVE_CONTRACTORS, () => {
@@ -121,6 +125,21 @@ const contractor = createSlice({
             state.error = action.error.message
         })
 
+        //GET CONTRACTOR /////////////////////////////////////
+        builder.addCase(getContractor.pending, state => {
+            state.contractorLoading = true
+        })
+        builder.addCase(getContractor.fulfilled, (state, action) => {
+            state.contractorLoading = false
+            state.contractor = action.payload.contractor
+            state.contractorError = ""
+        })
+        builder.addCase(getContractor.rejected, (state, action) => {
+            state.contractorLoading = false
+            state.contractor = null
+            state.contractorError = action.error.message
+        })
+
         //ACTIVE CONTRACTORS ////////////////////////
         builder.addCase(getActiveContractors.pending, state => {
 
@@ -162,7 +181,7 @@ const contractor = createSlice({
         builder.addCase(addContractor.rejected, (state, action) => {
             state.success = false
         })
-
+0
         //ADD CONTRACTOR DETAILS /////////////////////////////////////////
         builder.addCase(addContractorDetails.pending, state => {
             state.detailSuccess = false

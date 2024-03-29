@@ -1,10 +1,7 @@
 import React, {forwardRef, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
-import {TbBrandBlogger, TbCategory, TbUserDollar} from "react-icons/tb";
-import {MdCategory, MdOutlineRateReview, MdSpeakerNotes} from "react-icons/md";
-import {FaBloggerB, FaRegUser, FaUserAlt} from "react-icons/fa";
-import {CgNotes} from "react-icons/cg";
-import {GrSend} from "react-icons/gr";
+import {MdSpeakerNotes} from "react-icons/md";
+import {FaBloggerB, FaUserAlt} from "react-icons/fa";
 import {IoMdHome} from "react-icons/io";
 import {RiPagesFill, RiSendPlaneFill} from "react-icons/ri";
 import {BiSolidCategory} from "react-icons/bi";
@@ -27,7 +24,7 @@ const Sidebar = forwardRef(({}, ref) => {
     return (
         <div ref={ref}
              className="mt-[-4rem] fixed w-72 h-full bg-white rounded-r-[1.4rem] shadow-sm max-md:w-[40%] overflow-auto no-scrollbar">
-            <div className="flex flex-col mt-[2rem]">
+            <div className="flex flex-col mt-[2rem] mb-[1rem]">
                 <h3 className={`text-2xl ml-10 font-bold my-6`}>HELPERZZ</h3>
                 <div className="mx-4">
                     {/*//DASHBOARD*/}

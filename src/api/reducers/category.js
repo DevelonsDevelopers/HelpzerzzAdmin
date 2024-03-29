@@ -2,7 +2,7 @@ import {
     ACTIVE_CATEGORIES,
     ALL_CATEGORIES,
     CATEGORY_REDUCER,
-    CREATE_CATEGORY, DELETE_CATEGORY, FEATURE_CATEGORY, STATUS_CATEGORY,
+    CREATE_CATEGORY, DELETE_CATEGORY, FEATURE_CATEGORY, SINGLE_CATEGORY, STATUS_CATEGORY,
 } from "../../utils/constants";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import categoryService from "../services/categoryService";
@@ -33,6 +33,10 @@ export const addCategory = createAsyncThunk(CREATE_CATEGORY, (data) => {
 
 export const getCategories = createAsyncThunk(ALL_CATEGORIES, () => {
     return categoryService.fetchAll()
+})
+
+export const getCategory = createAsyncThunk(SINGLE_CATEGORY, (id) => {
+    return categoryService.fetch(id)
 })
 
 export const getActiveCategories = createAsyncThunk(ACTIVE_CATEGORIES, () => {
@@ -92,6 +96,21 @@ const category = createSlice({
             state.loading = false
             state.categories = []
             state.error = action.error.message
+        })
+
+        //GET CATEGORY /////////////////////////////////////
+        builder.addCase(getCategory.pending, state => {
+            state.categoryLoading = true
+        })
+        builder.addCase(getCategory.fulfilled, (state, action) => {
+            state.categoryLoading = false
+            state.category = action.payload.category
+            state.categoryError = ""
+        })
+        builder.addCase(getCategory.rejected, (state, action) => {
+            state.categoryLoading = false
+            state.category = null
+            state.categoryError = action.error.message
         })
 
         //ACTIVE CATEGORIES ///////////////////////////

@@ -1,5 +1,13 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ALL_BLOGS, BLOG_REDUCER, CREATE_BLOG, DELETE_BLOG, FEATURE_BLOG, STATUS_BLOG} from "../../utils/constants";
+import {
+    ALL_BLOGS,
+    BLOG_REDUCER,
+    CREATE_BLOG,
+    DELETE_BLOG,
+    FEATURE_BLOG,
+    SINGLE_BLOG,
+    STATUS_BLOG
+} from "../../utils/constants";
 import blogService from "../services/blogService";
 import uploadService from "../services/uploadService";
 
@@ -18,6 +26,10 @@ const initialState = {
 
 export const getBlogs = createAsyncThunk(ALL_BLOGS, () => {
     return blogService.fetchAll()
+})
+
+export const getBlog = createAsyncThunk(SINGLE_BLOG, (id) => {
+    return blogService.fetch(id)
 })
 
 export const addBlog = createAsyncThunk(CREATE_BLOG, (data) => {
@@ -81,6 +93,21 @@ const blog = createSlice({
             state.loading = false
             state.blogs = []
             state.error = action.error.message
+        })
+
+        //GET BLOG /////////////////////////////////////
+        builder.addCase(getBlog.pending, state => {
+            state.blogLoading = true
+        })
+        builder.addCase(getBlog.fulfilled, (state, action) => {
+            state.blogLoading = false
+            state.blog = action.payload.blog
+            state.blogError = ""
+        })
+        builder.addCase(getBlog.rejected, (state, action) => {
+            state.blogLoading = false
+            state.blog = null
+            state.blogError = action.error.message
         })
 
         //ADD BLOG /////////////////////////////////////////
