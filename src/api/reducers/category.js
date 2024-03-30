@@ -171,8 +171,8 @@ const category = createSlice({
         builder.addCase(updateCategory.fulfilled, (state, action) => {
             state.success = true
             if (action.payload) {
-                const value = state.categories.find(v => v.id === action.payload.category.id)
-                Object.assign(value, action.payload.category)
+                const value = state.categories.find(v => v.id === action.payload.id)
+                Object.assign(value, action.payload)
             }
         })
         builder.addCase(updateCategory.rejected, (state, action) => {

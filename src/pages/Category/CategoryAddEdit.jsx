@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
-import {addCategory, getCategory, successListener} from "../../api/reducers/category";
+import {addCategory, getCategory, successListener, updateCategory} from "../../api/reducers/category";
 import PortalLayout from "../../layouts/PortalLayout";
 import Loading from "../../components/Loading";
 import {IMAGE_PATH} from "../../utils/constants";
@@ -74,7 +74,7 @@ const CategoryAddEdit = ({ edit = false }) => {
         setErrors(tempErrors)
         if (!tempErrors.includes(true)) {
             if (edit) {
-                // dispatch(editCategory(categoryData))
+                dispatch(updateCategory({file: file, category: categoryData}))
             } else {
                 dispatch(addCategory({file: file, category: categoryData}))
             }
