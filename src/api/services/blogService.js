@@ -9,6 +9,14 @@ const blogService = {
             throw error
         }
     },
+    update: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/blogs/update', payload)
+            return response.data
+        } catch (error) {
+            throw error
+        }
+    },
     fetch: async (id) => {
         try {
             const response = await axiosInstance.get('/blogs/single/' + id);

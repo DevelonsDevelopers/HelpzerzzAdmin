@@ -30,22 +30,28 @@ function App() {
 
                 <Route path="/users" element={<UserList/>}/>
                 <Route path="/users/add" element={<UserAddEdit/>}/>
+                <Route path="/users/edit" element={<UserAddEdit edit={true}/>}/>
 
                 <Route path="/categories" element={<CategoryList/>}/>
                 <Route path="/categories/add" element={<CategoryAddEdit/>}/>
+                <Route path="/categories/edit" element={<CategoryAddEdit edit={true}/>}/>
 
                 <Route path="/subcategories" element={<SubcategoryList/>}/>
                 <Route path="/subcategories/add" element={<SubcategoryAddEdit/>}/>
+                <Route path="/subcategories/edit" element={<SubcategoryAddEdit edit={true}/>}/>
 
                 <Route path="/blogs" element={<BlogList/>}/>
                 <Route path="/blogs/add" element={<BlogAddEdit/>}/>
+                <Route path="/blogs/edit" element={<BlogAddEdit edit={true}/>}/>
 
                 <Route path="/contractors" element={<ContractorList/>}/>
                 <Route path="/contractors/add" element={<ContractorAddEdit/>}/>
+                <Route path="/contractors/edit" element={<ContractorAddEdit edit={true}/>}/>
                 <Route path="/contractors/details" element={<ContractorDetails/>}/>
 
                 <Route path="/costGuides" element={<CostGuideList/>}/>
                 <Route path="/costGuides/add" element={<CostGuideAddEdit/>}/>
+                <Route path="/costGuides/edit" element={<CostGuideAddEdit edit={true}/>}/>
 
                 <Route path="/testimonials" element={<TestimonialList/>}/>
                 <Route path="/testimonials/add" element={<TestimonialAddEdit/>}/>

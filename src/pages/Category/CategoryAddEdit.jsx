@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
-import {addCategory, successListener} from "../../api/reducers/category";
+import {addCategory, getCategory, successListener} from "../../api/reducers/category";
 import PortalLayout from "../../layouts/PortalLayout";
 import Loading from "../../components/Loading";
+import {IMAGE_PATH} from "../../utils/constants";
 
 const CategoryAddEdit = ({ edit = false }) => {
 
@@ -25,7 +26,7 @@ const CategoryAddEdit = ({ edit = false }) => {
     useEffect(() => {
         if (edit) {
             if (params.get("id")) {
-                // dispatch(getCategory(params.get("id")))
+                dispatch(getCategory(params.get("id")))
             }
         }
     }, []);
@@ -111,8 +112,16 @@ const CategoryAddEdit = ({ edit = false }) => {
                                     <label htmlFor="dropzone-file"
                                            className={`flex flex-col items-center justify-center w-full h-60 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 mt-[2.0rem] ${errors[2] ? "border-red-600" : "border-gray-300"}`}>
                                         {categoryData.image ?
-                                            <img src={categoryData.image} alt=""
-                                                 className={`rounded-lg object-contain h-60 w-full py-[2px]`}/>
+                                            <>
+                                                {
+                                                    file ?
+                                                        <img src={`${categoryData.image}`} alt=""
+                                                             className={`rounded-lg object-contain h-56 w-full py-[2px]`}/>
+                                                        :
+                                                        <img src={`${IMAGE_PATH}${categoryData.image}`} alt=""
+                                                             className={`rounded-lg object-contain h-56 w-full py-[2px]`}/>
+                                                }
+                                            </>
                                             :
                                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                                 <svg className="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true"

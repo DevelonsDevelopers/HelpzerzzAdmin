@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import PortalLayout from "../../layouts/PortalLayout";
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
-import {addSubcategory, successListener} from "../../api/reducers/subcategory";
+import {addSubcategory, getSubcategory, successListener, updateSubcategory} from "../../api/reducers/subcategory";
 import {getActiveCategories} from "../../api/reducers/category";
 
 const SubcategoryAddEdit = ({ edit = false }) => {
@@ -26,7 +26,7 @@ const SubcategoryAddEdit = ({ edit = false }) => {
     useEffect(() => {
         if (edit) {
             if (params.get("id")) {
-                // dispatch(getCompany(params.get("id")))
+                dispatch(getSubcategory(params.get("id")))
             }
         }
     }, []);
@@ -68,7 +68,7 @@ const SubcategoryAddEdit = ({ edit = false }) => {
         setErrors(tempErrors)
         if (!tempErrors.includes(true)){
             if (edit){
-                // dispatch(editCompany(companyData))
+                dispatch(updateSubcategory(subcategoryData))
             } else {
                 dispatch(addSubcategory(subcategoryData))
             }

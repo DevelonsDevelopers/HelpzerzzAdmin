@@ -2,7 +2,7 @@ import {
     ACTIVE_CATEGORIES,
     ALL_CATEGORIES,
     CATEGORY_REDUCER,
-    CREATE_CATEGORY, DELETE_CATEGORY, FEATURE_CATEGORY, SINGLE_CATEGORY, STATUS_CATEGORY,
+    CREATE_CATEGORY, DELETE_CATEGORY, FEATURE_CATEGORY, SINGLE_CATEGORY, STATUS_CATEGORY, UPDATE_CATEGORY,
 } from "../../utils/constants";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import categoryService from "../services/categoryService";
@@ -29,6 +29,30 @@ export const addCategory = createAsyncThunk(CREATE_CATEGORY, (data) => {
         category.image = file.fileName
         return categoryService.create(category)
     })
+})
+
+export const updateCategory = createAsyncThunk(UPDATE_CATEGORY, (data) => {
+    if (data.file) {
+        return uploadService.single(data.file).then(file => {
+            let category = data.category;
+            category.image = file.fileName
+            return categoryService.update(category).then(response => {
+                if (response.success) {
+                    return category
+                } else {
+                    return null
+                }
+            })
+        })
+    } else {
+        return categoryService.update(data.category).then(response => {
+            if (response.success) {
+                return data.category
+            } else {
+                return null
+            }
+        })
+    }
 })
 
 export const getCategories = createAsyncThunk(ALL_CATEGORIES, () => {
@@ -137,6 +161,21 @@ const category = createSlice({
             state.categories = tempCategories
         })
         builder.addCase(addCategory.rejected, (state, action) => {
+            state.success = false
+        })
+
+        //EDIT CATEGORY //////////////////////////////////////////
+        builder.addCase(updateCategory.pending, state => {
+            state.success = false
+        })
+        builder.addCase(updateCategory.fulfilled, (state, action) => {
+            state.success = true
+            if (action.payload) {
+                const value = state.categories.find(v => v.id === action.payload.category.id)
+                Object.assign(value, action.payload.category)
+            }
+        })
+        builder.addCase(updateCategory.rejected, (state, action) => {
             state.success = false
         })
 

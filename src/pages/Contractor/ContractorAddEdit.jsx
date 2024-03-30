@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
 import PortalLayout from "../../layouts/PortalLayout";
-import {addContractor, successListener} from "../../api/reducers/contractor";
+import {addContractor, getContractor, successListener, updateContractor} from "../../api/reducers/contractor";
+import {IMAGE_PATH} from "../../utils/constants";
 
 const ContractorAddEdit = ({edit = false}) => {
 
@@ -29,7 +30,7 @@ const ContractorAddEdit = ({edit = false}) => {
     useEffect(() => {
         if (edit) {
             if (params.get("id")) {
-                // dispatch(getCompany(params.get("id")))
+                dispatch(getContractor(params.get("id")))
             }
         }
     }, []);
@@ -79,7 +80,7 @@ const ContractorAddEdit = ({edit = false}) => {
         setErrors(tempErrors)
         if (!tempErrors.includes(true)) {
             if (edit) {
-                // dispatch(editCompany(companyData))
+                dispatch(updateContractor({file: file, contractor: contractorData}))
             } else {
                 dispatch(addContractor({file: file, contractor: contractorData}))
             }
@@ -161,8 +162,16 @@ const ContractorAddEdit = ({edit = false}) => {
                                 <label htmlFor="dropzone-file"
                                        className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 ${error[5] ? "border-red-600" : "border-gray-300"}`}>
                                     {contractorData.image ?
-                                        <img src={contractorData.image} alt=""
-                                             className={`rounded-lg object-contain h-64 w-full py-[2px]`}/>
+                                        <>
+                                            {
+                                                file ?
+                                                    <img src={`${contractorData.image}`} alt=""
+                                                         className={`rounded-lg object-contain h-56 w-full py-[2px]`}/>
+                                                    :
+                                                    <img src={`${IMAGE_PATH}${contractorData.image}`} alt=""
+                                                         className={`rounded-lg object-contain h-56 w-full py-[2px]`}/>
+                                            }
+                                        </>
                                         :
                                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg className="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true"

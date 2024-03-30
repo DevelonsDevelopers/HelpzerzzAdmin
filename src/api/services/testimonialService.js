@@ -9,6 +9,14 @@ const testimonialService = {
             throw error.response.data
         }
     },
+    update: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/testimonials/update', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     fetch: async (id) => {
         try {
             const response = await axiosInstance.get('/testimonials/single/' + id);

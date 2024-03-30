@@ -9,6 +9,14 @@ const contractorService = {
           throw error.response.data
         }
     },
+    update: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/contractors/update', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     details: async (id) => {
         try {
             const response = await axiosInstance.get('/contractors/details/' + id)

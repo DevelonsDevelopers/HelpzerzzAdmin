@@ -7,7 +7,7 @@ import DeleteModal from "../../components/DeleteModal";
 import {IoAdd} from "react-icons/io5";
 import {Android12Switch, BpCheckbox} from "../../utils/components";
 import {FormControlLabel} from "@mui/material";
-import {getSubcategories} from "../../api/reducers/subcategory";
+import {deleteSubcategory, getSubcategories, updateSubcategoryStatus} from "../../api/reducers/subcategory";
 
 const SubcategoryList = () => {
     const [open, setOpen] = useState(false)
@@ -30,24 +30,17 @@ const SubcategoryList = () => {
     }
 
     const handleDelete = () => {
-        // dispatch(deleteCategory(deleteID))
+        dispatch(deleteSubcategory(deleteID))
     }
 
     const handleStatus = (id, val) => {
-        // let status = 0;
-        // if (val === 0) {
-        //     status = 1
-        // }
-        // dispatch(updateCategoryStatus({id, status}))
+        let status = 0;
+        if (val === 0) {
+            status = 1
+        }
+        dispatch(updateSubcategoryStatus({id, status}))
     }
 
-    const handleFeatured = (id, val) => {
-        // let featured = 0;
-        // if (val === 0) {
-        //     featured = 1
-        // }
-        // dispatch(updateCategoryFeature({id, featured}))
-    }
 
     return (
         <>
@@ -85,7 +78,7 @@ const SubcategoryList = () => {
                                     <td onClick={() => handleStatus(value.id, value.status)} className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"><FormControlLabel className={"mx-auto"} control={<Android12Switch checked={value.status}/>}/></td>
                                     <td className="py-[2%] w-[2%] border-t-[1px]">
                                         <div className="flex items-center justify-center">
-                                            <div className="w-4 mr-2 cursor-pointer hover:scale-125"  >
+                                            <div className="w-4 mr-2 cursor-pointer hover:scale-125" onClick={() => navigate('/subcategories/edit?id=' + value.id)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="blue">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                 </svg>

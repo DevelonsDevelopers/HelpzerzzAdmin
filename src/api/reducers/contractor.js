@@ -8,7 +8,7 @@ import {
     DELETE_CONTRACTOR,
     DETAILS_CONTRACTOR,
     FEATURE_CONTRACTOR, SINGLE_CONTRACTOR,
-    STATUS_CONTRACTOR,
+    STATUS_CONTRACTOR, UPDATE_CONTRACTOR,
     UPDATE_DETAILS,
 } from "../../utils/constants";
 import contractorService from "../services/contractorService";
@@ -39,6 +39,30 @@ export const addContractor = createAsyncThunk(CREATE_CONTRACTOR, (data) => {
         contractor.image = file.fileName
         return contractorService.create(contractor)
     })
+})
+
+export const updateContractor = createAsyncThunk(UPDATE_CONTRACTOR, (data) => {
+    if (data.file) {
+        return uploadService.single(data.file).then(file => {
+            let contractor = data.contractor;
+            contractor.image = file.fileName
+            return contractorService.update(contractor).then(response => {
+                if (response.success) {
+                    return contractor
+                } else {
+                    return null
+                }
+            })
+        })
+    } else {
+        return contractorService.update(data.contractor).then(response => {
+            if (response.success) {
+                return data.contractor
+            } else {
+                return null
+            }
+        })
+    }
 })
 
 export const addContractorDetails = createAsyncThunk(CREATE_DETAILS, (data) => {
@@ -181,7 +205,22 @@ const contractor = createSlice({
         builder.addCase(addContractor.rejected, (state, action) => {
             state.success = false
         })
-0
+
+        //EDIT CONTRACTOR //////////////////////////////////////////
+        builder.addCase(updateContractor.pending, state => {
+            state.success = false
+        })
+        builder.addCase(updateContractor.fulfilled, (state, action) => {
+            state.success = true
+            if (action.payload) {
+                const value = state.contractors.find(v => v.id === action.payload.id)
+                Object.assign(value, action.payload)
+            }
+        })
+        builder.addCase(updateContractor.rejected, (state, action) => {
+            state.success = false
+        })
+
         //ADD CONTRACTOR DETAILS /////////////////////////////////////////
         builder.addCase(addContractorDetails.pending, state => {
             state.detailSuccess = false

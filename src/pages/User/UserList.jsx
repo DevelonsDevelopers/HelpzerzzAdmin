@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react';
 import PortalLayout from "../../layouts/PortalLayout";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {getUsers} from "../../api/reducers/user";
+import {deleteUser, getUsers, updateUserStatus} from "../../api/reducers/user";
 import Loading from "../../components/Loading";
 import DeleteModal from "../../components/DeleteModal";
 import {FormControlLabel} from "@mui/material";
 import {Android12Switch} from "../../utils/components";
 import {updateCategoryStatus} from "../../api/reducers/category";
 import {IoAdd} from "react-icons/io5";
+import toast from "react-hot-toast";
 
 const UserList = () => {
 
@@ -26,24 +27,26 @@ const UserList = () => {
         }
     }, [dispatch]);
 
-    // const initiateDelete = (id) => {
-    //     setOpen(!open)
-    //     setDeleteID(id)
-    // }
-    //
-    // const handleDelete = () => {
-    //     dispatch(deleteUser(deleteID))
-    // }
-    //
-    // const handleStatus = (id, status) => {
-    //     dispatch(statusUser({id, status}))
-    // }
+    const initiateDelete = (id) => {
+        setOpen(!open)
+        setDeleteID(id)
+    }
+
+    const handleDelete = () => {
+        if (response.users.length === 1){
+            toast.error("You must have single user to have access to Admin")
+        } else {
+            dispatch(deleteUser(deleteID))
+        }
+    }
+
+
     const handleStatus = (id, val) => {
         let status = 0;
         if (val === 0) {
             status = 1
         }
-        dispatch(updateCategoryStatus({id, status}))
+        dispatch(updateUserStatus({id, status}))
     }
 
     return (
@@ -53,27 +56,14 @@ const UserList = () => {
                 <Loading/>
                 :
             <div>
-                {/*<DeleteModal open={open} setOpen={setOpen} deleteFunction={handleDelete} deleting={response.deleting}/>*/}
+                <DeleteModal open={open} setOpen={setOpen} deleteFunction={handleDelete} deleting={response.deleting}/>
                 <div className="w-full flex flex-col justify-center">
                     <div className="flex justify-center w-[90%] m-auto">
                         <h1 className='text-[25px] font-[700] uppercase'>Users</h1>
                         <button onClick={() => navigate('/users/add')} className="flex w-[220px] bg-[#0D14FD] cursor-pointer py-2 px-[1rem] text-white font-[500] rounded-xl ml-auto items-center justify-center hover:scale-110">Add User<IoAdd className="ml-3"/></button>
                     </div>
                     <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6">
-                        {/*<thead>*/}
-                        {/*<tr className="uppercase text-sm leading-normal w-full">*/}
-                        {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>*/}
-                        {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[5%]">Name</th>*/}
-                        {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Username</th>*/}
-                        {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Email</th>*/}
-                        {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Status</th>*/}
-                        {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Actions</th>*/}
-                        {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]"></th>*/}
-                        {/*</tr>*/}
-                        {/*</thead>*/}
-
                         <thead>
-
                         <tr className="text-sm leading-normal w-full">
                             <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center text-lg w-[2%]">ID
                             </th>
@@ -91,21 +81,21 @@ const UserList = () => {
                         <tbody>
                         {response?.users?.map((value) => (
                             <tr className="text-[#000000] text-sm w-[100%]">
-                                <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-blue-500">1</td>
-                                <td className="py-[2%] w-[5%] border-t-[1px] text-center text-[12px] font-bold">Admin</td>
-                                <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[13px] font-medium">admin</td>
-                                <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[12px] font-medium">admin@email.com</td>
+                                <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-blue-500">{value.id}</td>
+                                <td className="py-[2%] w-[5%] border-t-[1px] text-center text-[12px] font-bold">{value.name}</td>
+                                <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[13px] font-medium">{value.username}</td>
+                                <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[12px] font-medium">{value.email}</td>
                                 <td onClick={() => handleStatus(value.id, value.status)} className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"><FormControlLabel className={"mx-auto"} control={<Android12Switch checked={value.status} color={"success"}/>}/></td>
                                 <td className="py-[2%] w-[2%] border-t-[1px]">
                                     <div className="flex items-center justify-center">
-                                        <div className="w-4 mr-2 cursor-pointer hover:scale-125">
+                                        <div className="w-4 mr-2 cursor-pointer hover:scale-125" onClick={() => navigate('/users/edit?id=' + value.id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  stroke="blue">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                       d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                                             </svg>
                                         </div>
-                                        <div className="w-4 ml-2 cursor-pointer hover:scale-125">
+                                        <div className="w-4 ml-2 cursor-pointer hover:scale-125" onClick={() => initiateDelete(value.id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  stroke="red">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

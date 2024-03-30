@@ -6,10 +6,12 @@ import {
     DELETE_BLOG,
     FEATURE_BLOG,
     SINGLE_BLOG,
-    STATUS_BLOG
+    STATUS_BLOG, UPDATE_BLOG
 } from "../../utils/constants";
 import blogService from "../services/blogService";
 import uploadService from "../services/uploadService";
+import categoryService from "../services/categoryService";
+import {updateCategory} from "./category";
 
 const initialState = {
     loading: false,
@@ -38,6 +40,30 @@ export const addBlog = createAsyncThunk(CREATE_BLOG, (data) => {
         blog.image = file.fileName
         return blogService.create(blog)
     })
+})
+
+export const updateBlog = createAsyncThunk(UPDATE_BLOG, (data) => {
+    if (data.file) {
+        return uploadService.single(data.file).then(file => {
+            let blog = data.blog;
+            blog.image = file.fileName
+            return blogService.update(blog).then(response => {
+                if (response.success) {
+                    return blog
+                } else {
+                    return null
+                }
+            })
+        })
+    } else {
+        return blogService.update(data.blog).then(response => {
+            if (response.success) {
+                return data.blog
+            } else {
+                return null
+            }
+        })
+    }
 })
 
 export const deleteBlog = createAsyncThunk(DELETE_BLOG, (id) => {
@@ -125,6 +151,21 @@ const blog = createSlice({
             state.success = false
         })
 
+        //EDIT BLOG //////////////////////////////////////////
+        builder.addCase(updateBlog.pending, state => {
+            state.success = false
+        })
+        builder.addCase(updateBlog.fulfilled, (state, action) => {
+            state.success = true
+            if (action.payload) {
+                const value = state.blogs.find(v => v.id === action.payload.id)
+                Object.assign(value, action.payload)
+            }
+        })
+        builder.addCase(updateBlog.rejected, (state, action) => {
+            state.success = false
+        })
+
         //DELETE BLOG ////////////////////////////////////////
         builder.addCase(deleteBlog.pending, state => {
             state.deleting = true
@@ -137,7 +178,7 @@ const blog = createSlice({
             state.deleting = false
         })
 
-        //STATUS CATEGORY ////////////////////////////////////////
+        //STATUS BLOG ////////////////////////////////////////
         builder.addCase(updateBlogStatus.pending, state => {
 
         })
@@ -155,7 +196,7 @@ const blog = createSlice({
 
         })
 
-        //FEATURE CATEGORY ////////////////////////////////////////
+        //FEATURE BLOG ////////////////////////////////////////
         builder.addCase(updateBlogFeature.pending, state => {
 
         })
