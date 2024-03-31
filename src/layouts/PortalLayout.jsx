@@ -1,41 +1,45 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from "react";
 import Topbar from "./Topbar";
-import {Transition} from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import Sidebar from "./Sidebar";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const PortalLayout = ({ children }) => {
+  const location = useLocation();
+  const [showNav, setShowNav] = useState(true);
 
-    const location = useLocation()
-    const [showNav, setShowNav] = useState(true)
-
-    return (
+  return (
+    <div>
+      {location.pathname === "/login" ? (
+        children
+      ) : (
         <div>
-            {location.pathname === "/login" ? children
-                :
-            <div>
-                <Topbar showNav={showNav} setShowNav={setShowNav} />
-                <Transition
-                    as={Fragment}
-                    show={showNav}
-                    enter="transform transition duration-[400ms]"
-                    enterFrom="-translate-x-full"
-                    enterTo="translate-x-0"
-                    leave="transform duration-[400ms] transition ease-in-out"
-                    leaveFrom="translate-x-0"
-                    leaveTo="-translate-x-full"
-                >
-                    <Sidebar />
-                </Transition>
-                <main
-                    className={`bg-gray-100 pt-6 transition-all duration-[400ms] ${showNav ? "pl-64" : ""
-                    }`}>
-                    <div className="bg-gray-100 px-4 md:px-16 min-h-screen max-h-[100%] pb-[4rem] ">{children}</div>
-                </main>
+          <Topbar showNav={showNav} setShowNav={setShowNav} />
+          <Transition
+            as={Fragment}
+            show={showNav}
+            enter="transform transition duration-[400ms]"
+            enterFrom="-translate-x-full"
+            enterTo="translate-x-0"
+            leave="transform duration-[400ms] transition ease-in-out"
+            leaveFrom="translate-x-0"
+            leaveTo="-translate-x-full"
+          >
+            <Sidebar />
+          </Transition>
+          <main
+            className={`bg-gray-100 pt-6 transition-all duration-[400ms] ${
+              showNav ? "pl-56" : ""
+            }`}
+          >
+            <div className="bg-gray-100 px-4 md:px-16 min-h-screen max-h-[100%] pb-[4rem] ">
+              {children}
             </div>
-            }
+          </main>
         </div>
-    )
+      )}
+    </div>
+  );
 };
 
 export default PortalLayout;
