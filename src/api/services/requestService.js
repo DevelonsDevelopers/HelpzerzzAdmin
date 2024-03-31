@@ -1,17 +1,17 @@
 import axiosInstance from "./axiosInstance";
 
 const requestService = {
-    create: async (payload) => {
+    fetchAll: async () => {
         try {
-            const response = await axiosInstance.post('/serviceRequests/create', payload)
+            const response = await axiosInstance.get('/serviceRequests/all');
             return response.data
         } catch (error) {
             throw error.response.data
         }
     },
-    fetchAll: async () => {
+    fetch: async (id) => {
         try {
-            const response = await axiosInstance.get('/serviceRequests/all');
+            const response = await axiosInstance.get('/serviceRequests/single/' + id);
             return response.data
         } catch (error) {
             throw error.response.data

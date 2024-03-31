@@ -2,31 +2,25 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import Loading from "../../components/Loading";
-import {
-    deleteContractor,
-    getContractors,
-    updateContractorFeature,
-    updateContractorStatus
-} from "../../api/reducers/contractor";
 import DeleteModal from "../../components/DeleteModal";
+import {Android12Switch} from "../../utils/components";
 import {FormControlLabel} from "@mui/material";
-import {Android12Switch, BpCheckbox} from "../../utils/components";
-import {IoAdd} from "react-icons/io5";
 import {AiOutlineArrowRight} from "react-icons/ai";
+import {getCustomers} from "../../api/reducers/customer";
 
-const ContractorList = () => {
+const CustomerList = () => {
 
     const [open, setOpen] = useState(false)
     const [deleteID, setDeleteID] = useState()
 
-    const response = useSelector(state => state.contractor)
+    const response = useSelector(state => state.customer)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (!response.fetched){
-            dispatch(getContractors())
+            dispatch(getCustomers())
         }
     }, [dispatch]);
 
@@ -36,23 +30,15 @@ const ContractorList = () => {
     }
 
     const handleDelete = () => {
-        dispatch(deleteContractor(deleteID))
+        // dispatch(deleteContractor(deleteID))
     }
 
     const handleStatus = (id, val) => {
-        let status = 0;
-        if (val === 0) {
-            status = 1
-        }
-        dispatch(updateContractorStatus({id, status}))
-    }
-
-    const handleFeatured = (id, val) => {
-        let featured = 0;
-        if (val === 0) {
-            featured = 1
-        }
-        dispatch(updateContractorFeature({id, featured}))
+        // let status = 0;
+        // if (val === 0) {
+        //     status = 1
+        // }
+        // dispatch(updateContractorStatus({id, status}))
     }
 
     return (
@@ -64,33 +50,26 @@ const ContractorList = () => {
                     <DeleteModal open={open} setOpen={setOpen} deleteFunction={handleDelete} deleting={response.deleting}/>
                     <div className="w-full flex flex-col justify-center">
                         <div className="flex justify-center w-[90%] m-auto">
-                            <h1 className='text-[25px] font-[700] uppercase'>Contractors</h1>
-                            <button onClick={() => navigate('/contractors/add')} className="flex w-[220px] bg-[#0D14FD] cursor-pointer py-2 px-[1rem] text-white font-[500] rounded-xl ml-auto items-center justify-center hover:scale-110">Add Contractor<IoAdd className="ml-3"/></button>
+                            <h1 className='text-[25px] font-[700] uppercase'>Customers</h1>
                         </div>
                         <table className="rounded-xl p-5 bg-white w-[90%] m-auto mt-6">
                             <thead>
 
                             <tr className="text-sm leading-normal w-full">
-                                <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center text-lg w-[2%]">ID
-                                </th>
-                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[3%]">Name
-                                </th>
-                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Email</th>
-                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Featured</th>
+                                <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center text-lg w-[2%]">Name</th>
+                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[3%]">Email</th>
+                                <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Address</th>
                                 <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Status</th>
                                 <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">Actions</th>
                                 <th className="py-[2%] bg-gray-50 rounded-tr-xl text-center text-lg w-[1%]"></th>
                             </tr>
                             </thead>
-
-
                             <tbody>
-                            {response?.contractors.map((value) => (
+                            {response?.customers.map((value) => (
                                 <tr className="text-[#000000] text-sm w-[100%]">
-                                    <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-blue-500">{value?.id}</td>
-                                    <td className="py-[2%] w-[5%] border-t-[1px] text-center text-[12px] font-bold">{value.name}</td>
-                                    <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[10px] font-medium">{value?.email}</td>
-                                    <td onClick={() => handleFeatured(value.id, value.featured)} className={`py-[2%] w-[1%] border-t-[1px] justify-center text-[15px] font-bold cursor-pointer hover:scale-105 items-center ${value.featured === 1 ? "text-green-800" : "text-red-700"}`}><center><BpCheckbox className="mx-auto" checked={value.featured}/></center></td>
+                                    <td className="py-[2%] w-[2%] border-t-[1px] text-center font-medium">{value?.name}</td>
+                                    <td className="py-[2%] w-[5%] border-t-[1px] text-center text-[12px] font-medium">{value.email}</td>
+                                    <td className="py-[2%] w-[2%] border-t-[1px] text-center text-[10px] font-medium">{value?.address}</td>
                                     <td onClick={() => handleStatus(value.id, value.status)} className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"><FormControlLabel className={"mx-auto"} control={<Android12Switch checked={value.status} color={"success"}/>}/></td>
                                     <td className="py-[2%] w-[2%] border-t-[1px]">
                                         <div className="flex items-center justify-center">
@@ -107,8 +86,8 @@ const ContractorList = () => {
                                         </div>
                                     </td>
                                     <td className="py-[2%] w-[1%] border-t-[1px]">
-                                        <div className="flex items-center justify-center text-center text-blue-700 cursor-pointer hover:scale-110" onClick={() => navigate('/contractors/details?id=' + value.id)}>
-                                                <div className="flex">Details <AiOutlineArrowRight className="ml-2 mt-1"/></div>
+                                        <div className="flex items-center justify-center text-center text-blue-700 cursor-pointer hover:scale-110">
+                                            <div className="flex">Details <AiOutlineArrowRight className="ml-2 mt-1"/></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -122,4 +101,4 @@ const ContractorList = () => {
     );
 };
 
-export default ContractorList;
+export default CustomerList;

@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ALL_REQUESTS, CREATE_REQUEST, REQUESTS_REDUCER} from "../../utils/constants";
+import {ALL_REQUESTS, ASSIGN_CONTRACTOR, REQUESTS_REDUCER, SINGLE_REQUEST} from "../../utils/constants";
 import requestService from "../services/requestService";
+import requestContractorService from "../services/requestContractorService";
 
 
 const initialState = {
@@ -18,6 +19,10 @@ const initialState = {
 
 export const getRequests = createAsyncThunk(ALL_REQUESTS, () => {
     return requestService.fetchAll()
+})
+
+export const getRequest = createAsyncThunk(SINGLE_REQUEST, (id) => {
+    return requestService.fetch(id)
 })
 
 const request = createSlice({
@@ -38,6 +43,21 @@ const request = createSlice({
             state.loading = false
             state.requests = []
             state.error = action.error.message
+        })
+
+        //GET CATEGORY /////////////////////////////////////
+        builder.addCase(getRequest.pending, state => {
+            state.requestLoading = true
+        })
+        builder.addCase(getRequest.fulfilled, (state, action) => {
+            state.requestLoading = false
+            state.request = action.payload.serviceRequest
+            state.requestError = ""
+        })
+        builder.addCase(getRequest.rejected, (state, action) => {
+            state.requestLoading = false
+            state.request = null
+            state.requestError = action.error.message
         })
     }
 })

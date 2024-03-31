@@ -20,6 +20,7 @@ import ContractorDetails from "./pages/Contractor/ContractorDetails";
 import SubcategoryList from "./pages/Subcategory/SubcategoryList";
 import SubcategoryAddEdit from "./pages/Subcategory/SubcategoryAddEdit";
 import PortalLayout from "./layouts/PortalLayout";
+import CustomerList from "./pages/Customer/CustomerList";
 
 function App() {
     return (
@@ -48,6 +49,8 @@ function App() {
                 <Route path="/contractors/add" element={<ContractorAddEdit/>}/>
                 <Route path="/contractors/edit" element={<ContractorAddEdit edit={true}/>}/>
                 <Route path="/contractors/details" element={<ContractorDetails/>}/>
+
+                <Route path="/customers" element={<CustomerList/>}/>
 
                 <Route path="/costGuides" element={<CostGuideList/>}/>
                 <Route path="/costGuides/add" element={<CostGuideAddEdit/>}/>

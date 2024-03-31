@@ -97,7 +97,7 @@ const RequestList = () => {
                                 </td>
                                 <td className="py-[2%] w-[1%] border-t-[1px]">
                                     <div
-                                        className="flex items-center justify-center text-center text-blue-700 cursor-pointer hover:scale-110">
+                                        className="flex items-center justify-center text-center text-blue-700 cursor-pointer hover:scale-110" onClick={() => navigate('/requests/details?id=' + value.id)}>
                                         <div className="flex">Details <AiOutlineArrowRight className="ml-2 mt-1"/></div>
                                     </div>
                                 </td>

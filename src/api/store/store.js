@@ -7,6 +7,7 @@ import costGuide from "../reducers/costGuide";
 import subcategory from "../reducers/subcategory";
 import testimonial from "../reducers/testimonial";
 import request from "../reducers/request";
+import customer from "../reducers/customer";
 
 const store = configureStore({
     reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
         subcategory: subcategory,
         testimonial: testimonial,
         request: request,
+        customer: customer
     }
 })
 

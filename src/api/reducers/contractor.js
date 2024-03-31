@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ACTIVE_CONTRACTORS,
-    ALL_CONTRACTORS,
+    ALL_CONTRACTORS, ASSIGN_CONTRACTOR, ASSIGNED_CONTRACTORS,
     CONTRACTOR_REDUCER,
     CREATE_CONTRACTOR,
     CREATE_DETAILS,
@@ -13,24 +13,29 @@ import {
 } from "../../utils/constants";
 import contractorService from "../services/contractorService";
 import uploadService from "../services/uploadService";
+import requestContractorService from "../services/requestContractorService";
 
 const initialState = {
     loading: false,
     contractorLoading: false,
     detailsLoading: false,
+    assignedLoading: false,
     deleting: false,
     noData: false,
     success: false,
     detailSuccess: false,
     fetched: false,
     activeFetched: false,
+    assignedFetched: false,
     contractors: [],
     activeContractors: [],
+    assignedContractors: [],
     contractor: null,
     contractorDetails: null,
     error: '',
     contractorError: '',
     detailsError: '',
+    assignedError: '',
 }
 
 export const addContractor = createAsyncThunk(CREATE_CONTRACTOR, (data) => {
@@ -85,6 +90,14 @@ export const getContractor = createAsyncThunk(SINGLE_CONTRACTOR, (id) => {
 
 export const getActiveContractors = createAsyncThunk(ACTIVE_CONTRACTORS, () => {
     return contractorService.fetchAllActive()
+})
+
+export const getAllAssignedContractors = createAsyncThunk(ASSIGNED_CONTRACTORS, (request) => {
+    return contractorService.fetchAllAssigned(request)
+})
+
+export const assignContractor = createAsyncThunk(ASSIGN_CONTRACTOR, (data) => {
+    return requestContractorService.create(data)
 })
 
 export const contractorDetails = createAsyncThunk(DETAILS_CONTRACTOR, (id) => {
@@ -147,6 +160,30 @@ const contractor = createSlice({
             state.loading = false
             state.contractors = []
             state.error = action.error.message
+        })
+
+        //ASSIGNED CONTRACTORS ///////////////////////////
+        builder.addCase(getAllAssignedContractors.pending, state => {
+            state.assignedLoading = true
+        })
+        builder.addCase(getAllAssignedContractors.fulfilled, (state, action) => {
+            state.assignedLoading = false
+            state.assignedContractors = action.payload.contractors
+            state.assignedError = ''
+            state.assignedFetched = true
+        })
+        builder.addCase(getAllAssignedContractors.rejected, (state, action) => {
+            state.assignedLoading = false
+            state.assignedContractors = []
+            state.assignedError = action.error.message
+        })
+
+        builder.addCase(assignContractor.fulfilled, (state, action) => {
+            console.log(action.payload)
+            const value = state.assignedContractors.find(v => v.contractor === action.payload.requestContractor.contractor)
+            if (value) {
+                value.assigned = action.payload.requestContractor.contractor
+            }
         })
 
         //GET CONTRACTOR /////////////////////////////////////

@@ -65,6 +65,14 @@ const contractorService = {
             throw error.response.data
         }
     },
+    fetchAllAssigned: async (request) => {
+        try {
+            const response = await axiosInstance.get('/contractors/allAssigned/' + request);
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     delete: async (id) => {
         try {
             const response = await axiosInstance.delete('/contractors/delete/' + id)

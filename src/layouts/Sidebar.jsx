@@ -25,7 +25,7 @@ const Sidebar = forwardRef(({}, ref) => {
         <div ref={ref}
              className="mt-[-4rem] fixed w-72 h-full bg-white rounded-r-[1.4rem] shadow-sm max-md:w-[40%] overflow-auto no-scrollbar">
             <div className="flex flex-col mt-[2rem] mb-[1rem]">
-                <h3 className={`text-2xl ml-10 font-bold my-6`}>HELPERZZ</h3>
+                <h3 className={`text-3xl ml-10 font-bold mb-6 `}>HELPERZZ</h3>
                 <div className="mx-4">
                     {/*//DASHBOARD*/}
                     <div>
@@ -39,7 +39,7 @@ const Sidebar = forwardRef(({}, ref) => {
 
                     <div>
                         <button type="button" onClick={() => handleSelection(0)}
-                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname === "/requests" ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/requests") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <RiSendPlaneFill className={`text-2xl`}/>
                             <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Requests</span>
@@ -64,7 +64,7 @@ const Sidebar = forwardRef(({}, ref) => {
 
                     <div>
                         <button type="button" onClick={() => handleSelection(1)}
-                                className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/categories") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <BiSolidCategory className={"text-2xl"}/>
                             <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
@@ -110,55 +110,20 @@ const Sidebar = forwardRef(({}, ref) => {
 
                     </div>
 
-                    {/*<div>*/}
-                    {/*    <button type="button" onClick={() => handleSelection(2)}*/}
-                    {/*            className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"*/}
-                    {/*            aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">*/}
-                    {/*        <MdCategory className={`text-2xl`}/>*/}
-                    {/*        <span*/}
-                    {/*            className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Subcategories</span>*/}
-                    {/*        <svg className={`w-3 h-3 ${open[2] ? '-rotate-180 duration-300' : 'rotate-0 duration-300'}`}*/}
-                    {/*             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"*/}
-                    {/*             viewBox="0 0 10 6">*/}
-                    {/*            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"*/}
-                    {/*                  d="m1 1 4 4 4-4"/>*/}
-                    {/*        </svg>*/}
-                    {/*    </button>*/}
-
-                    {/*    <ul id="dropdown-example" className={`${open[2] ? '' : 'hidden'} py-2 space-y-2`}>*/}
-                    {/*        <li>*/}
-                    {/*            <a onClick={(e) => {*/}
-                    {/*                e.preventDefault()*/}
-                    {/*                navigate('/subcategories')*/}
-                    {/*            }}*/}
-                    {/*               className="cursor-pointer flex items-center p-2 text-[13px] text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 bg-gray-100  w-[84%] m-auto hover:font-bold">Manage Subcategories </a>*/}
-                    {/*        </li>*/}
-                    {/*        <li>*/}
-                    {/*            <a onClick={(e) => {*/}
-                    {/*                e.preventDefault()*/}
-                    {/*                navigate('/subcategories/add')*/}
-                    {/*            }}*/}
-                    {/*               className="cursor-pointer flex items-center p-2 text-[13px] text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 bg-gray-100 w-[84%] m-auto hover:font-bold">Add Subcategory</a>*/}
-                    {/*        </li>*/}
-
-                    {/*    </ul>*/}
-
-                    {/*</div>*/}
-
                     <div>
-                        <button type="button" onClick={() => handleSelection(3)}
-                                className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"
+                        <button type="button" onClick={() => handleSelection(2)}
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/contractors") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <FaUserGroup className={`text-2xl`}/>
                             <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Contractors</span>
-                            <svg className={`w-3 h-3 ${open[3] ? '-rotate-180 duration-300' : 'rotate-0 duration-300'}`}
+                            <svg className={`w-3 h-3 ${open[2] ? '-rotate-180 duration-300' : 'rotate-0 duration-300'}`}
                                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                  viewBox="0 0 10 6">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                       d="m1 1 4 4 4-4"/>
                             </svg>
                         </button>
-                        <ul id="dropdown-example" className={`${open[3] ? '' : 'hidden'} py-2 space-y-2`}>
+                        <ul id="dropdown-example" className={`${open[2] ? '' : 'hidden'} py-2 space-y-2`}>
                             <li>
                                 <a onClick={(e) => {
                                     e.preventDefault()
@@ -178,8 +143,32 @@ const Sidebar = forwardRef(({}, ref) => {
                     </div>
 
                     <div>
+                        <button type="button" onClick={() => handleSelection(3)}
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/customers") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
+                                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                            <FaUserGroup className={`text-2xl`}/>
+                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Customers</span>
+                            <svg className={`w-3 h-3 ${open[3] ? '-rotate-180 duration-300' : 'rotate-0 duration-300'}`}
+                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 10 6">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                      d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <ul id="dropdown-example" className={`${open[3] ? '' : 'hidden'} py-2 space-y-2`}>
+                            <li>
+                                <a onClick={(e) => {
+                                    e.preventDefault()
+                                    navigate('/customers')
+                                }}
+                                   className="cursor-pointer flex items-center p-2 text-[13px] text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 bg-gray-100  w-[84%] m-auto hover:font-bold">Manage Customers </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
                         <button type="button" onClick={() => handleSelection(4)}
-                                className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/blogs") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <FaBloggerB className={`text-2xl`}/>
                             <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Blogs</span>
@@ -211,7 +200,7 @@ const Sidebar = forwardRef(({}, ref) => {
 
                     <div>
                         <button type="button" onClick={() => handleSelection(5)}
-                                className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/costGuides") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <RiPagesFill className={`text-2xl`}/>
                             <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Cost Guides</span>
@@ -243,7 +232,7 @@ const Sidebar = forwardRef(({}, ref) => {
 
                     <div>
                         <button type="button" onClick={() => handleSelection(6)}
-                                className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/testimonials") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <MdSpeakerNotes className={`text-2xl`}/>
                             <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Testimonials</span>
@@ -275,7 +264,7 @@ const Sidebar = forwardRef(({}, ref) => {
 
                     <div>
                         <button type="button" onClick={() => handleSelection(7)}
-                                className="flex items-center w-[85%] p-2 mx-auto text-base text-gray-700 transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3"
+                                className={`flex items-center w-[85%] p-2 mx-auto text-base ${location.pathname.includes("/users") ? "text-[#0D14FD]" : "text-gray-700"} transition duration-75 rounded-lg group bg-blue-50 hover:bg-blue-100 hover:text-[#0D14FD] mt-3`}
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <FaUserAlt className={`text-2xl`}/>
                             <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Users</span>
