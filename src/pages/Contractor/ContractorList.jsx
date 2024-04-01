@@ -82,13 +82,13 @@ const ContractorList = () => {
             <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
               <thead>
                 <tr className="text-sm leading-normal w-full">
-                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] ">
                     ID
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
                     Name
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
                     Email
                   </th>
                   <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
@@ -111,12 +111,12 @@ const ContractorList = () => {
                       {value?.id}
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
                         {value.name}
                       </div>
                     </td>
                     <td className=" border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[200px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
                         {value?.email}
                       </div>
                     </td>

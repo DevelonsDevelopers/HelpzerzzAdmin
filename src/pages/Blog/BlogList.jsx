@@ -98,16 +98,16 @@ const BlogList = () => {
 
               <thead>
                 <tr className="text-sm leading-normal">
-                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[1%]">
+                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">
                     ID
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
                     Title
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
                     Category
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
                     Subtitle
                   </th>
                   <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
@@ -127,25 +127,25 @@ const BlogList = () => {
                 {response?.blogs.map((value) => (
                   <tr className="text-[#000000] text-sm w-[100%]">
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg text-center md:text-md text-sm font-medium w-[30px] mx-auto  justify-center">
+                      <div className="py-[2%] lg:text-lg text-center md:text-md text-sm font-medium mx-auto  justify-center">
                         {value?.id}
                       </div>
                     </td>
 
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
                         {value.title}
                       </div>
                     </td>
 
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[100px] mx-auto  justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto  justify-center">
                         {value?.category}
                       </div>
                     </td>
 
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto  justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
                         {value?.subtitle}
                       </div>
                     </td>

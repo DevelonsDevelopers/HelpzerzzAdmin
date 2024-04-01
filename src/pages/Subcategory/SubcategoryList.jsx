@@ -75,22 +75,22 @@ const SubcategoryList = () => {
               <thead>
                 <tr className="text-sm leading-normal w-full">
                   {/*<th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>*/}
-                  <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 rounded-tl-xl  md:text-lg text-md w-[2%]">
                     ID
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 text-left md:text-lg text-md w-[2%]">
                     Name
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 text-left md:text-lg text-md w-[2%]">
                     Category
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50  md:text-lg text-md w-[2%]">
                     Status
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50  md:text-lg text-md w-[2%]">
                     Actions
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[2%]"></th>
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]"></th>
                 </tr>
               </thead>
               <tbody>
@@ -98,17 +98,17 @@ const SubcategoryList = () => {
                   <tr className="text-[#000000] text-sm w-[100%]">
                     {/*<td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-blue-500">{value.id}</td>*/}
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[10px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm w-[10px] font-medium mx-auto lg:pl-0 pl-[10%] justify-center">
                         {value.id}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
                         {value.name}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[70px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
                         {value.category_name}
                       </div>
                     </td>

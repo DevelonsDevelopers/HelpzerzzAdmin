@@ -21,6 +21,7 @@ const data = [
 const RequestDetails = () => {
   const [requestData, setRequestData] = useState();
   const [action, setAction] = useState(null);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const response = useSelector((state) => state.request);
   const contractorResponse = useSelector((state) => state.contractor);
@@ -47,33 +48,73 @@ const RequestDetails = () => {
     dispatch(assignContractor({ request, contractor }));
   };
 
+  const handleRejectClick = () => {
+    setShowConfirmation(true);
+  };
+
+  const handleRejectConfirm = () => {
+    setShowConfirmation(false);
+    setAction("rejected");
+  };
+
+  const handleRejectCancel = () => {
+    setShowConfirmation(false);
+  };
+
   return (
     <>
       <div>
-        <h1 className="text-center font-[800] text-[25px] uppercase mt-5">
+        <h1 className="lg:text-3xl md:text-2xl text-xl font-[700] mt-5 ml-[3%]">
           Request Detail
         </h1>
 
         <div className="bg-white mt-[3rem] rounded-xl px-[8rem] py-16 flex flex-col mx-8">
-          <div className="flex justify-center items center mx-auto gap-4 mb-5">
-            <button
-              className="border-black  text-black border-2 text-lg font-semibold ml-auto mt-auto px-7 rounded-lg py-2"
-              onClick={() => setAction("accepted")}
-            >
-              ACCEPTED
-            </button>
-            <button
-              className="border-white  text-white bg-black border-2 text-lg font-semibold ml-auto mt-auto px-7 rounded-lg py-2"
-              onClick={() => setAction("rejected")}
-            >
-              REJECTED
-            </button>
-          </div>
+          {action === null && (
+            <div className="flex justify-center items center mx-auto gap-4 mb-5">
+              <button
+                className="md:text-lg text-md bg-green-800 text-white font-semibold ml-auto mt-auto px-7 rounded-lg py-2"
+                onClick={() => setAction("accepted")}
+              >
+                ACCEPTED
+              </button>
+              <button
+                className="md:text-lg text-md bg-red-700 text-white font-semibold ml-auto mt-auto px-7 rounded-lg py-2"
+                onClick={handleRejectClick}
+              >
+                REJECTED
+              </button>
+            </div>
+          )}
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="border-2 rounded-xl p-6">
+          {showConfirmation && (
+            <div
+              className=" absolute top-[60%] left-[57%] transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 w-[400px] p-4 h-[220px] border-2 border-gray-600 justify-center items-center  rounded-md "
+              style={{ alignContent: "center" }}
+            >
+              <p className="lg:text-2xl font-semibold md:text-xl text-center">
+                Are you sure you want to reject request?
+              </p>
+              <div className="mt-6 mb-4 justify-center flex gap-2">
+                <button
+                  onClick={handleRejectConfirm}
+                  className="md:text-md text-sm bg-red-700 text-white font-semibold mt-auto px-7 rounded-lg py-2"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={handleRejectCancel}
+                  className="md:text-md text-sm bg-gray-600 text-white font-semibold mt-auto px-7 rounded-lg py-2"
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="lg:grid lg:grid-cols-2 lg:gap-4 flex-wrap">
+            <div className="border-2 rounded-xl p-6 min-w-[300px]">
               <h1 className="text-right">{requestData?.created_at}</h1>
-              <div className="border-2 rounded-xl p-4 my-2">
+              <div className="border-2 rounded-xl p-4 my-2 ">
                 <div className="flex justify-between p-2">
                   <h1 className="text-left w-[40%]">Home type :</h1>
                   <h1 className="text-right w-[60%]">
@@ -89,7 +130,7 @@ const RequestDetails = () => {
                   <h1>{requestData?.status}</h1>
                 </div>
                 <div className="flex justify-between p-2">
-                  <h1 className="text-left w-[40%]">Subcategory :</h1>
+                  <h1 className="text-left w-[40%] ">Subcategory :</h1>
                   <h1 className="text-right w-[60%]">
                     {requestData?.subcategory_name}
                   </h1>
@@ -120,7 +161,7 @@ const RequestDetails = () => {
             </div>
 
             {/*Contracotrs List*/}
-            <div className="border-2 rounded-xl p-6 bg-gray-50">
+            <div className="border-2 rounded-xl p-6 bg-gray-50 min-w-[300px]">
               {action === "accepted" ? (
                 <>
                   <div className="w-[90%] ml-auto mr-auto mb-4">
@@ -159,7 +200,10 @@ const RequestDetails = () => {
                 </>
               ) : null}
               {action === "rejected" ? (
-                <div className="text-center mt-5 text-3xl font-bold items-center justify-center flex">
+                <div
+                  className="text-center text-3xl font-bold h-full justify-center items-center flex"
+                  style={{ alignContent: "center" }}
+                >
                   Your request has been rejected!
                 </div>
               ) : null}

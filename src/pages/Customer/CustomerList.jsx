@@ -61,13 +61,13 @@ const CustomerList = () => {
             <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
               <thead>
                 <tr className="text-sm leading-normal w-full">
-                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] text-left pl-[2%]">
                     Name
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
                     Email
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
                     Address
                   </th>
                   <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
@@ -83,17 +83,17 @@ const CustomerList = () => {
                 {response?.customers.map((value) => (
                   <tr className="text-[#000000] text-sm w-[100%]">
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center pl-[10%]">
                         {value?.name}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto  justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto  justify-center">
                         {value.email}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto  justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto  justify-center">
                         {value?.address}
                       </div>
                     </td>
@@ -101,7 +101,7 @@ const CustomerList = () => {
                       onClick={() => handleStatus(value.id, value.status)}
                       className="border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"
                     >
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto pl-[3%] justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto pl-[4%] justify-center">
                         <FormControlLabel
                           className={"mx-auto"}
                           control={

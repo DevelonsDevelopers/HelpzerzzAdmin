@@ -63,13 +63,14 @@ const RequestList = () => {
             <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
               <thead>
                 <tr className="text-sm leading-normal">
-                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[2%]">
                     Customer Name
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%]">
-                    Home Type
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
+                    Customer Name
                   </th>
-                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
+
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
                     Timeline
                   </th>
                   <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
@@ -85,17 +86,17 @@ const RequestList = () => {
                 {response.requests.map((value) => (
                   <tr className="text-[#000000] text-sm w-full">
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto lg:pl-0 pl-[10%] justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto pl-[10%] justify-center">
                         {value.name}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[250px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
                         {value.home_type}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[140px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
                         {value.time}
                       </div>
                     </td>
