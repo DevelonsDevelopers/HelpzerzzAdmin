@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import Topbar from "./Topbar";
 import { Transition } from "@headlessui/react";
 import Sidebar from "./Sidebar";
@@ -7,6 +7,36 @@ import { useLocation } from "react-router-dom";
 const PortalLayout = ({ children }) => {
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
+  const sidebarRef = useRef(true);
+
+  useEffect(() => {
+    function handleResize() {
+      setShowNav(window.innerWidth >= 748);
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        !event.target.classList.contains("sidebar-toggle") &&
+        window.innerWidth < 748
+      ) {
+        setShowNav(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showNav]);
 
   return (
     <div>
@@ -25,7 +55,9 @@ const PortalLayout = ({ children }) => {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <Sidebar />
+            <div ref={sidebarRef}>
+              <Sidebar />
+            </div>
           </Transition>
           <main
             className={`bg-gray-100 pt-6 transition-all duration-[400ms] ${
