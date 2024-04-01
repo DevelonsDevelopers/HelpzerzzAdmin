@@ -68,17 +68,17 @@ const RequestDetails = () => {
           Request Detail
         </h1>
 
-        <div className="bg-white mt-[3rem] rounded-xl px-[8rem] py-16 flex flex-col mx-8">
+        <div className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto">
           {action === null && (
             <div className="flex justify-center items center mx-auto gap-4 mb-5">
               <button
-                className="md:text-lg text-md bg-green-800 text-white font-semibold ml-auto mt-auto px-7 rounded-lg py-2"
+                className="md:text-lg text-md bg-green-800 text-white font-semibold ml-auto mt-auto sm:px-7 px-3 rounded-lg py-2"
                 onClick={() => setAction("accepted")}
               >
                 ACCEPTED
               </button>
               <button
-                className="md:text-lg text-md bg-red-700 text-white font-semibold ml-auto mt-auto px-7 rounded-lg py-2"
+                className="md:text-lg text-md bg-red-700 text-white font-semibold ml-auto mt-auto sm:px-7 px-3 rounded-lg py-2"
                 onClick={handleRejectClick}
               >
                 REJECTED
@@ -112,31 +112,35 @@ const RequestDetails = () => {
           )}
 
           <div className="lg:grid lg:grid-cols-2 lg:gap-4 flex-wrap">
-            <div className="border-2 rounded-xl p-6 min-w-[300px]">
+            <div className="border-2 rounded-xl lg:p-6 p-3 min-w-[290px]">
               <h1 className="text-right">{requestData?.created_at}</h1>
               <div className="border-2 rounded-xl p-4 my-2 ">
                 <div className="flex justify-between p-2">
-                  <h1 className="text-left w-[40%]">Home type :</h1>
-                  <h1 className="text-right w-[60%]">
+                  <h1 className="text-sm md:text-lg text-left w-[40%]">
+                    Home type :
+                  </h1>
+                  <h1 className="text-sm md:text-lg text-right w-[60%]">
                     {requestData?.home_type}
                   </h1>
                 </div>
-                <div className="flex justify-between p-2">
-                  <h1 className="text-left w-[40%]">Postal Code :</h1>
+                <div className="flex justify-between p-2 text-sm md:text-lg">
+                  <h1 className=" text-left w-[40%]">Postal Code :</h1>
                   <h1>{requestData?.postal_code}</h1>
                 </div>
-                <div className="flex justify-between p-2">
+                <div className="text-sm md:text-lg flex justify-between p-2">
                   <h1>Status :</h1>
                   <h1>{requestData?.status}</h1>
                 </div>
                 <div className="flex justify-between p-2">
-                  <h1 className="text-left w-[40%] ">Subcategory :</h1>
-                  <h1 className="text-right w-[60%]">
+                  <h1 className="text-sm md:text-lg text-left w-[40%] ">
+                    Subcategory :
+                  </h1>
+                  <h1 className="text-sm md:text-lg text-right w-[60%]">
                     {requestData?.subcategory_name}
                   </h1>
                 </div>
               </div>
-              <div className="border-2 rounded-xl p-4 my-2">
+              <div className="border-2 rounded-xl p-4 my-2 text-sm md:text-lg">
                 <div className="flex justify-between p-2">
                   <h1>Name :</h1>
                   <h1>{requestData?.name}</h1>
@@ -154,14 +158,14 @@ const RequestDetails = () => {
                   <h1 className="text-right w-[60%]">{requestData?.address}</h1>
                 </div>
               </div>
-              <div className="border-2 rounded-xl p-4 my-2">
+              <div className="text-sm md:text-lg border-2 rounded-xl p-4 my-2">
                 <h1>Detail :</h1>
                 <h1 className="ml-2 mt-4">{requestData?.details}</h1>
               </div>
             </div>
 
             {/*Contracotrs List*/}
-            <div className="border-2 rounded-xl p-6 bg-gray-50 min-w-[300px]">
+            <div className="border-2 rounded-xl lg:p-6 p-3 bg-gray-50 min-w-[290px]">
               {action === "accepted" ? (
                 <>
                   <div className="w-[90%] ml-auto mr-auto mb-4">
