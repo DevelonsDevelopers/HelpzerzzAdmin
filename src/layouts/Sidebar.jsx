@@ -32,7 +32,7 @@ const Sidebar = forwardRef(({}, ref) => {
     <>
       <div
         ref={ref}
-        className="mt-[-4rem] fixed lg:w-[260px] md:w-[230px] w-[200px] h-full bg-white  border-gray-300 border-r-[1px]  shadow-2xl max-md:w-[30%] overflow-auto no-scrollbar"
+        className="mt-[-4rem] fixed lg:w-[260px] md:w-[230px] w-[200px] h-full bg-white  border-gray-300 border-r-[1px]  shadow-2xl max-md:w-[180] overflow-auto no-scrollbar"
       >
         <div className="flex flex-col mt-[2rem] mb-[1rem] ">
           <h3

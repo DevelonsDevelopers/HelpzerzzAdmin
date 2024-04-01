@@ -56,44 +56,50 @@ const RequestList = () => {
         <div>
           <div className="w-full flex flex-col justify-center">
             <div className="flex justify-between w-[100%] m-auto">
-              <h1 className="text-3xl font-[700]">Manage Service Requests</h1>
+              <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
+                Manage Service Requests
+              </h1>
             </div>
             <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
               <thead>
                 <tr className="text-sm leading-normal">
-                  <th className="py-[2%] bg-gray-50 rounded-tl-xl text-lg w-[2%]">
+                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">
                     Customer Name
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-lg w-[3%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%]">
                     Home Type
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-lg w-[2%]">
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
                     Timeline
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-lg w-[2%]">Status</th>
-                  <th className="py-[2%] bg-gray-50 text-lg w-[2%]">Actions</th>
-                  <th className="py-[2%] bg-gray-50 rounded-tr-xl text-lg w-[1%]"></th>
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
+                    Status
+                  </th>
+                  <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%]">
+                    Actions
+                  </th>
+                  <th className="py-[2%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th>
                 </tr>
               </thead>
               <tbody>
                 {response.requests.map((value) => (
                   <tr className="text-[#000000] text-sm w-full">
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] text-md font-medium w-[120px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[150px] mx-auto lg:pl-0 pl-[10%] justify-center">
                         {value.name}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] text-md font-medium w-[200px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[250px] mx-auto justify-center">
                         {value.home_type}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] text-md font-medium w-[100px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[140px] mx-auto justify-center">
                         {value.time}
                       </div>
                     </td>
-                    <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-md hover:scale-110">
+                    <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold lg:text-lg md:text-md text-sm hover:scale-110">
                       <p
                         className={`w-[100px] mx-auto rounded-2xl py-1 px-2 text-white ${
                           value.status === 1 ? "bg-[#16dbcc]" : "bg-gray-500"
@@ -130,7 +136,7 @@ const RequestList = () => {
                           navigate("/requests/details?id=" + value.id)
                         }
                       >
-                        <div className="flex">
+                        <div className="flex lg:text-lg md:text-md text-sm">
                           Details <AiOutlineArrowRight className="ml-2 mt-1" />
                         </div>
                       </div>

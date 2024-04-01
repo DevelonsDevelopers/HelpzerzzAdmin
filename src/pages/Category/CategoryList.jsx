@@ -69,10 +69,12 @@ const CategoryList = () => {
           {/*<h1 className='text-center text-[25px] font-[800] mt-5 uppercase'>Categories</h1>*/}
           <div className="w-full flex flex-col justify-center">
             <div className="flex justify-center w-[100%] m-auto">
-              <h1 className="text-[25px] font-[700]">Manage Categories</h1>
+              <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
+                Manage Categories
+              </h1>
               <button
                 onClick={() => navigate("/categories/add")}
-                className="flex w-[220px] bg-[#0D14FD] cursor-pointer py-2 px-[1rem] text-white font-[500] rounded-xl ml-auto items-center justify-center hover:scale-110"
+                className="flex bg-[#0D14FD] cursor-pointer py-2 px-[1rem] text-white font-[500] rounded-xl ml-auto items-center justify-center hover:scale-110"
               >
                 Add Category
                 <IoAdd className="ml-3" />
@@ -82,22 +84,22 @@ const CategoryList = () => {
               <thead>
                 <tr className="text-sm leading-normal w-full">
                   {/*<th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>*/}
-                  <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center text-lg w-[5%]">
+                  <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center md:text-lg text-md w-[3%]">
                     Name
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">
+                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[2%]">
                     Detail
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center text-lg w-[1%]">
+                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
                     Featured
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center text-lg w-[1%]">
+                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
                     Status
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">
+                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[2%]">
                     Actions
                   </th>
-                  <th className="py-[2%] bg-gray-50 text-center text-lg w-[1%]">
+                  <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
                     Popular
                   </th>
                 </tr>
@@ -107,18 +109,18 @@ const CategoryList = () => {
                   <tr className="text-[#000000] text-sm w-[100%]">
                     {/*<td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-blue-500">{value.id}</td>*/}
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] text-md font-medium w-[140px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[180px] lg:pl-0 pl-[10%] mx-auto justify-center">
                         {value.name}
                       </div>
                     </td>
                     <td className="border-t-[1px]">
-                      <div className="py-[2%] text-md font-medium w-[200px] mx-auto justify-center">
+                      <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[200px] mx-auto justify-center">
                         {value.details}
                       </div>
                     </td>
                     <td
                       onClick={() => handleFeatured(value.id, value.featured)}
-                      className={`py-[2%] w-[1%] border-t-[1px] justify-center text-md font-bold cursor-pointer hover:scale-105 items-center ${
+                      className={`py-[2%] w-[1%] border-t-[1px] justify-center lg:text-lg md:text-md text-sm font-bold cursor-pointer hover:scale-105 items-center ${
                         value.featured === 1 ? "text-green-800" : "text-red-700"
                       }`}
                     >
@@ -131,7 +133,7 @@ const CategoryList = () => {
                     </td>
                     <td
                       onClick={() => handleStatus(value.id, value.status)}
-                      className="py-[2%] w-[1%] border-t-[1px] text-center text-md font-bold cursor-pointer hover:scale-105 items-center justify-center"
+                      className="py-[2%] w-[1%] pl-[2%]  border-t-[1px] text-center lg:text-lg md:text-md text-sm font-bold cursor-pointer hover:scale-105 items-center mx-auto justify-center"
                     >
                       <FormControlLabel
                         className={"mx-auto"}
@@ -146,7 +148,7 @@ const CategoryList = () => {
                     <td className="py-[2%] w-[2%] border-t-[1px]">
                       <div className="flex items-center justify-center">
                         <div
-                          className="w-4 mr-2 cursor-pointer hover:scale-125"
+                          className="w-6 mr-2 cursor-pointer hover:scale-125"
                           onClick={() =>
                             navigate("/categories/edit?id=" + value.id)
                           }
@@ -155,7 +157,7 @@ const CategoryList = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="blue"
+                            stroke="black"
                           >
                             <path
                               strokeLinecap="round"
@@ -166,14 +168,14 @@ const CategoryList = () => {
                           </svg>
                         </div>
                         <div
-                          className="w-4 ml-2 cursor-pointer hover:scale-125"
+                          className="w-6 ml-2 cursor-pointer hover:scale-125"
                           onClick={() => initiateDelete(value.id)}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="red"
+                            stroke="black"
                           >
                             <path
                               strokeLinecap="round"
@@ -187,7 +189,7 @@ const CategoryList = () => {
                     </td>
                     <td
                       onClick={() => handleStatus(value.id, value.status)}
-                      className="py-[2%] w-[1%] border-t-[1px] text-center text-md font-bold cursor-pointer hover:scale-105 items-center justify-center"
+                      className="py-[2%] w-[1%] pl-[2%] border-t-[1px] text-center lg:text-lg md:text-md text-sm font-bold cursor-pointer hover:scale-105 items-center justify-center"
                     >
                       <FormControlLabel
                         className={"mx-auto"}
