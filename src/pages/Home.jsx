@@ -184,8 +184,8 @@ const Home = () => {
   return (
     <>
       <div className="bg-gray-100">
-        <div className="flex mt-4 m-auto gap-5">
-          <div className="w-[40%] rounded-md shadow-md p-4 bg-white">
+        <div className="flex mt-4 m-auto gap-5 lg:flex-nowrap flex-wrap">
+          <div className="lg:w-[40%] w-full rounded-md shadow-md p-4 bg-white">
             <div className="flex align-center items-center gap-6">
               <h1 className="text-[2rem] text-gray-600 font-[500]">$9,564</h1>
               <button className="bg-[#FC185A1A] flex gap-2 items-center text-[#FC185A] px-2 rounded-lg py-[2px] text-[14px]">
@@ -226,17 +226,17 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-4 w-[60%] bg-white rounded-xl shadow-md p-4 ">
+          <div className="grid sm:grid-cols-4 grid-cols-2 lg:w-[60%] w-full bg-white rounded-xl shadow-md p-4 ">
             <div className="flex flex-col border-r-2 items-center justify-center">
               <IoMdCart
                 size={48}
                 className="bg-[#1B79FD1A] p-2 rounded-full"
                 color="#0D6EFD"
               />
-              <h1 className="mt-4 text-[24px] font-[600] text-gray-600">
+              <h1 className="mt-4 sm:text-[24px] text-lg font-[600] text-gray-600">
                 85,246
               </h1>
-              <h1 className="mt-4 text-[18px] font-[400] text-gray-600">
+              <h1 className="mt-3 sm:text-[18px] text-md font-[400] text-gray-600">
                 Orders
               </h1>
             </div>
@@ -246,43 +246,45 @@ const Home = () => {
                 className="bg-[#28F4B71A] p-2 rounded-full"
                 color="#28F4B7"
               />
-              <h1 className="mt-4 text-[24px] font-[600] text-gray-600">
+              <h1 className="mt-4 sm:text-[24px] text-lg font-[600] text-gray-600">
                 $96,147
               </h1>
-              <h1 className="mt-4 text-[18px] font-[400] text-gray-600">
-                INCOME
+              <h1 className="mt-3 sm:text-[18px] text-md font-[400] text-gray-600">
+                Income
               </h1>
             </div>
-            <div className="flex flex-col border-r-2 items-center justify-center">
+            <div className="sm:mt-0 mt-3 flex flex-col border-r-2 items-center justify-center">
               <FaRegBell
                 size={48}
                 className="bg-[#FFE7EE] p-2 rounded-full"
                 color="#FC185A"
               />
-              <h1 className="mt-4 text-[24px] font-[600] text-gray-600">846</h1>
-              <h1 className="mt-4 text-[18px] font-[400] text-gray-600">
+              <h1 className="mt-4 sm:text-[24px] text-lg font-[600] text-gray-600">
+                846
+              </h1>
+              <h1 className="mt-3 sm:text-[18px] text-md font-[400] text-gray-600">
                 Notifications
               </h1>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="sm:mt-0 mt-3 flex flex-col items-center justify-center">
               <TiCreditCard
                 size={50}
                 className="bg-[#6F42C11A] p-2 rounded-full"
                 color="#6F42C1"
               />
-              <h1 className="mt-4 text-[24px] font-[600] text-gray-600">
+              <h1 className="mt-4 sm:text-[24px] text-lg font-[600] text-gray-600">
                 $84,472
               </h1>
-              <h1 className="mt-4 text-[18px] font-[400] text-gray-600">
+              <h1 className="mt-3 sm:text-[18px] text-md font-[400] text-gray-600">
                 Payments
               </h1>
             </div>
           </div>
         </div>
 
-        <div className="flex gap-5 mt-4">
-          <div className="w-[40%]">
-            <div className="grid grid-cols-2 gap-4 justify-between">
+        <div className="flex gap-5 mt-4 lg:flex-nowrap flex-wrap">
+          <div className="lg:w-[40%] w-full">
+            <div className="md:grid md:grid-cols-2 md:gap-4 flex-wrap justify-between">
               <div className=" border-2 rounded-md shadow-md p-4 bg-white">
                 <h1 className="text-[2rem] text-gray-600 font-[500]">$9,568</h1>
 
@@ -383,7 +385,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="bg-white p-4 rounded-xl shadow-md w-[60%]">
+          <div className="bg-white p-4 rounded-xl shadow-md lg:w-[60%] w-full">
             <div className="flex justify-between">
               <h1 className="font-[600] text-[19px] text-gray-700">
                 Sales & Views
@@ -401,7 +403,7 @@ const Home = () => {
                 <Bar dataKey="Sales" fill="#16DBCC" radius={20} />
               </BarChart>
             </ResponsiveContainer>
-            <div className="grid grid-cols-2 justify-between border-[1px] rounded-xl border-gray-400 m-2 p-4">
+            <div className="sm:grid sm:grid-cols-2 flex-wrap justify-between border-[1px] rounded-xl border-gray-400 m-2 p-4">
               <div className="flex border-r-[1px] border-gray-400 gap-4 align-center items-center">
                 <div className="">
                   <ResponsiveContainer width={120} height={100}>
@@ -438,7 +440,7 @@ const Home = () => {
                   </h1>
                 </div>
               </div>
-              <div className="flex ml-auto gap-4 align-center items-center">
+              <div className="flex lg:mt-0 mt-5 ml-auto gap-4 align-center items-center">
                 <div className="">
                   <ResponsiveContainer width={120} height={100}>
                     <PieChart>
@@ -478,8 +480,8 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-6 mt-6">
-          <div className="bg-white p-4 rounded-xl shadow-md">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-6 flex-wrap mt-6">
+          <div className="bg-white p-4 lg:mt-0 mt-3 rounded-xl shadow-md">
             <div className="flex justify-between items-center pr-2 mb-4">
               <h1 className="font-[600] text-[20px] text-gray-700">
                 Recent Contractors
@@ -510,7 +512,7 @@ const Home = () => {
               </div>
             ))}
           </div>
-          <div className="bg-white p-4 rounded-xl shadow-md">
+          <div className="bg-white p-4 lg:mt-0 mt-3 rounded-xl shadow-md">
             <div className="flex justify-between items-center pr-2 mb-4">
               <h1 className="font-[600] text-[20px] text-gray-700">
                 Recent Leads
@@ -536,7 +538,7 @@ const Home = () => {
               </div>
             ))}
           </div>
-          <div className="bg-white p-4 rounded-xl shadow-md">
+          <div className="bg-white p-4 lg:mt-0 mt-3 rounded-xl shadow-md">
             <div className="flex justify-between items-center pr-2 mb-4">
               <h1 className="font-[600] text-[20px] text-gray-700">
                 Recent Orders
