@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PortalLayout from "../../layouts/PortalLayout";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getRequests } from "../../api/reducers/request";
 import Loading from "../../components/Loading";
-import { Android12Switch } from "../../utils/components";
-import { FormControlLabel } from "@mui/material";
-
 const RequestList = () => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
@@ -60,6 +56,7 @@ const RequestList = () => {
                 Manage Service Requests
               </h1>
             </div>
+
             <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
               <thead>
                 <tr className="text-sm leading-normal">
@@ -67,7 +64,7 @@ const RequestList = () => {
                     Customer Name
                   </th>
                   <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
-                    Customer Name
+                    Home Type
                   </th>
 
                   <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
