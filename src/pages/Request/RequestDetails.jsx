@@ -189,9 +189,11 @@ const RequestDetails = () => {
                         </div>
                         <button
                           disabled={value.assigned !== 0}
-                          className={`bg-black text-white ml-auto mt-auto px-4 rounded-lg py-[3px] ${
-                            value.assigned !== 0 ? "cursor-not-allowed" : ""
-                          }`}
+                          className={`${
+                            value.assigned !== 0
+                              ? "bg-green-500 text-white cursor-not-allowed"
+                              : "bg-black text-white"
+                          } ml-auto mt-auto px-4 rounded-lg py-[3px]`}
                           onClick={() =>
                             assign(params.get("id"), value.contractor)
                           }

@@ -85,10 +85,10 @@ const CategoryList = () => {
                 <thead>
                   <tr className="text-sm leading-normal w-full">
                     {/*<th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>*/}
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[2%]">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[3%]">
                       Name
                     </th>
-                    <th className="py-[2%] bg-gray-50 text-left md:text-lg text-md w-[1%]">
+                    <th className="py-[2%] bg-gray-50 text-left md:text-lg text-md w-[1%] pl-[3%]">
                       Detail
                     </th>
                     <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
@@ -109,12 +109,12 @@ const CategoryList = () => {
                   {response?.categories.map((value) => (
                     <tr className="text-[#000000] text-sm w-[100%]">
                       {/*<td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold text-blue-500">{value.id}</td>*/}
-                      <td className="border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium pl-[10%] mx-auto justify-center">
+                      <td className="border-t-[1px] pl-[3%]">
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
                           {value.name}
                         </div>
                       </td>
-                      <td className="border-t-[1px]">
+                      <td className="border-t-[1px] pl-[3%]">
                         <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
                           {value.details}
                         </div>
