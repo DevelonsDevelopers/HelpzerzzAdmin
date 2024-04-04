@@ -41,6 +41,30 @@ const contractorService = {
             throw error.response.data
         }
     },
+    createAffiliation: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/createAffiliation', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    createAward: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/createAward', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    createBadge: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/createBadge', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     fetch: async (id) => {
         try {
             const response = await axiosInstance.get('/contractors/single/' + id);

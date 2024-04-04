@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ACTIVE_CONTRACTORS,
     ALL_CONTRACTORS, ASSIGN_CONTRACTOR, ASSIGNED_CONTRACTORS,
-    CONTRACTOR_REDUCER,
+    CONTRACTOR_REDUCER, CREATE_AFFILIATION, CREATE_AWARD, CREATE_BADGE,
     CREATE_CONTRACTOR,
     CREATE_DETAILS,
     DELETE_CONTRACTOR,
@@ -24,6 +24,9 @@ const initialState = {
     noData: false,
     success: false,
     detailSuccess: false,
+    affiliationSuccess: false,
+    awardSuccess: false,
+    badgeSuccess: false,
     fetched: false,
     activeFetched: false,
     assignedFetched: false,
@@ -43,6 +46,30 @@ export const addContractor = createAsyncThunk(CREATE_CONTRACTOR, (data) => {
         let contractor = data.contractor;
         contractor.image = file.fileName
         return contractorService.create(contractor)
+    })
+})
+
+export const addAffiliation = createAsyncThunk(CREATE_AFFILIATION, (data) => {
+    return uploadService.single(data.file).then(file => {
+        let affiliation = data.affiliation;
+        affiliation.image = file.fileName
+        return contractorService.createAffiliation(affiliation)
+    })
+})
+
+export const addAward = createAsyncThunk(CREATE_AWARD, (data) => {
+    return uploadService.single(data.file).then(file => {
+        let award = data.award;
+        award.image = file.fileName
+        return contractorService.createAward(award)
+    })
+})
+
+export const addBadge = createAsyncThunk(CREATE_BADGE, (data) => {
+    return uploadService.single(data.file).then(file => {
+        let badge = data.badge;
+        badge.image = file.fileName
+        return contractorService.createBadge(badge)
     })
 })
 
@@ -143,7 +170,16 @@ const contractor = createSlice({
         },
         detailsSuccessListener: (state) => {
             state.detailSuccess = false
-        }
+        },
+        affiliationSuccessListener: (state) => {
+            state.affiliationSuccess = false
+        },
+        awardSuccessListener: (state) => {
+            state.awardSuccess = false
+        },
+        badgeSuccessListener: (state) => {
+            state.badgeSuccess = false
+        },
     },
     extraReducers: builder => {
         //ALL CONTRACTORS ///////////////////////////
@@ -269,6 +305,39 @@ const contractor = createSlice({
             state.detailSuccess = false
         })
 
+        //ADD CONTRACTOR AFFILIATION /////////////////////////////////////////
+        builder.addCase(addAffiliation.pending, state => {
+            state.affiliationSuccess = false
+        })
+        builder.addCase(addAffiliation.fulfilled, (state, action) => {
+            state.affiliationSuccess = true
+        })
+        builder.addCase(addAffiliation.rejected, (state, action) => {
+            state.affiliationSuccess = false
+        })
+
+        //ADD CONTRACTOR AWARD /////////////////////////////////////////
+        builder.addCase(addAward.pending, state => {
+            state.awardSuccess = false
+        })
+        builder.addCase(addAward.fulfilled, (state, action) => {
+            state.awardSuccess = true
+        })
+        builder.addCase(addAward.rejected, (state, action) => {
+            state.awardSuccess = false
+        })
+
+        //ADD CONTRACTOR BADGE /////////////////////////////////////////
+        builder.addCase(addBadge.pending, state => {
+            state.badgeSuccess = false
+        })
+        builder.addCase(addBadge.fulfilled, (state, action) => {
+            state.badgeSuccess = true
+        })
+        builder.addCase(addBadge.rejected, (state, action) => {
+            state.badgeSuccess = false
+        })
+
         //UPDATE CONTRACTOR DETAILS /////////////////////////////////////////
         builder.addCase(editContractorDetails.pending, state => {
             state.detailSuccess = false
@@ -331,4 +400,4 @@ const contractor = createSlice({
 })
 
 export default contractor.reducer
-export const { successListener, detailsSuccessListener } = contractor.actions
+export const { successListener, detailsSuccessListener, affiliationSuccessListener, awardSuccessListener, badgeSuccessListener } = contractor.actions
