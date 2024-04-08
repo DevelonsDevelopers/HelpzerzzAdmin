@@ -65,6 +65,22 @@ const contractorService = {
             throw error.response.data
         }
     },
+    createProject: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/createProject', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    addImage: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/addProjectImage', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     fetch: async (id) => {
         try {
             const response = await axiosInstance.get('/contractors/single/' + id);

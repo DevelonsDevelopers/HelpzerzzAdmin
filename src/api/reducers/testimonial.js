@@ -1,5 +1,11 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ALL_TESTIMONIALS, CREATE_TESTIMONIAL, SINGLE_TESTIMONIAL, TESTIMONIAL_REDUCER} from "../../utils/constants";
+import {
+    ALL_TESTIMONIALS,
+    CREATE_TESTIMONIAL,
+    SINGLE_TESTIMONIAL,
+    TESTIMONIAL_REDUCER,
+    UPDATE_TESTIMONIAL
+} from "../../utils/constants";
 import testimonialService from "../services/testimonialService";
 
 const initialState = {
@@ -15,8 +21,12 @@ const initialState = {
     testimonialError: '',
 }
 
-export const addTestimonial = createAsyncThunk(CREATE_TESTIMONIAL, (subcategory) => {
-    return testimonialService.create(subcategory)
+export const addTestimonial = createAsyncThunk(CREATE_TESTIMONIAL, (testimonial) => {
+    return testimonialService.create(testimonial)
+})
+
+export const updateTestimonial = createAsyncThunk(UPDATE_TESTIMONIAL, (testimonial) => {
+    return testimonialService.update(testimonial)
 })
 
 export const getTestimonials = createAsyncThunk(ALL_TESTIMONIALS, () => {
@@ -30,6 +40,11 @@ export const getTestimonial = createAsyncThunk(SINGLE_TESTIMONIAL, (id) => {
 const testimonial = createSlice({
     name: TESTIMONIAL_REDUCER,
     initialState,
+    reducers: {
+        successListener: (state) => {
+            state.success = false
+        }
+    },
     extraReducers: builder => {
         //ALL TESTIMONIALS ///////////////////////////
         builder.addCase(getTestimonials.pending, state => {
@@ -68,30 +83,31 @@ const testimonial = createSlice({
         })
         builder.addCase(addTestimonial.fulfilled, (state, action) => {
             state.success = true
-            let tempTestimonials = [...state.tempTestimonials]
+            let tempTestimonials = [...state.testimonials]
             let testimonial = action.payload.testimonial
             tempTestimonials.unshift(testimonial)
-            state.subcategories = tempTestimonials
+            state.testimonials = tempTestimonials
         })
         builder.addCase(addTestimonial.rejected, (state, action) => {
             state.success = false
         })
 
-        // //EDIT COST GUIDE //////////////////////////////////////////
-        // builder.addCase(updateSubcategory.pending, state => {
-        //     state.success = false
-        // })
-        // builder.addCase(updateSubcategory.fulfilled, (state, action) => {
-        //     state.success = true
-        //     if (action.payload) {
-        //         const value = state.subcategories.find(v => v.id === action.payload.id)
-        //         Object.assign(value, action.payload)
-        //     }
-        // })
-        // builder.addCase(updateSubcategory.rejected, (state, action) => {
-        //     state.success = false
-        // })
+        //EDIT TESTIMONIAL //////////////////////////////////////////
+        builder.addCase(updateTestimonial.pending, state => {
+            state.success = false
+        })
+        builder.addCase(updateTestimonial.fulfilled, (state, action) => {
+            state.success = true
+            if (action.payload) {
+                const value = state.testimonials.find(v => v.id === action.payload.id)
+                Object.assign(value, action.payload)
+            }
+        })
+        builder.addCase(updateTestimonial.rejected, (state, action) => {
+            state.success = false
+        })
     }
 })
 
 export default testimonial.reducer
+export const { successListener } = testimonial.actions

@@ -101,6 +101,9 @@ const ContractorDetails = () => {
                                 <Tab label="Badges"/>
                                 <Tab label="Projects"/>
                                 <Tab label="Reviews"/>
+                                <Tab label="Service Areas"/>
+                                <Tab label="Highlights"/>
+                                <Tab label="Languages"/>
                             </Tabs>
                         </Box>
                         <div className='bg-white mt-[1rem] rounded-xl px-[8rem] py-16 flex flex-col mx-8'>

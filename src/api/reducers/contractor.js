@@ -4,7 +4,7 @@ import {
     ALL_CONTRACTORS, ASSIGN_CONTRACTOR, ASSIGNED_CONTRACTORS,
     CONTRACTOR_REDUCER, CREATE_AFFILIATION, CREATE_AWARD, CREATE_BADGE,
     CREATE_CONTRACTOR,
-    CREATE_DETAILS,
+    CREATE_DETAILS, CREATE_PROJECT,
     DELETE_CONTRACTOR,
     DETAILS_CONTRACTOR,
     FEATURE_CONTRACTOR, SINGLE_CONTRACTOR,
@@ -27,6 +27,7 @@ const initialState = {
     affiliationSuccess: false,
     awardSuccess: false,
     badgeSuccess: false,
+    projectSuccess: false,
     fetched: false,
     activeFetched: false,
     assignedFetched: false,
@@ -70,6 +71,23 @@ export const addBadge = createAsyncThunk(CREATE_BADGE, (data) => {
         let badge = data.badge;
         badge.image = file.fileName
         return contractorService.createBadge(badge)
+    })
+})
+
+export const addProject = createAsyncThunk(CREATE_PROJECT, (data) => {
+    return contractorService.createProject(data.project).then(async response => {
+        for (let i = 0; i < data.files.length; i++) {
+            console.log(i)
+            await uploadService.single(data.files[i]).then(async file => {
+                console.log(file)
+                await contractorService.addImage({ project: response.project.id, image: file.fileName }).then(res => {
+                    console.log(res)
+                    if (i === data.files.length - 1){
+                        return true
+                    }
+                })
+            })
+        }
     })
 })
 
@@ -179,6 +197,9 @@ const contractor = createSlice({
         },
         badgeSuccessListener: (state) => {
             state.badgeSuccess = false
+        },
+        projectSuccessListener: (state) => {
+            state.projectSuccess = false
         },
     },
     extraReducers: builder => {
@@ -338,6 +359,17 @@ const contractor = createSlice({
             state.badgeSuccess = false
         })
 
+        //ADD CONTRACTOR PROJECT /////////////////////////////////////////
+        builder.addCase(addProject.pending, state => {
+            state.projectSuccess = false
+        })
+        builder.addCase(addProject.fulfilled, (state, action) => {
+            state.projectSuccess = true
+        })
+        builder.addCase(addProject.rejected, (state, action) => {
+            state.projectSuccess = false
+        })
+
         //UPDATE CONTRACTOR DETAILS /////////////////////////////////////////
         builder.addCase(editContractorDetails.pending, state => {
             state.detailSuccess = false
@@ -400,4 +432,4 @@ const contractor = createSlice({
 })
 
 export default contractor.reducer
-export const { successListener, detailsSuccessListener, affiliationSuccessListener, awardSuccessListener, badgeSuccessListener } = contractor.actions
+export const { successListener, detailsSuccessListener, affiliationSuccessListener, awardSuccessListener, badgeSuccessListener, projectSuccessListener } = contractor.actions

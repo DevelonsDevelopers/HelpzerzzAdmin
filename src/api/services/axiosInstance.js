@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://develons.site/api',
+    baseURL: 'https://api.helperzz.com/api',
     headers: {
         'Content-Type': 'application/json',
     },

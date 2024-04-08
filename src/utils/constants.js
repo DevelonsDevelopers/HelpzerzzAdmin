@@ -1,5 +1,5 @@
 
-export const IMAGE_PATH = "https://develons.site/HelperzzAPI/public/uploads/"
+export const IMAGE_PATH = "https://api.helperzz.com/public/uploads/"
 
 export const SESSION_USER = "HELPERZZZ_ADMIN_USER"
 
@@ -39,6 +39,7 @@ export const STATUS_SUBCATEGORY = "STATUS_SUBCATEGORY"
 export const ALL_TESTIMONIALS = "ALL_TESTIMONIALS"
 export const SINGLE_TESTIMONIAL = "SINGLE_TESTIMONIAL"
 export const CREATE_TESTIMONIAL = "CREATE_TESTIMONIAL"
+export const UPDATE_TESTIMONIAL = "UPDATE_TESTIMONIAL"
 export const DELETE_TESTIMONIAL = "DELETE_TESTIMONIAL"
 export const STATUS_TESTIMONIAL = "STATUS_TESTIMONIAL"
 
@@ -82,6 +83,7 @@ export const CREATE_CONTRACTOR = "CREATE_CONTRACTOR"
 export const CREATE_AFFILIATION = "CREATE_AFFILIATION"
 export const CREATE_AWARD = "CREATE_AWARD"
 export const CREATE_BADGE = "CREATE_BADGE"
+export const CREATE_PROJECT = "CREATE_PROJECT"
 export const UPDATE_CONTRACTOR = "UPDATE_CONTRACTOR"
 export const CREATE_DETAILS = "CREATE_DETAILS"
 export const UPDATE_DETAILS = "UPDATE_DETAILS"

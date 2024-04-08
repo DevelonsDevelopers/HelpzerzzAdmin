@@ -58,6 +58,7 @@ function App() {
 
                 <Route path="/testimonials" element={<TestimonialList/>}/>
                 <Route path="/testimonials/add" element={<TestimonialAddEdit/>}/>
+                <Route path="/testimonials/edit" element={<TestimonialAddEdit edit={true}/>}/>
 
                 <Route path="/requests" element={<RequestList/>}/>
                 <Route path="/requests/details" element={<RequestDetails/>}/>

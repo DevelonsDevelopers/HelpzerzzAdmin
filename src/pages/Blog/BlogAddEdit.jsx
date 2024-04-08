@@ -13,11 +13,12 @@ import uploadService from "../../api/services/uploadService";
 import { IMAGE_PATH } from "../../utils/constants";
 
 const BlogAddEdit = ({ edit = false }) => {
-  const names = ["title", "category", "subtitle", "content", "image"];
-  const [error, setErrors] = useState([false, false, false, false, false]);
+  const names = ["title", "category", "author", "subtitle", "content", "image"];
+  const [error, setErrors] = useState([false, false, false, false, false, false]);
   const [blogData, setBlogData] = useState({
     title: "",
     category: "",
+    author: "",
     subtitle: "",
     content: "",
     image: "",
@@ -143,15 +144,31 @@ const BlogAddEdit = ({ edit = false }) => {
 
               <div className="w-[100%] px-5 py-2 mt-2">
                 <label className="block text-[12px] ml-3 font-medium uppercase">
+                  Author
+                </label>
+                <input
+                    value={blogData.author}
+                    type="text"
+                    name={names[2]}
+                    onChange={(e) => handleChange(e)}
+                    className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
+                        error[2] ? "border-red-600" : "border-gray-300"
+                    }`}
+                    placeholder="Enter Blog Author"
+                />
+              </div>
+
+              <div className="w-[100%] px-5 py-2 mt-2">
+                <label className="block text-[12px] ml-3 font-medium uppercase">
                   Subtitle
                 </label>
                 <input
                   value={blogData.subtitle}
                   type="text"
-                  name={names[2]}
+                  name={names[3]}
                   onChange={(e) => handleChange(e)}
                   className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
-                    error[2] ? "border-red-600" : "border-gray-300"
+                    error[3] ? "border-red-600" : "border-gray-300"
                   }`}
                   placeholder="Enter Blog Subtitle"
                 />
@@ -162,7 +179,7 @@ const BlogAddEdit = ({ edit = false }) => {
                 <label
                   htmlFor="dropzone-file"
                   className={`flex flex-col items-center justify-center w-full h-56 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 ${
-                    error[4] ? "border-red-600" : "border-gray-300"
+                    error[5] ? "border-red-600" : "border-gray-300"
                   }`}
                 >
                   {blogData.image ? (
@@ -210,7 +227,7 @@ const BlogAddEdit = ({ edit = false }) => {
                   <input
                     type="file"
                     id="dropzone-file"
-                    name={names[4]}
+                    name={names[5]}
                     className="hidden"
                     onChange={(e) => convertToBase64(e)}
                   />
@@ -224,16 +241,16 @@ const BlogAddEdit = ({ edit = false }) => {
             </label>
             <div
               className={`rounded-[5px] border-[1px] ${
-                error[3] ? "border-red-600" : "border-gray-300"
+                error[4] ? "border-red-600" : "border-gray-300"
               }`}
             >
               <JoditEditor
                 // ref={editor}
                 value={blogData.content}
-                name={names[3]}
+                name={names[4]}
                 tabIndex={1}
                 onChange={(v) =>
-                  handleChange({ target: { name: names[3], value: v } })
+                  handleChange({ target: { name: names[4], value: v } })
                 }
               />
             </div>
