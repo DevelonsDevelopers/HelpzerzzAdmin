@@ -17,6 +17,22 @@ const requestService = {
             throw error.response.data
         }
     },
+    accept: async (id) => {
+        try {
+            const response = await axiosInstance.get('/serviceRequests/accept/' + id);
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    reject: async (id) => {
+        try {
+            const response = await axiosInstance.get('/serviceRequests/reject/' + id);
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    }
 }
 
 export default requestService

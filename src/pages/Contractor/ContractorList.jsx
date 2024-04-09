@@ -83,14 +83,14 @@ const ContractorList = () => {
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
                   <tr className="text-sm leading-normal w-full">
-                    <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] pl-[3%] ">
-                      ID
+                    <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] pl-[3%] text-left">
+                      Company
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
-                      Name
+                      Address
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
-                      Email
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left">
+                      Name
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
                       Featured
@@ -108,17 +108,17 @@ const ContractorList = () => {
                 <tbody>
                   {response?.contractors.map((value) => (
                     <tr className="text-[#000000] text-sm w-[100%]">
-                      <td className="py-[2%] w-[2%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] text-center pl-[3%] min-w-[50px]">
-                        {value?.id}
+                      <td className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] pl-[3%] min-w-[50px] ${value.company_name ? "" : "text-red-600"}`}>
+                        {value.company_name ? value.company_name : "Complete Details"}
                       </td>
                       <td className="border-t-[1px] ">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[150px]  ">
-                          {value.name}
+                        <div className={`py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[150px] ${value.company_address ? "" : "text-red-600"}`}>
+                          {value.company_address ? value.company_address : "Complete Details"}
                         </div>
                       </td>
                       <td className=" border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[200px]">
-                          {value?.email}
+                        <div className="py-[2%] lg:text-sm md:text-sm text-sm font-bold mx-auto min-w-[80px]">
+                          {value.name}
                         </div>
                       </td>
                       <td

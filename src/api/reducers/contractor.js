@@ -23,6 +23,7 @@ const initialState = {
     deleting: false,
     noData: false,
     success: false,
+    successID: 0,
     detailSuccess: false,
     affiliationSuccess: false,
     awardSuccess: false,
@@ -293,6 +294,7 @@ const contractor = createSlice({
             state.success = true
             let tempContractors = [...state.contractors]
             let contractor = action.payload.contractor
+            state.successID = action.payload.contractor?.id
             tempContractors.unshift(contractor)
             state.contractors = tempContractors
         })

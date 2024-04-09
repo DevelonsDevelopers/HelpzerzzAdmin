@@ -100,10 +100,10 @@ const RequestList = () => {
                       <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold lg:text-lg md:text-md text-sm hover:scale-110">
                         <p
                           className={`w-[100px] mx-auto rounded-2xl py-1 px-2 text-white ${
-                            value.status === 1 ? "bg-[#16dbcc]" : "bg-gray-500"
+                            value.status === 1 ? "bg-[#16dbcc]" : value.status === 2 ? "bg-red-700" : "bg-gray-500"
                           }`}
                         >
-                          {value.status === 1 ? "Active" : "Pending"}
+                          {value.status === 1 ? "Active" : value.status === 2 ? "Rejected" : "Pending"}
                         </p>
                       </td>
                       <td className="py-[2%] w-[2%] border-t-[1px]">

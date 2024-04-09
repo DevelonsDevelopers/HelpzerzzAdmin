@@ -23,7 +23,7 @@ const PortalLayout = ({ children }) => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (
-        sidebarRef.current &&
+        !sidebarRef.current &&
         !sidebarRef.current.contains(event.target) &&
         !event.target.classList.contains("sidebar-toggle") &&
         window.innerWidth < 748

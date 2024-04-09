@@ -38,52 +38,9 @@ const ContractorDetails = () => {
             }
         }, []);
 
-        // useEffect(() => {
-        //     if (!categoryResponse.activeFetched) {
-        //         dispatch(getActiveCategories())
-        //     }
-        // }, [categoryResponse.activeFetched]);
-        //
-        // useEffect(() => {
-        //     if (response.contractorDetails?.details) {
-        //         setEdit(true)
-        //         setDetailsData(response.contractorDetails.details)
-        //     }
-        // }, [response.contractorDetails]);
-
         const handleTabChange = (event, newValue) => {
             setTabValue(newValue);
         };
-
-        // useEffect(() => {
-        //     if (response.detailSuccess) {
-        //         navigate('/contractors')
-        //         dispatch(detailsSuccessListener())
-        //     }
-        // }, [response.detailSuccess]);
-
-        // const handleChange = (e) => {
-        //     let tempErrors = [...error]
-        //     tempErrors[names.indexOf(e.target.name)] = false
-        //     setErrors(tempErrors)
-        //     setDetailsData((data) => ({...data, [e.target.name]: e.target.value}))
-        // }
-        //
-        // const handleSubmit = (e) => {
-        //     let tempErrors = [...error]
-        //     for (let i = 0; i < names.length; i++) {
-        //         let name = names[i];
-        //         tempErrors[i] = detailsData[name].length === 0;
-        //     }
-        //     setErrors(tempErrors)
-        //     if (!tempErrors.includes(true)) {
-        //         if (edit) {
-        //             dispatch(editContractorDetails(detailsData))
-        //         } else {
-        //             dispatch(addContractorDetails(detailsData))
-        //         }
-        //     }
-        // }
 
         return (
             <>
@@ -91,8 +48,8 @@ const ContractorDetails = () => {
                     <Loading/>
                     :
                     <div>
-                        <h1 className='text-center text-[25px] font-[800] mt-5 uppercase'>{response.contractorDetails?.contractor.name}</h1>
-                        <h5 className='text-center text-[15px] font-[400] mt-[2px]'>{response.contractorDetails?.contractor.email}</h5>
+                        <h1 className='text-center text-[25px] font-[800] mt-5 uppercase'>{response.contractorDetails?.details?.company_name ? response.contractorDetails?.details.company_name : "-"}</h1>
+                        <h5 className='text-center text-[15px] font-[400] mt-[2px]'>{response.contractorDetails?.details?.address ? response.contractorDetails?.details.address : "-"}</h5>
                         <Box sx={{width: '95%', bgcolor: 'background.paper'}} className="mx-auto rounded-xl mt-[3rem]">
                             <Tabs value={tabValue} onChange={handleTabChange} centered>
                                 <Tab label="Details"/>
