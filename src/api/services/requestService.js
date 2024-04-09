@@ -32,6 +32,14 @@ const requestService = {
         } catch (error) {
             throw error.response.data
         }
+    },
+    delete: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/serviceRequests/delete/' + id);
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
     }
 }
 

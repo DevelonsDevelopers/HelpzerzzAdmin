@@ -125,7 +125,7 @@ const SubcategoryAddEdit = ({ edit = false }) => {
                   className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
                     error[0] ? "border-red-600" : "border-gray-300"
                   }`}
-                  placeholder="Enter Blog Title"
+                  placeholder="Enter Subcategory Name Here"
                 />
               </div>
             </div>

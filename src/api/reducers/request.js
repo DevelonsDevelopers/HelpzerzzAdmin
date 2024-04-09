@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ACCEPT_REQUEST,
     ALL_REQUESTS,
-    ASSIGN_CONTRACTOR,
+    ASSIGN_CONTRACTOR, DELETE_REQUEST,
     REJECT_REQUEST,
     REQUESTS_REDUCER,
     SINGLE_REQUEST
@@ -45,6 +45,16 @@ export const acceptRequest = createAsyncThunk(ACCEPT_REQUEST, (id) => {
 
 export const rejectRequest = createAsyncThunk(REJECT_REQUEST, (id) => {
     return requestService.reject(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const deleteRequest = createAsyncThunk(DELETE_REQUEST, (id) => {
+    return requestService.delete(id).then(response => {
         if (response.success){
             return id
         } else {
@@ -116,6 +126,18 @@ const request = createSlice({
         })
         builder.addCase(rejectRequest.rejected, (state, action) => {
             state.requestLoading = false
+        })
+
+        //DELETE REQUEST ////////////////////////////////////////
+        builder.addCase(deleteRequest.pending, state => {
+            state.deleting = true
+        })
+        builder.addCase(deleteRequest.fulfilled, (state, action) => {
+            state.deleting = false
+            state.requests = state.requests.filter((value) => value.id !== action.payload)
+        })
+        builder.addCase(deleteRequest.rejected, (state, action) => {
+            state.deleting = false
         })
     }
 })

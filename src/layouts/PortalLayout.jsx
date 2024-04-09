@@ -24,8 +24,8 @@ const PortalLayout = ({ children }) => {
     function handleClickOutside(event) {
       if (
         !sidebarRef.current &&
-        !sidebarRef.current.contains(event.target) &&
-        !event.target.classList.contains("sidebar-toggle") &&
+        !sidebarRef.current?.contains(event.target) &&
+        !event.target.classList?.contains("sidebar-toggle") &&
         window.innerWidth < 748
       ) {
         setShowNav(false);

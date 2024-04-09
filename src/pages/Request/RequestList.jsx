@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getRequests } from "../../api/reducers/request";
+import {deleteRequest, getRequests} from "../../api/reducers/request";
 import Loading from "../../components/Loading";
+import DeleteModal from "../../components/DeleteModal";
 const RequestList = () => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
@@ -25,7 +26,7 @@ const RequestList = () => {
   };
 
   const handleDelete = () => {
-    // dispatch(deleteCategory(deleteID))
+    dispatch(deleteRequest(deleteID))
   };
 
   const handleStatus = (id, val) => {
@@ -50,6 +51,12 @@ const RequestList = () => {
         <Loading />
       ) : (
         <div>
+          <DeleteModal
+              open={open}
+              setOpen={setOpen}
+              deleteFunction={handleDelete}
+              deleting={response.deleting}
+          />
           <div className="w-full flex flex-col justify-center">
             <div className="flex justify-between w-[100%] m-auto">
               <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
@@ -108,7 +115,7 @@ const RequestList = () => {
                       </td>
                       <td className="py-[2%] w-[2%] border-t-[1px]">
                         <div className="flex items-center justify-center">
-                          <div className="w-4  cursor-pointer hover:scale-125">
+                          <div className="w-4  cursor-pointer hover:scale-125" onClick={() => initiateDelete(value.id)}>
                             <svg
                               width="24"
                               height="24"

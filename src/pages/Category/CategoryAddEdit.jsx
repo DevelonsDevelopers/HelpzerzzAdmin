@@ -19,6 +19,7 @@ const CategoryAddEdit = ({ edit = false }) => {
     name: "",
     details: "",
     image: "",
+    tag: "",
   });
 
   const [file, setFile] = useState();
@@ -54,12 +55,17 @@ const CategoryAddEdit = ({ edit = false }) => {
     }
   }, [response.success]);
 
+  useEffect(() => {
+    setCategoryData(data => ({ ...data, tag: categoryData.name.replaceAll(" ", "-").toLowerCase() }))
+  }, [categoryData.name]);
+
   const handleChange = (e) => {
     let tempErrors = [...errors];
     tempErrors[names.indexOf(e.target.name)] = false;
     setErrors(tempErrors);
     setCategoryData((data) => ({ ...data, [e.target.name]: e.target.value }));
   };
+
   const convertToBase64 = (e) => {
     const reader = new FileReader();
     if (e.target.files.length > 0) {
