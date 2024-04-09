@@ -56,7 +56,11 @@ const ContractorAddEdit = ({edit = false}) => {
 
     useEffect(() => {
         if (response.success) {
-            navigate("/contractors/details?id=" + response.successID);
+            if (edit){
+                navigate("/contractors");
+            } else {
+                navigate("/contractors/details?id=" + response.successID);
+            }
             dispatch(successListener());
         }
     }, [response.success]);
