@@ -16,7 +16,6 @@ const DeleteModal = ({open, setOpen, deleteFunction, deleting}) => {
     const handleClose = () => {
         setOpen(!open)
     }
-
     const handleDelete = () => {
         deleteFunction()
         setClicked(true)
