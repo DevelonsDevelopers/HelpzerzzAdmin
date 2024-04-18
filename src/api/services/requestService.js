@@ -9,6 +9,14 @@ const requestService = {
             throw error.response.data
         }
     },
+    recent: async () => {
+        try {
+            const response = await axiosInstance.get('/serviceRequests/recent');
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     fetch: async (id) => {
         try {
             const response = await axiosInstance.get('/serviceRequests/single/' + id);

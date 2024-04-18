@@ -21,6 +21,12 @@ import SubcategoryList from "./pages/Subcategory/SubcategoryList";
 import SubcategoryAddEdit from "./pages/Subcategory/SubcategoryAddEdit";
 import PortalLayout from "./layouts/PortalLayout";
 import CustomerList from "./pages/Customer/CustomerList";
+import CityAddEdit from "./pages/City/CityAddEdit";
+import CityList from "./pages/City/CityList";
+import HighlightList from "./pages/Highlight/HighlightList";
+import HighlightAddEdit from "./pages/Highlight/HighlightAddEdit";
+import LanguageList from "./pages/Language/LanguageList";
+import LanguageAddEdit from "./pages/Language/LanguageAddEdit";
 
 function App() {
     return (
@@ -40,6 +46,10 @@ function App() {
                 <Route path="/subcategories" element={<SubcategoryList/>}/>
                 <Route path="/subcategories/add" element={<SubcategoryAddEdit/>}/>
                 <Route path="/subcategories/edit" element={<SubcategoryAddEdit edit={true}/>}/>
+
+                <Route path="/cities" element={<CityList/>}/>
+                <Route path="/cities/add" element={<CityAddEdit/>}/>
+                <Route path="/cities/edit" element={<CityAddEdit edit={true}/>}/>
 
                 <Route path="/blogs" element={<BlogList/>}/>
                 <Route path="/blogs/add" element={<BlogAddEdit/>}/>
@@ -62,6 +72,13 @@ function App() {
 
                 <Route path="/requests" element={<RequestList/>}/>
                 <Route path="/requests/details" element={<RequestDetails/>}/>
+
+                <Route path="/utils/highlights" element={<HighlightList/>}/>
+                <Route path="/utils/highlights/add" element={<HighlightAddEdit/>}/>
+                <Route path="/utils/highlights/edit" element={<HighlightAddEdit edit={true}/>}/>
+                <Route path="/utils/languages" element={<LanguageList/>}/>
+                <Route path="/utils/languages/add" element={<LanguageAddEdit/>}/>
+                <Route path="/utils/languages/edit" element={<LanguageAddEdit edit={true}/>}/>
             </Routes>
         </PortalLayout>
     );

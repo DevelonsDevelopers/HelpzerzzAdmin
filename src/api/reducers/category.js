@@ -2,7 +2,13 @@ import {
     ACTIVE_CATEGORIES,
     ALL_CATEGORIES,
     CATEGORY_REDUCER,
-    CREATE_CATEGORY, DELETE_CATEGORY, FEATURE_CATEGORY, SINGLE_CATEGORY, STATUS_CATEGORY, UPDATE_CATEGORY,
+    CREATE_CATEGORY,
+    DELETE_CATEGORY,
+    FEATURE_CATEGORY,
+    POPULAR_CATEGORY,
+    SINGLE_CATEGORY,
+    STATUS_CATEGORY,
+    UPDATE_CATEGORY,
 } from "../../utils/constants";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import categoryService from "../services/categoryService";
@@ -89,6 +95,16 @@ export const updateCategoryStatus = createAsyncThunk(STATUS_CATEGORY, (data) => 
 
 export const updateCategoryFeature = createAsyncThunk(FEATURE_CATEGORY, (data) => {
     return categoryService.changeFeatured(data).then(response => {
+        if (response.success){
+            return data.id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const updateCategoryPopular = createAsyncThunk(POPULAR_CATEGORY, (data) => {
+    return categoryService.changePopular(data).then(response => {
         if (response.success){
             return data.id
         } else {
@@ -224,6 +240,24 @@ const category = createSlice({
             }
         })
         builder.addCase(updateCategoryFeature.rejected, (state, action) => {
+
+        })
+
+        //POPULAR CATEGORY ////////////////////////////////////////
+        builder.addCase(updateCategoryPopular.pending, state => {
+
+        })
+        builder.addCase(updateCategoryPopular.fulfilled, (state, action) => {
+            const value = state.categories.find(v => v.id === action.payload)
+            if (value) {
+                if (value.popular === 0) {
+                    value.popular = 1
+                } else {
+                    value.popular = 0
+                }
+            }
+        })
+        builder.addCase(updateCategoryPopular.rejected, (state, action) => {
 
         })
     }

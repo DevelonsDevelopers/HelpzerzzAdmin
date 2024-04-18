@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   deleteCategory,
   getCategories,
-  updateCategoryFeature,
+  updateCategoryFeature, updateCategoryPopular,
   updateCategoryStatus,
 } from "../../api/reducers/category";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,6 +44,14 @@ const CategoryList = () => {
       status = 1;
     }
     dispatch(updateCategoryStatus({ id, status }));
+  };
+
+  const handlePopular = (id, val) => {
+    let popular = 0;
+    if (val === 0) {
+      popular = 1;
+    }
+    dispatch(updateCategoryPopular({ id, popular }));
   };
 
   const handleFeatured = (id, val) => {
@@ -191,12 +199,12 @@ const CategoryList = () => {
                         </div>
                       </td>
                       <td
-                        onClick={() => handleStatus(value.id, value.status)}
+                        onClick={() => handlePopular(value.id, value.popular)}
                         className="py-[2%] w-[1%] pl-[2%] border-t-[1px] text-center lg:text-lg md:text-md text-sm font-bold cursor-pointer hover:scale-105 items-center justify-center"
                       >
                         <FormControlLabel
                           className={"mx-auto"}
-                          control={<Android12Switch checked={value.status} />}
+                          control={<Android12Switch checked={value.popular} />}
                         />
                       </td>
                     </tr>

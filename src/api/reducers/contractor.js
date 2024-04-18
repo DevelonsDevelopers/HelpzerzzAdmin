@@ -1,19 +1,20 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ACTIVE_CONTRACTORS,
-    ALL_CONTRACTORS, ASSIGN_CONTRACTOR, ASSIGNED_CONTRACTORS,
+    ALL_CONTRACTORS, ASSIGN_AREA, ASSIGN_CONTRACTOR, ASSIGN_HIGHLIGHT, ASSIGN_LANGUAGE, ASSIGNED_CONTRACTORS,
     CONTRACTOR_REDUCER, CREATE_AFFILIATION, CREATE_AWARD, CREATE_BADGE,
     CREATE_CONTRACTOR,
     CREATE_DETAILS, CREATE_PROJECT,
     DELETE_CONTRACTOR,
     DETAILS_CONTRACTOR,
-    FEATURE_CONTRACTOR, SINGLE_CONTRACTOR,
+    FEATURE_CONTRACTOR, POPULAR_CONTRACTORS, RECENT_CONTRACTORS, SINGLE_CONTRACTOR,
     STATUS_CONTRACTOR, UPDATE_CONTRACTOR,
     UPDATE_DETAILS,
 } from "../../utils/constants";
 import contractorService from "../services/contractorService";
 import uploadService from "../services/uploadService";
 import requestContractorService from "../services/requestContractorService";
+import emailService from "../services/emailService";
 
 const initialState = {
     loading: false,
@@ -35,6 +36,8 @@ const initialState = {
     contractors: [],
     activeContractors: [],
     assignedContractors: [],
+    recentContractors: [],
+    popularContractors: [],
     contractor: null,
     contractorDetails: null,
     error: '',
@@ -130,6 +133,14 @@ export const getContractors = createAsyncThunk(ALL_CONTRACTORS, () => {
     return contractorService.fetchAll()
 })
 
+export const getRecentContractors = createAsyncThunk(RECENT_CONTRACTORS, () => {
+    return contractorService.fetchRecent()
+})
+
+export const getPopularContractors = createAsyncThunk(POPULAR_CONTRACTORS, () => {
+    return contractorService.fetchPopular()
+})
+
 export const getContractor = createAsyncThunk(SINGLE_CONTRACTOR, (id) => {
     return contractorService.fetch(id)
 })
@@ -144,6 +155,18 @@ export const getAllAssignedContractors = createAsyncThunk(ASSIGNED_CONTRACTORS, 
 
 export const assignContractor = createAsyncThunk(ASSIGN_CONTRACTOR, (data) => {
     return requestContractorService.create(data)
+})
+
+export const assignArea = createAsyncThunk(ASSIGN_AREA, (data) => {
+    return contractorService.assignArea(data)
+})
+
+export const assignHighlight = createAsyncThunk(ASSIGN_HIGHLIGHT, (data) => {
+    return contractorService.assignHighlight(data)
+})
+
+export const assignLanguage = createAsyncThunk(ASSIGN_LANGUAGE, (data) => {
+    return contractorService.assignLanguage(data)
 })
 
 export const contractorDetails = createAsyncThunk(DETAILS_CONTRACTOR, (id) => {
@@ -220,6 +243,28 @@ const contractor = createSlice({
             state.error = action.error.message
         })
 
+        //RECENT CONTRACTORS ///////////////////////////
+        builder.addCase(getRecentContractors.pending, state => {
+
+        })
+        builder.addCase(getRecentContractors.fulfilled, (state, action) => {
+            state.recentContractors = action.payload.contractors
+        })
+        builder.addCase(getRecentContractors.rejected, (state, action) => {
+            state.recentContractors = []
+        })
+
+        //POPULAR CONTRACTORS ///////////////////////////
+        builder.addCase(getPopularContractors.pending, state => {
+
+        })
+        builder.addCase(getPopularContractors.fulfilled, (state, action) => {
+            state.popularContractors = action.payload.contractors
+        })
+        builder.addCase(getPopularContractors.rejected, (state, action) => {
+            state.popularContractors = []
+        })
+
         //ASSIGNED CONTRACTORS ///////////////////////////
         builder.addCase(getAllAssignedContractors.pending, state => {
             state.assignedLoading = true
@@ -236,10 +281,10 @@ const contractor = createSlice({
             state.assignedError = action.error.message
         })
 
-        builder.addCase(assignContractor.fulfilled, (state, action) => {
-            console.log(action.payload)
+        builder.addCase(assignContractor.fulfilled,  (state, action) => {
             const value = state.assignedContractors.find(v => v.contractor === action.payload.requestContractor.contractor)
             if (value) {
+                emailService.assignContractor({ email: value.email, name: value.name })
                 value.assigned = action.payload.requestContractor.contractor
             }
         })

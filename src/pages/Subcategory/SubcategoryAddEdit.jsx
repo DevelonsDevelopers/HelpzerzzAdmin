@@ -11,6 +11,7 @@ import {
 import { getActiveCategories } from "../../api/reducers/category";
 
 const SubcategoryAddEdit = ({ edit = false }) => {
+
   const names = ["category", "name"];
   const [error, setErrors] = useState([false, false]);
   const [subcategoryData, setSubcategoryData] = useState({

@@ -8,6 +8,9 @@ import subcategory from "../reducers/subcategory";
 import testimonial from "../reducers/testimonial";
 import request from "../reducers/request";
 import customer from "../reducers/customer";
+import city from "../reducers/city";
+import highlight from "../reducers/highlight";
+import language from "../reducers/language";
 
 const store = configureStore({
     reducer: {
@@ -19,7 +22,10 @@ const store = configureStore({
         subcategory: subcategory,
         testimonial: testimonial,
         request: request,
-        customer: customer
+        customer: customer,
+        city: city,
+        highlight: highlight,
+        language: language
     }
 })
 

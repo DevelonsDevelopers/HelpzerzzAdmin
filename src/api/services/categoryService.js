@@ -64,6 +64,14 @@ const categoryService = {
         } catch (error) {
             throw error.response.data
         }
+    },
+    changePopular: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/categories/popular', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
     }
 }
 

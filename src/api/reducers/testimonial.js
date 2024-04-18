@@ -1,8 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ALL_TESTIMONIALS,
-    CREATE_TESTIMONIAL,
-    SINGLE_TESTIMONIAL,
+    CREATE_TESTIMONIAL, DELETE_TESTIMONIAL, FEATURE_TESTIMONIAL,
+    SINGLE_TESTIMONIAL, STATUS_TESTIMONIAL,
     TESTIMONIAL_REDUCER,
     UPDATE_TESTIMONIAL
 } from "../../utils/constants";
@@ -26,7 +26,13 @@ export const addTestimonial = createAsyncThunk(CREATE_TESTIMONIAL, (testimonial)
 })
 
 export const updateTestimonial = createAsyncThunk(UPDATE_TESTIMONIAL, (testimonial) => {
-    return testimonialService.update(testimonial)
+    return testimonialService.update(testimonial).then(response => {
+        if (response.success) {
+            return testimonial
+        } else {
+            return null
+        }
+    })
 })
 
 export const getTestimonials = createAsyncThunk(ALL_TESTIMONIALS, () => {
@@ -35,6 +41,36 @@ export const getTestimonials = createAsyncThunk(ALL_TESTIMONIALS, () => {
 
 export const getTestimonial = createAsyncThunk(SINGLE_TESTIMONIAL, (id) => {
     return testimonialService.fetch(id)
+})
+
+export const deleteTestimonial = createAsyncThunk(DELETE_TESTIMONIAL, (id) => {
+    return testimonialService.delete(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const updateTestimonialStatus = createAsyncThunk(STATUS_TESTIMONIAL, (data) => {
+    return testimonialService.changeStatus(data).then(response => {
+        if (response.success){
+            return data.id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const updateTestimonialFeature = createAsyncThunk(FEATURE_TESTIMONIAL, (data) => {
+    return testimonialService.changeFeatured(data).then(response => {
+        if (response.success){
+            return data.id
+        } else {
+            return 0
+        }
+    })
 })
 
 const testimonial = createSlice({
@@ -62,7 +98,7 @@ const testimonial = createSlice({
             state.error = action.error.message
         })
 
-        //GET CATEGORY /////////////////////////////////////
+        //GET TESTIMONIAL /////////////////////////////////////
         builder.addCase(getTestimonial.pending, state => {
             state.testimonialLoading = true
         })
@@ -105,6 +141,54 @@ const testimonial = createSlice({
         })
         builder.addCase(updateTestimonial.rejected, (state, action) => {
             state.success = false
+        })
+
+        //DELETE TESTIMONIAL ////////////////////////////////////////
+        builder.addCase(deleteTestimonial.pending, state => {
+            state.deleting = true
+        })
+        builder.addCase(deleteTestimonial.fulfilled, (state, action) => {
+            state.deleting = false
+            state.testimonials = state.testimonials.filter((value) => value.id !== action.payload)
+        })
+        builder.addCase(deleteTestimonial.rejected, (state, action) => {
+            state.deleting = false
+        })
+
+        //STATUS TESTIMONIAL ////////////////////////////////////////
+        builder.addCase(updateTestimonialStatus.pending, state => {
+
+        })
+        builder.addCase(updateTestimonialStatus.fulfilled, (state, action) => {
+            const value = state.testimonials.find(v => v.id === action.payload)
+            if (value) {
+                if (value.status === 0) {
+                    value.status = 1
+                } else {
+                    value.status = 0
+                }
+            }
+        })
+        builder.addCase(updateTestimonialStatus.rejected, (state, action) => {
+
+        })
+
+        //FEATURE TESTIMONIAL ////////////////////////////////////////
+        builder.addCase(updateTestimonialFeature.pending, state => {
+
+        })
+        builder.addCase(updateTestimonialFeature.fulfilled, (state, action) => {
+            const value = state.testimonials.find(v => v.id === action.payload)
+            if (value) {
+                if (value.featured === 0) {
+                    value.featured = 1
+                } else {
+                    value.featured = 0
+                }
+            }
+        })
+        builder.addCase(updateTestimonialFeature.rejected, (state, action) => {
+
         })
     }
 })

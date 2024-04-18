@@ -33,6 +33,30 @@ const testimonialService = {
             throw error.response.data
         }
     },
+    delete: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/testimonials/delete/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    changeStatus: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/testimonials/status', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    changeFeatured: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/testimonials/featured', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    }
 }
 
 export default testimonialService

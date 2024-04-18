@@ -83,20 +83,6 @@ const BlogList = () => {
             </div>
             <div className="overflow-auto min-w-[300px]">
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
-                {/*<thead>*/}
-
-                {/*<tr className="uppercase text-sm leading-normal w-full">*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">ID</th>*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[5%]">Title</th>*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Category</th>*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Subtitle</th>*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]">Featured</th>*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Status</th>*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[2%]">Actions</th>*/}
-                {/*    <th className="py-[2%] border-b-[2px] border-b-black text-center text-[13px] w-[1%]"></th>*/}
-                {/*</tr>*/}
-                {/*</thead>*/}
-
                 <thead>
                   <tr className="text-sm leading-normal">
                     <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">

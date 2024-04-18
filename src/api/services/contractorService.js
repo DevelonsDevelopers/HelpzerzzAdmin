@@ -73,6 +73,30 @@ const contractorService = {
             throw error.response.data
         }
     },
+    assignArea: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/assignArea', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    assignHighlight: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/assignHighlight', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    assignLanguage: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/assignLanguage', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     addImage: async (payload) => {
         try {
             const response = await axiosInstance.post('/contractors/addProjectImage', payload)
@@ -92,6 +116,22 @@ const contractorService = {
     fetchAll: async () => {
         try {
             const response = await axiosInstance.get('/contractors/all');
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    fetchRecent: async () => {
+        try {
+            const response = await axiosInstance.get('/contractors/recent');
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    fetchPopular: async () => {
+        try {
+            const response = await axiosInstance.get('/contractors/popular');
             return response.data
         } catch (error) {
             throw error.response.data

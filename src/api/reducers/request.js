@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ACCEPT_REQUEST,
     ALL_REQUESTS,
-    ASSIGN_CONTRACTOR, DELETE_REQUEST,
+    ASSIGN_CONTRACTOR, DELETE_REQUEST, RECENT_REQUESTS,
     REJECT_REQUEST,
     REQUESTS_REDUCER,
     SINGLE_REQUEST
@@ -20,6 +20,7 @@ const initialState = {
     success: false,
     fetched: false,
     requests: [],
+    recent: [],
     request: null,
     error: '',
     requestError: '',
@@ -27,6 +28,10 @@ const initialState = {
 
 export const getRequests = createAsyncThunk(ALL_REQUESTS, () => {
     return requestService.fetchAll()
+})
+
+export const getRecentRequests = createAsyncThunk(RECENT_REQUESTS, () => {
+    return requestService.recent()
 })
 
 export const getRequest = createAsyncThunk(SINGLE_REQUEST, (id) => {
@@ -81,6 +86,16 @@ const request = createSlice({
             state.loading = false
             state.requests = []
             state.error = action.error.message
+        })
+
+        //RECENT REQUESTS ///////////////////////////
+        builder.addCase(getRecentRequests.pending, state => {
+        })
+        builder.addCase(getRecentRequests.fulfilled, (state, action) => {
+            state.recent = action.payload.requests
+        })
+        builder.addCase(getRecentRequests.rejected, (state, action) => {
+            state.recent = []
         })
 
         //GET REQUEST /////////////////////////////////////

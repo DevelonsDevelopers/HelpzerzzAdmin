@@ -18,6 +18,10 @@ import Awards from "./Components/Awards";
 import Badges from "./Components/Badges";
 import Projects from "./Components/Projects";
 import Reviews from "./Components/Reviews";
+import Areas from "./Components/Areas";
+import Highlights from "./Components/Highlights";
+import Languages from "./Components/Languages";
+import Leads from "./Components/Leads";
 
 const ContractorDetails = () => {
 
@@ -51,7 +55,7 @@ const ContractorDetails = () => {
                         <h1 className='text-center text-[25px] font-[800] mt-5 uppercase'>{response.contractorDetails?.details?.company_name ? response.contractorDetails?.details.company_name : "-"}</h1>
                         <h5 className='text-center text-[15px] font-[400] mt-[2px]'>{response.contractorDetails?.details?.address ? response.contractorDetails?.details.address : "-"}</h5>
                         <Box sx={{width: '95%', bgcolor: 'background.paper'}} className="mx-auto rounded-xl mt-[3rem]">
-                            <Tabs value={tabValue} onChange={handleTabChange} centered>
+                            <Tabs value={tabValue} onChange={handleTabChange} centered variant="scrollable" >
                                 <Tab label="Details"/>
                                 <Tab label="Affiliations"/>
                                 <Tab label="Awards"/>
@@ -61,6 +65,8 @@ const ContractorDetails = () => {
                                 <Tab label="Service Areas"/>
                                 <Tab label="Highlights"/>
                                 <Tab label="Languages"/>
+                                <Tab label="Leads"/>
+                                <Tab label="Documents"/>
                             </Tabs>
                         </Box>
                         <div className='bg-white mt-[1rem] rounded-xl px-[8rem] py-16 flex flex-col mx-8'>
@@ -91,6 +97,26 @@ const ContractorDetails = () => {
                             }
                             {tabValue === 5 ?
                                 <Reviews id={ID} response={response}/>
+                                :
+                                null
+                            }
+                            {tabValue === 6 ?
+                                <Areas id={ID} response={response}/>
+                                :
+                                null
+                            }
+                            {tabValue === 7 ?
+                                <Highlights id={ID} response={response}/>
+                                :
+                                null
+                            }
+                            {tabValue === 8 ?
+                                <Languages id={ID} response={response}/>
+                                :
+                                null
+                            }
+                            {tabValue === 9 ?
+                                <Leads id={ID} response={response}/>
                                 :
                                 null
                             }

@@ -13,7 +13,12 @@ import DeleteModal from "../../components/DeleteModal";
 import {IoAdd} from "react-icons/io5";
 import {Android12Switch, BpCheckbox} from "../../utils/components";
 import {FormControlLabel} from "@mui/material";
-import {getTestimonials} from "../../api/reducers/testimonial";
+import {
+    deleteTestimonial,
+    getTestimonials,
+    updateTestimonialFeature,
+    updateTestimonialStatus
+} from "../../api/reducers/testimonial";
 
 const TestimonialList = () => {
     const [open, setOpen] = useState(false);
@@ -36,23 +41,23 @@ const TestimonialList = () => {
     };
 
     const handleDelete = () => {
-        // dispatch(deleteCategory(deleteID))
+        dispatch(deleteTestimonial(deleteID))
     };
 
     const handleStatus = (id, val) => {
-        // let status = 0;
-        // if (val === 0) {
-        //     status = 1
-        // }
-        // dispatch(updateCategoryStatus({id, status}))
+        let status = 0;
+        if (val === 0) {
+            status = 1
+        }
+        dispatch(updateTestimonialStatus({id, status}))
     };
 
     const handleFeatured = (id, val) => {
-        // let featured = 0;
-        // if (val === 0) {
-        //     featured = 1
-        // }
-        // dispatch(updateCategoryFeature({id, featured}))
+        let featured = 0;
+        if (val === 0) {
+            featured = 1
+        }
+        dispatch(updateTestimonialFeature({id, featured}))
     };
 
     return (
@@ -94,6 +99,9 @@ const TestimonialList = () => {
                                     Rating
                                 </th>
                                 <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-center">
+                                    Featured
+                                </th>
+                                <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-center">
                                     Status
                                 </th>
                                 <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-center">
@@ -126,6 +134,22 @@ const TestimonialList = () => {
                                             className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
                                             {value.rating}
                                         </div>
+                                    </td>
+
+                                    <td
+                                        onClick={() => handleFeatured(value.id, value.featured)}
+                                        className={`py-[2%] w-[1%] border-t-[1px] justify-center lg:text-lg md:text-md text-sm font-bold cursor-pointer hover:scale-105 items-center ${
+                                            value.featured === 1
+                                                ? "text-green-800"
+                                                : "text-red-700"
+                                        }`}
+                                    >
+                                        <center>
+                                            <BpCheckbox
+                                                className="mx-auto"
+                                                checked={value.featured}
+                                            />
+                                        </center>
                                     </td>
 
                                     <td
