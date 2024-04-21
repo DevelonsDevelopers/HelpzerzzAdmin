@@ -80,7 +80,7 @@ const UserList = () => {
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6">
                 <thead>
                   <tr className="text-sm leading-normal w-full">
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md text-left w-[2%]">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md text-center w-[1%]">
                       ID
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
@@ -89,13 +89,13 @@ const UserList = () => {
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
                       Username
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
                       Email
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
                       Status
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] ">
                       Actions
                     </th>
                     <th className="py-[2%] bg-gray-50 rounded-tr-xl text-center text-lg w-[1%]"></th>
@@ -128,17 +128,19 @@ const UserList = () => {
 
                       <td
                         onClick={() => handleStatus(value.id, value.status)}
-                        className="py-[2%] w-[1%] pl-[2%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"
+                        className="border-t-[1px] cursor-pointer hover:scale-105 pl-[1%]"
                       >
-                        <FormControlLabel
-                          className={"mx-auto"}
-                          control={
-                            <Android12Switch
-                              checked={value.status}
-                              color={"success"}
-                            />
-                          }
-                        />
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[50px] mx-auto justify-center">
+                          <FormControlLabel
+                            className={"mx-auto"}
+                            control={
+                              <Android12Switch
+                                checked={value.status}
+                                color={"success"}
+                              />
+                            }
+                          />
+                        </div>
                       </td>
                       <td className="py-[2%] w-[2%] border-t-[1px]">
                         <div className="flex items-center justify-center">

@@ -91,7 +91,7 @@ const BlogList = () => {
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
                       Title
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%]">
                       Category
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
@@ -125,8 +125,8 @@ const BlogList = () => {
                         </div>
                       </td>
 
-                      <td className="border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto  justify-center min-w-[150px]">
+                      <td className="border-t-[1px] pl-[1%]">
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto  justify-center min-w-[150px] ">
                           {value?.category}
                         </div>
                       </td>
@@ -154,9 +154,9 @@ const BlogList = () => {
                       </td>
                       <td
                         onClick={() => handleStatus(value.id, value.status)}
-                        className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] font-bold cursor-pointer hover:scale-105 items-center justify-center"
+                        className="border-t-[1px] cursor-pointer hover:scale-105 pl-[1%]"
                       >
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto pl-[2%] justify-center">
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[50px] mx-auto justify-center">
                           <FormControlLabel
                             className={"mx-auto"}
                             control={

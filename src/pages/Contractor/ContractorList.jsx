@@ -67,7 +67,7 @@ const ContractorList = () => {
             deleting={response.deleting}
           />
           <div className="w-full flex flex-col justify-center">
-            <div className="flex justify-center w-[90%] m-auto">
+            <div className="flex justify-center w-[100%] m-auto">
               <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
                 Contractors
               </h1>
@@ -108,12 +108,24 @@ const ContractorList = () => {
                 <tbody>
                   {response?.contractors.map((value) => (
                     <tr className="text-[#000000] text-sm w-[100%]">
-                      <td className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] pl-[3%] min-w-[50px] ${value.company_name ? "" : "text-red-600"}`}>
-                        {value.company_name ? value.company_name : "Complete Details"}
+                      <td
+                        className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] pl-[3%] min-w-[50px] ${
+                          value.company_name ? "" : "text-red-600"
+                        }`}
+                      >
+                        {value.company_name
+                          ? value.company_name
+                          : "Complete Details"}
                       </td>
                       <td className="border-t-[1px] ">
-                        <div className={`py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[150px] ${value.company_address ? "" : "text-red-600"}`}>
-                          {value.company_address ? value.company_address : "Complete Details"}
+                        <div
+                          className={`py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[150px] ${
+                            value.company_address ? "" : "text-red-600"
+                          }`}
+                        >
+                          {value.company_address
+                            ? value.company_address
+                            : "Complete Details"}
                         </div>
                       </td>
                       <td className=" border-t-[1px]">
