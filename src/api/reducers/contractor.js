@@ -4,8 +4,8 @@ import {
     ALL_CONTRACTORS, ASSIGN_AREA, ASSIGN_CONTRACTOR, ASSIGN_HIGHLIGHT, ASSIGN_LANGUAGE, ASSIGNED_CONTRACTORS,
     CONTRACTOR_REDUCER, CREATE_AFFILIATION, CREATE_AWARD, CREATE_BADGE,
     CREATE_CONTRACTOR,
-    CREATE_DETAILS, CREATE_PROJECT,
-    DELETE_CONTRACTOR,
+    CREATE_DETAILS, CREATE_PROJECT, DELETE_AFFILIATION, DELETE_AWARD, DELETE_BADGE,
+    DELETE_CONTRACTOR, DELETE_PROJECT,
     DETAILS_CONTRACTOR,
     FEATURE_CONTRACTOR, POPULAR_CONTRACTORS, RECENT_CONTRACTORS, SINGLE_CONTRACTOR,
     STATUS_CONTRACTOR, UPDATE_CONTRACTOR,
@@ -62,6 +62,16 @@ export const addAffiliation = createAsyncThunk(CREATE_AFFILIATION, (data) => {
     })
 })
 
+export const deleteAffiliation = createAsyncThunk(DELETE_AFFILIATION, (id) => {
+    return contractorService.deleteAffiliation(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
 export const addAward = createAsyncThunk(CREATE_AWARD, (data) => {
     return uploadService.single(data.file).then(file => {
         let award = data.award;
@@ -70,11 +80,31 @@ export const addAward = createAsyncThunk(CREATE_AWARD, (data) => {
     })
 })
 
+export const deleteAward = createAsyncThunk(DELETE_AWARD, (id) => {
+    return contractorService.deleteAward(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
 export const addBadge = createAsyncThunk(CREATE_BADGE, (data) => {
     return uploadService.single(data.file).then(file => {
         let badge = data.badge;
         badge.image = file.fileName
         return contractorService.createBadge(badge)
+    })
+})
+
+export const deleteBadge = createAsyncThunk(DELETE_BADGE, (id) => {
+    return contractorService.deleteBadge(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
     })
 })
 
@@ -91,6 +121,16 @@ export const addProject = createAsyncThunk(CREATE_PROJECT, (data) => {
                     }
                 })
             })
+        }
+    })
+})
+
+export const deleteProject = createAsyncThunk(DELETE_PROJECT, (id) => {
+    return contractorService.deleteProject(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
         }
     })
 })
@@ -281,11 +321,36 @@ const contractor = createSlice({
             state.assignedError = action.error.message
         })
 
+        //ASSIGN CONTRACTOR
         builder.addCase(assignContractor.fulfilled,  (state, action) => {
             const value = state.assignedContractors.find(v => v.contractor === action.payload.requestContractor.contractor)
             if (value) {
                 emailService.assignContractor({ email: value.email, name: value.name })
                 value.assigned = action.payload.requestContractor.contractor
+            }
+        })
+
+        //ASSIGN AREA
+        builder.addCase(assignArea.fulfilled,  (state, action) => {
+            const value = state.contractorDetails?.areas?.find(v => v.id === action.payload.area.city)
+            if (value) {
+                value.assigned = action.payload.area.id
+            }
+        })
+
+        //ASSIGN HIGHLIGHTS
+        builder.addCase(assignHighlight.fulfilled,  (state, action) => {
+            const value = state.contractorDetails?.highlights?.find(v => v.id === action.payload.highlight.highlight)
+            if (value) {
+                value.assigned = action.payload.highlight.id
+            }
+        })
+
+        //ASSIGN LANGUAGE
+        builder.addCase(assignLanguage.fulfilled,  (state, action) => {
+            const value = state.contractorDetails?.languages?.find(v => v.id === action.payload.language.language)
+            if (value) {
+                value.assigned = action.payload.language.id
             }
         })
 
@@ -382,6 +447,11 @@ const contractor = createSlice({
         })
         builder.addCase(addAffiliation.rejected, (state, action) => {
             state.affiliationSuccess = false
+        })
+
+        builder.addCase(deleteContractor.fulfilled, (state, action) => {
+            state.deleting = false
+            state.contractors = state.contractors.filter((value) => value.id !== action.payload)
         })
 
         //ADD CONTRACTOR AWARD /////////////////////////////////////////

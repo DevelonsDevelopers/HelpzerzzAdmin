@@ -49,9 +49,25 @@ const contractorService = {
             throw error.response.data
         }
     },
+    deleteAffiliation: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/deleteAffiliation/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     createAward: async (payload) => {
         try {
             const response = await axiosInstance.post('/contractors/createAward', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    deleteAward: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/deleteAward/' + id)
             return response.data
         } catch (error) {
             throw error.response.data
@@ -65,9 +81,25 @@ const contractorService = {
             throw error.response.data
         }
     },
+    deleteBadge: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/deleteBadge/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     createProject: async (payload) => {
         try {
             const response = await axiosInstance.post('/contractors/createProject', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    deleteProject: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/deleteProject/' + id)
             return response.data
         } catch (error) {
             throw error.response.data
@@ -81,6 +113,14 @@ const contractorService = {
             throw error.response.data
         }
     },
+    unAssignArea: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/unAssignArea/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     assignHighlight: async (payload) => {
         try {
             const response = await axiosInstance.post('/contractors/assignHighlight', payload)
@@ -89,9 +129,25 @@ const contractorService = {
             throw error.response.data
         }
     },
+    unAssignHighlight: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/unAssignHighlight/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     assignLanguage: async (payload) => {
         try {
             const response = await axiosInstance.post('/contractors/assignLanguage', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    unAssignLanguage: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/unAssignLanguage/' + id)
             return response.data
         } catch (error) {
             throw error.response.data

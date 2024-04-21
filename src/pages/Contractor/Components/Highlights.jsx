@@ -3,8 +3,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {getHighlights} from "../../../api/reducers/highlight";
 import Loading from "../../../components/Loading";
+import {assignArea, assignHighlight} from "../../../api/reducers/contractor";
 
 const Highlights = ({ id, response }) => {
+
+    const dispatch = useDispatch()
+
+    const Assign = (highlight) => {
+        dispatch(assignHighlight({ contractor: id, highlight: highlight}))
+    }
 
     return (
         <>
@@ -20,7 +27,7 @@ const Highlights = ({ id, response }) => {
                                 <div
                                     className="py-[2%] lg:text-lg text-center md:text-md text-sm font-medium mx-auto  justify-center min-w-[50px]">
                                     {value.assigned === 0 ?
-                                        <button className={`rounded-md bg-black px-10 py-1 text-white`}>Assign</button>
+                                        <button className={`rounded-md bg-black px-10 py-1 text-white`} onClick={() => Assign(value.id)}>Assign</button>
                                         :
                                         <button className={`rounded-md bg-green-800 px-10 py-1 text-white`}>Assigned</button>
                                     }
