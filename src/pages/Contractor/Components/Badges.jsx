@@ -218,7 +218,11 @@ const Badges = ({ id, response }) => {
                     {value.subtitle}
                   </span>
                 </div>
-                {/* <button className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}>Delete</button> */}
+                <button
+                  className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>

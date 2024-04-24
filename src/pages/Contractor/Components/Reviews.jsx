@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { IMAGE_PATH } from "../../../utils/constants";
 import { Rating } from "@mui/material";
 import moment from "moment";
+import { Popover, Transition } from "@headlessui/react";
 
 const Reviews = ({ id, response }) => {
+  const [openMenu, setOpenMenu] = useState();
   console.log(response);
   return (
     <div>
@@ -15,9 +17,31 @@ const Reviews = ({ id, response }) => {
             <div className={` flex flex-col py-3 justify-center px-4`}>
               <span className="flex text-left w-full justify-between align-center mt-2 ">
                 <span className={`font-bold text-left`}>{value.title}</span>
-                <span>
-                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAc0lEQVR4nNXTwQ2CQBAF0HdXaxDKMNgY2ohgC0ABWgxQiWaTPex9jOJP5voymfzh33LANc8+At3xytNFoGcBPSJQgwUzTraQGhNGVBFoKm40fgoaIlCVN0nI0RZyxporkKrw+0L2BXSLQOlRL2ixi0DfzxsZ/B2yf+xpkAAAAABJRU5ErkJggg==" />
-                </span>
+                <Popover className="relative">
+                  <Popover.Button onClick={() => setOpenMenu(!openMenu)}>
+                    <span>
+                      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAc0lEQVR4nNXTwQ2CQBAF0HdXaxDKMNgY2ohgC0ABWgxQiWaTPex9jOJP5voymfzh33LANc8+At3xytNFoGcBPSJQgwUzTraQGhNGVBFoKm40fgoaIlCVN0nI0RZyxporkKrw+0L2BXSLQOlRL2ixi0DfzxsZ/B2yf+xpkAAAAABJRU5ErkJggg==" />
+                    </span>
+                  </Popover.Button>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform scale-95"
+                    enterTo="transform scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform scale-100"
+                    leaveTo="transform scale-95"
+                  >
+                    <Popover.Panel className="absolute right-0 border-[1px]  max-sm:right-0 z-50 bg-white shadow-sm rounded-md max-w-xs max-sm:w-[100px] w-[100px] py-4">
+                      <center className="flex flex-col gap-2">
+                        <button className="text-[14px] font-[500]">Edit</button>
+                        <button className="text-[14px] font-[500]">
+                          Delete
+                        </button>
+                      </center>
+                    </Popover.Panel>
+                  </Transition>
+                </Popover>
               </span>
               <div className="text-left flex">
                 <Rating value={value.rating} size="small" readOnly />
