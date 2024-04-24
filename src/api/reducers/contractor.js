@@ -449,10 +449,10 @@ const contractor = createSlice({
             state.affiliationSuccess = false
         })
 
-        builder.addCase(deleteContractor.fulfilled, (state, action) => {
-            state.deleting = false
-            state.contractors = state.contractors.filter((value) => value.id !== action.payload)
-        })
+        // builder.addCase(deleteContractor.fulfilled, (state, action) => {
+        //     state.deleting = false
+        //     state.contractors = state.contractors.filter((value) => value.id !== action.payload)
+        // })
 
         //ADD CONTRACTOR AWARD /////////////////////////////////////////
         builder.addCase(addAward.pending, state => {
