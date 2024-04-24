@@ -85,7 +85,7 @@ const CostGuideList = () => {
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
                   <tr className="text-sm leading-normal w-full">
-                    <th className="py-[2%] bg-gray-50 rounded-tl-xl text-center text-lg w-[2%]">
+                    <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">
                       ID
                     </th>
                     <th className="py-[2%] bg-gray-50 text-left text-lg w-[3%]">
@@ -111,7 +111,7 @@ const CostGuideList = () => {
                   {response?.costGuides.map((value) => (
                     <tr className="text-[#000000] text-sm w-[100%]">
                       <td className="border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[10px] mx-auto justify-center min-w-[50px]">
+                        <div className="py-[2%] lg:text-lg text-center md:text-md text-sm font-medium mx-auto  justify-center min-w-[50px]">
                           {value?.id}
                         </div>
                       </td>
@@ -145,7 +145,7 @@ const CostGuideList = () => {
                       </td>
                       <td
                         onClick={() => handleStatus(value.id, value.status)}
-                        className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] pl-[2%] font-bold cursor-pointer hover:scale-105 items-center justify-center"
+                        className="py-[2%] w-[1%] border-t-[1px] text-center text-[8px] pl-[3%] font-bold cursor-pointer hover:scale-105 items-center justify-center"
                       >
                         <FormControlLabel
                           className={"mx-auto"}

@@ -282,14 +282,16 @@ const Projects = ({ id, response }) => {
         <>
           <button
             onClick={() => setAdd(true)}
-            className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
+            className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110 max-w-[900px]"
           >
             Add Project
           </button>
-          <div className={`grid grid-cols-3 gap-2 mt-6`}>
+          <div
+            className={`lg:grid lg:grid-cols-3 gap-2 mt-6 max-w-[900px] flex flex-wrap`}
+          >
             {response?.contractorDetails?.projects?.map((value) => (
               <div
-                className={`flex flex-col text-center border-gray-600 border-[1px] rounded-2xl bg-gray-50`}
+                className={`flex flex-col text-center border-gray-600 border-[1px] rounded-2xl bg-gray-50 w-[250px]`}
               >
                 <div
                   className={` flex flex-col py-6 justify-center items-center`}
@@ -303,18 +305,18 @@ const Projects = ({ id, response }) => {
                       />
                     ))}
                   </div>
-                  <span className={`absolute bottom-80 mt-2 font-bold`}>
+                  <span className={`relative top-[0%] h-[40px] mt-2 font-bold`}>
                     {value.title}
                   </span>
                   <span className={`mt-1 font-medium text-[12px]`}>
                     {value.subtitle}
                   </span>
                 </div>
-                {/* <button
+                <button
                   className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}
                 >
                   Delete
-                </button> */}
+                </button>
               </div>
             ))}
           </div>
