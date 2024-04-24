@@ -33,6 +33,12 @@ const CategoryAddEdit = ({ edit = false }) => {
   const params = new URLSearchParams(location.search);
 
   useEffect(() => {
+    if (!response.fetched) {
+      dispatch(getCategory());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     if (edit) {
       if (params.get("id")) {
         dispatch(getCategory(params.get("id")));
@@ -56,7 +62,10 @@ const CategoryAddEdit = ({ edit = false }) => {
   }, [response.success]);
 
   useEffect(() => {
-    setCategoryData(data => ({ ...data, tag: categoryData.name.replaceAll(" ", "-").toLowerCase() }))
+    setCategoryData((data) => ({
+      ...data,
+      tag: categoryData.name.replaceAll(" ", "-").toLowerCase(),
+    }));
   }, [categoryData.name]);
 
   const handleChange = (e) => {

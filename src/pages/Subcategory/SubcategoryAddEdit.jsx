@@ -11,7 +11,6 @@ import {
 import { getActiveCategories } from "../../api/reducers/category";
 
 const SubcategoryAddEdit = ({ edit = false }) => {
-
   const names = ["category", "name"];
   const [error, setErrors] = useState([false, false]);
   const [subcategoryData, setSubcategoryData] = useState({
@@ -27,6 +26,12 @@ const SubcategoryAddEdit = ({ edit = false }) => {
   const location = useLocation();
 
   const params = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    if (!response.fetched) {
+      dispatch(getSubcategory());
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     if (edit) {

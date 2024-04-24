@@ -39,6 +39,12 @@ const ContractorAddEdit = ({edit = false}) => {
     const params = new URLSearchParams(location.search);
 
     useEffect(() => {
+        if (!response.fetched) {
+          dispatch(getContractor());
+        }
+      }, [dispatch]);
+      
+    useEffect(() => {
         if (edit) {
             if (params.get("id")) {
                 dispatch(getContractor(params.get("id")));

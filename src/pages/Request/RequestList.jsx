@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {deleteRequest, getRequests} from "../../api/reducers/request";
+import { deleteRequest, getRequests } from "../../api/reducers/request";
 import Loading from "../../components/Loading";
 import DeleteModal from "../../components/DeleteModal";
+import deleteImage from "../../components/assets/delete.png";
+
 const RequestList = () => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
@@ -26,7 +28,7 @@ const RequestList = () => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteRequest(deleteID))
+    dispatch(deleteRequest(deleteID));
   };
 
   const handleStatus = (id, val) => {
@@ -52,10 +54,10 @@ const RequestList = () => {
       ) : (
         <div>
           <DeleteModal
-              open={open}
-              setOpen={setOpen}
-              deleteFunction={handleDelete}
-              deleting={response.deleting}
+            open={open}
+            setOpen={setOpen}
+            deleteFunction={handleDelete}
+            deleting={response.deleting}
           />
           <div className="w-full flex flex-col justify-center">
             <div className="flex justify-between w-[100%] m-auto">
@@ -107,30 +109,27 @@ const RequestList = () => {
                       <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold lg:text-lg md:text-md text-sm hover:scale-110">
                         <p
                           className={`w-[100px] mx-auto rounded-2xl py-1 px-2 text-white ${
-                            value.status === 1 ? "bg-[#16dbcc]" : value.status === 2 ? "bg-red-700" : "bg-gray-500"
+                            value.status === 1
+                              ? "bg-[#16dbcc]"
+                              : value.status === 2
+                              ? "bg-red-700"
+                              : "bg-gray-500"
                           }`}
                         >
-                          {value.status === 1 ? "Active" : value.status === 2 ? "Rejected" : "Pending"}
+                          {value.status === 1
+                            ? "Active"
+                            : value.status === 2
+                            ? "Rejected"
+                            : "Pending"}
                         </p>
                       </td>
                       <td className="py-[2%] w-[2%] border-t-[1px]">
                         <div className="flex items-center justify-center">
-                          <div className="w-4  cursor-pointer hover:scale-125" onClick={() => initiateDelete(value.id)}>
-                            <svg
-                              width="24"
-                              height="24"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="black"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
+                          <div
+                            className="w-8  cursor-pointer hover:scale-125"
+                            onClick={() => initiateDelete(value.id)}
+                          >
+                            <img src={deleteImage} alt="Delete" />
                           </div>
                         </div>
                       </td>

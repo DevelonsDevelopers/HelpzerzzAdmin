@@ -15,6 +15,8 @@ const Topbar = ({ showNav, setShowNav }) => {
 
   useEffect(() => {
     const token = Cookies.get("helperzz-jwt-auth-token");
+    console.log(token);
+
     if (!token) {
       navigate("/login");
     }
@@ -49,7 +51,27 @@ const Topbar = ({ showNav, setShowNav }) => {
       </div>
       <div>
         <div className="items-center md:pr-6 flex gap-6">
-          <FaBell className="h-6 w-6 mt-[4px]" />
+          <Popover className="relative">
+            <Popover.Button
+              onClick={() => setOpenMenu(!openMenu)}
+              className="flex outline-none cursor-pointer text-gray-700"
+            >
+              <FaBell className="h-6 w-6 mt-[4px]" />
+            </Popover.Button>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform scale-95"
+              enterTo="transform scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform scale-100"
+              leaveTo="transform scale-95"
+            >
+              <Popover.Panel className="mr-8 md:mr-10 absolute -right-16 max-sm:right-0 z-50 mt-4 border-[1px] bg-white shadow-sm rounded-md max-w-xs min-w-[200px] py-3">
+                <center className="">Notifications</center>
+              </Popover.Panel>
+            </Transition>
+          </Popover>
 
           <Popover className="relative">
             <Popover.Button
@@ -72,12 +94,12 @@ const Topbar = ({ showNav, setShowNav }) => {
               leaveFrom="transform scale-100"
               leaveTo="transform scale-95"
             >
-              <Popover.Panel className="mr-8 md:mr-10 absolute -right-16 max-sm:right-0 z-50 mt-4 bg-white shadow-sm rounded-md max-w-xs max-sm:wi-[230px] w-[250px] py-3">
+              <Popover.Panel className="mr-8 md:mr-10 absolute -right-16 max-sm:right-0 z-50 mt-3 bg-white  border-[1px] shadow-sm rounded-md max-w-xs max-sm:wi-[230px] w-[250px] py-3">
                 <div>
                   <>
                     <center className="mt-5">
-                      {/*<div className="text-[14px] font-[400]">{sessionUser?.name}</div>*/}
-                      {/*<div className="text-[12px] font-[600]">{sessionUser?.email}</div>*/}
+                      {/* <div className="text-[14px] font-[400]">{sessionUser?.name}</div>
+                      <div className="text-[12px] font-[600]">{sessionUser?.email}</div> */}
                       <button
                         onClick={() => handleLogout()}
                         className="mt-5 text-center w-[50%] rounded bg-[#058ACA] hover:bg-[#046C9C] text-white font-[600] py-1 mb-5 shadow-md text-[0.8rem]"

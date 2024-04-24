@@ -7,14 +7,19 @@ import {
   successListener,
   updateBlog,
 } from "../../api/reducers/blog";
-import PortalLayout from "../../layouts/PortalLayout";
 import JoditEditor from "jodit-react";
-import uploadService from "../../api/services/uploadService";
 import { IMAGE_PATH } from "../../utils/constants";
 
 const BlogAddEdit = ({ edit = false }) => {
   const names = ["title", "category", "author", "subtitle", "content", "image"];
-  const [error, setErrors] = useState([false, false, false, false, false, false]);
+  const [error, setErrors] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const [blogData, setBlogData] = useState({
     title: "",
     category: "",
@@ -32,6 +37,12 @@ const BlogAddEdit = ({ edit = false }) => {
   const location = useLocation();
 
   const params = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    if (!response.fetched) {
+      dispatch(getBlog());
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     if (edit) {
@@ -147,14 +158,14 @@ const BlogAddEdit = ({ edit = false }) => {
                   Author
                 </label>
                 <input
-                    value={blogData.author}
-                    type="text"
-                    name={names[2]}
-                    onChange={(e) => handleChange(e)}
-                    className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
-                        error[2] ? "border-red-600" : "border-gray-300"
-                    }`}
-                    placeholder="Enter Blog Author"
+                  value={blogData.author}
+                  type="text"
+                  name={names[2]}
+                  onChange={(e) => handleChange(e)}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
+                    error[2] ? "border-red-600" : "border-gray-300"
+                  }`}
+                  placeholder="Enter Blog Author"
                 />
               </div>
 

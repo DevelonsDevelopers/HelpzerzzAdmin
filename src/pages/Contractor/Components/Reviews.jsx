@@ -80,13 +80,13 @@ const Reviews = ({ id, response }) => {
                 <>
                   {value.status === 1 ? (
                     <button
-                      className={`w-[200px] py-2 bg-green-700 rounded-lg mr-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
+                      className={`w-[40%] py-2 bg-[#12947c] rounded-lg mr-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
                     >
                       Approved
                     </button>
                   ) : (
                     <button
-                      className={`w-[200px] py-2 bg-red-700 rounded-lg mr-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
+                      className={`w-[40%] py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
                     >
                       Rejected
                     </button>

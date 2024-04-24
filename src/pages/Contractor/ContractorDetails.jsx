@@ -84,7 +84,7 @@ const ContractorDetails = () => {
               <Tab label="Documents" />
             </Tabs>
           </Box>
-          <div className="bg-white mt-[1rem] rounded-xl md:px-[8rem] py-16 flex flex-col mx-8">
+          <div className=" mt-[1rem] rounded-xl md:px-[2rem] pt-5 pb-16 flex flex-col">
             {tabValue === 0 ? <Details id={ID} response={response} /> : null}
             {tabValue === 1 ? (
               <Affiliations id={ID} response={response} />

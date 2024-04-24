@@ -31,6 +31,12 @@ const CostGuideAddEdit = ({ edit = false }) => {
   const params = new URLSearchParams(location.search);
 
   useEffect(() => {
+    if (!response.fetched) {
+      dispatch(getCostGuide());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     if (edit) {
       if (params.get("id")) {
         dispatch(getCostGuide(params.get("id")));

@@ -194,16 +194,18 @@ const Badges = ({ id, response }) => {
         </div>
       ) : (
         <>
-          <button
-            onClick={() => setAdd(true)}
-            className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
-          >
-            Add Badge
-          </button>
-          <div className={`grid grid-cols-5 gap-2 mt-6`}>
+          <div className="max-w-[1200px]">
+            <button
+              onClick={() => setAdd(true)}
+              className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
+            >
+              Add Badge
+            </button>
+          </div>
+          <div className={`flex flex-row flex-wrap gap-5 mt-6 `}>
             {response?.contractorDetails?.badges?.map((value) => (
               <div
-                className={`flex flex-col text-center border-gray-600 border-[1px] rounded-2xl bg-gray-50`}
+                className={`flex flex-col flex-wrap text-center shadow-[rgba(0,0,15,0.05)_0px_0px_10px_5px] border-[1px] rounded-2xl bg-gray-50 w-[200px]`}
               >
                 <div
                   className={`flex flex-col py-6 justify-center items-center`}
@@ -213,8 +215,8 @@ const Badges = ({ id, response }) => {
                     src={`${IMAGE_PATH}${value.image}`}
                     alt=""
                   />
-                  <span className={`mt-2 font-bold`}>{value.title}</span>
-                  <span className={`mt-1 font-medium text-[12px]`}>
+                  <span className={`mt-2 font-bold px-3`}>{value.title}</span>
+                  <span className={`mt-1 font-medium text-[12px] px-3`}>
                     {value.subtitle}
                   </span>
                 </div>

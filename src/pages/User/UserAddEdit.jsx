@@ -35,6 +35,12 @@ const UserAddEdit = ({ edit = false }) => {
   }, []);
 
   useEffect(() => {
+    if (!response.fetched) {
+      dispatch(getUser());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     if (edit) {
       if (response.user) {
         setUserData(response.user);

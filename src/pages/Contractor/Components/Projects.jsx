@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { IMAGE_PATH } from "../../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import editImage from "../../../components/assets/edit.png";
+import deleteImage from "../../../components/assets/delete.png";
 import {
   addBadge,
   addProject,
@@ -280,43 +282,48 @@ const Projects = ({ id, response }) => {
         </div>
       ) : (
         <>
-          <button
-            onClick={() => setAdd(true)}
-            className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110 max-w-[900px]"
-          >
-            Add Project
-          </button>
-          <div
-            className={`lg:grid lg:grid-cols-3 gap-2 mt-6 max-w-[900px] flex flex-wrap`}
-          >
+          <div className="max-w-[1200px]">
+            <button
+              onClick={() => setAdd(true)}
+              className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110 max-w-[900px]"
+            >
+              Add Project
+            </button>
+          </div>
+          <div className={`flex flex-row flex-wrap gap-5 mt-6`}>
             {response?.contractorDetails?.projects?.map((value) => (
               <div
-                className={`flex flex-col text-center border-gray-600 border-[1px] rounded-2xl bg-gray-50 w-[250px]`}
+                className={`flex flex-col flex-wrap text-center shadow-[rgba(0,0,15,0.05)_0px_0px_10px_5px] rounded-2xl bg-gray-50 max-w-[320px] p-4`}
               >
+                <span
+                  className={`min-h-[60px] mt-2 font-bold text-left text-lg`}
+                >
+                  {value.title}
+                </span>
+                {/* <span className={`mt-1 font-medium text-[12px]`}>
+                  {value.subtitle}
+                </span> */}
                 <div
                   className={` flex flex-col py-6 justify-center items-center`}
                 >
                   <div className={`grid grid-cols-3 gap-2`}>
                     {value.images.map((img) => (
                       <img
-                        className="w-20 h-20 rounded-xl"
+                        className="w-24 h-24 rounded-xl"
                         src={`${IMAGE_PATH}${img.image}`}
                         alt=""
                       />
                     ))}
                   </div>
-                  <span className={`relative top-[0%] h-[40px] mt-2 font-bold`}>
-                    {value.title}
-                  </span>
-                  <span className={`mt-1 font-medium text-[12px]`}>
-                    {value.subtitle}
-                  </span>
                 </div>
-                <button
-                  className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}
-                >
-                  Delete
-                </button>
+                <div className="flex justify-left pb-3">
+                  <div className="w-8 ml-1 cursor-pointer hover:scale-125">
+                    <img src={editImage} alt="Edit" />
+                  </div>
+                  <div className="w-8 ml-5 cursor-pointer hover:scale-125">
+                    <img src={deleteImage} alt="Delete" />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
