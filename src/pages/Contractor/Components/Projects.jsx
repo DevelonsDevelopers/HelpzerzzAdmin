@@ -7,6 +7,7 @@ import deleteImage from "../../../components/assets/delete.png";
 import {
   addBadge,
   addProject,
+  deleteProject,
   projectSuccessListener,
 } from "../../../api/reducers/contractor";
 import { getSubcategories } from "../../../api/reducers/subcategory";
@@ -320,7 +321,11 @@ const Projects = ({ id, response }) => {
                   {/* <div className="w-8 ml-1 cursor-pointer hover:scale-125">
                     <img src={editImage} alt="Edit" />
                   </div> */}
-                  <div className="w-8 ml-1 cursor-pointer hover:scale-125">
+                  <div className="w-8 ml-1 cursor-pointer hover:scale-125"></div>
+                  <div
+                    onClick={() => dispatch(deleteProject(value.id))}
+                    className="w-8 ml-5 cursor-pointer hover:scale-125"
+                  >
                     <img src={deleteImage} alt="Delete" />
                   </div>
                 </div>

@@ -27,6 +27,8 @@ const ContractorAddEdit = ({edit = false}) => {
         password: "",
         address: "",
         image: "",
+        status: 1,
+        checked: 1
     });
     const [file, setFile] = useState();
 
@@ -43,7 +45,7 @@ const ContractorAddEdit = ({edit = false}) => {
           dispatch(getContractor());
         }
       }, [dispatch]);
-      
+
     useEffect(() => {
         if (edit) {
             if (params.get("id")) {

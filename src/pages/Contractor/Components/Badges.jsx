@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   addBadge,
-  badgeSuccessListener,
+  badgeSuccessListener, deleteBadge,
 } from "../../../api/reducers/contractor";
 
 const Badges = ({ id, response }) => {
@@ -220,7 +220,7 @@ const Badges = ({ id, response }) => {
                     {value.subtitle}
                   </span>
                 </div>
-                <button
+                <button onClick={() => dispatch(deleteBadge(value.id))}
                   className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}
                 >
                   Delete
