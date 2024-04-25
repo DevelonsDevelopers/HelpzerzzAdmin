@@ -3,7 +3,7 @@ import { IMAGE_PATH } from "../../../utils/constants";
 import { useDispatch } from "react-redux";
 import {
   addAffiliation,
-  affiliationSuccessListener,
+  affiliationSuccessListener, deleteAffiliation,
 } from "../../../api/reducers/contractor";
 import { useNavigate } from "react-router-dom";
 
@@ -223,7 +223,7 @@ const Affiliations = ({ id, response }) => {
                     {value.subtitle}
                   </span>
                 </div>
-                <button
+                <button onClick={() => dispatch(deleteAffiliation(value.id))}
                   className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}
                 >
                   Delete

@@ -27,7 +27,8 @@ const ContractorAddEdit = ({edit = false}) => {
         password: "",
         address: "",
         image: "",
-        status: 1
+        status: 1,
+        checked: 1
     });
     const [file, setFile] = useState();
 

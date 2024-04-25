@@ -22,6 +22,7 @@ import Areas from "./Components/Areas";
 import Highlights from "./Components/Highlights";
 import Languages from "./Components/Languages";
 import Leads from "./Components/Leads";
+import Documents from "./Components/Documents";
 
 const ContractorDetails = () => {
   const [tabValue, setTabValue] = React.useState(0);
@@ -97,6 +98,7 @@ const ContractorDetails = () => {
             {tabValue === 7 ? <Highlights id={ID} response={response} /> : null}
             {tabValue === 8 ? <Languages id={ID} response={response} /> : null}
             {tabValue === 9 ? <Leads id={ID} response={response} /> : null}
+            {tabValue === 10 ? <Documents id={ID} response={response} /> : null}
           </div>
         </div>
       )}
