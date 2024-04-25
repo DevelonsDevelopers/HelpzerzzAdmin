@@ -1,7 +1,12 @@
 import React from 'react';
 import {IMAGE_PATH} from "../../../utils/constants";
+import {deleteDocument} from "../../../api/reducers/contractor";
+import {useDispatch} from "react-redux";
 
 const Documents = ({ id, response }) => {
+
+    const dispatch = useDispatch()
+
     return (
         <>
             <div className="max-w-[1200px]">
@@ -27,7 +32,7 @@ const Documents = ({ id, response }) => {
                             />
                             <span className={`mt-2 font-bold px-3`}>{value.title}</span>
                         </div>
-                        <button
+                        <button onClick={() => dispatch(deleteDocument(value.id))}
                             className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}
                         >
                             Delete

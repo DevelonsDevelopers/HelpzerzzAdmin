@@ -105,6 +105,14 @@ const contractorService = {
             throw error.response.data
         }
     },
+    deleteDocument: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/contractors/deleteDocument/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     assignArea: async (payload) => {
         try {
             const response = await axiosInstance.post('/contractors/assignArea', payload)
