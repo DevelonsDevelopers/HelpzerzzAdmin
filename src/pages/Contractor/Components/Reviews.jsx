@@ -12,10 +12,10 @@ const Reviews = ({ id, response }) => {
       <div className={`flex flex-row flex-wrap gap-5 mt-6 `}>
         {response?.contractorDetails?.reviews?.map((value) => (
           <div
-            className={`flex flex-wrap w-[280px] text-center shadow-[rgba(0,0,15,0.05)_0px_0px_10px_5px] border-[1px] rounded-2xl bg-gray-50`}
+            className={`flex flex-wrap w-[280px] min-h-[350px] text-center shadow-[rgba(0,0,15,0.05)_0px_0px_10px_5px] border-[1px] rounded-2xl bg-gray-50`}
           >
-            <div className={` flex flex-col py-3 justify-center px-4`}>
-              <span className="flex text-left w-full justify-between align-center mt-2 ">
+            <div className={`relative flex flex-col py-3 justify-center px-4`}>
+              <span className="absolute top-0 left-0 right-0 px-4 pt-5  flex text-left w-full justify-between align-center mt-2 ">
                 <span className={`font-bold text-left`}>{value.title}</span>
                 <Popover className="relative">
                   <Popover.Button onClick={() => setOpenMenu(!openMenu)}>
@@ -43,7 +43,7 @@ const Reviews = ({ id, response }) => {
                   </Transition>
                 </Popover>
               </span>
-              <div className="text-left flex">
+              <div className="text-left flex absolute top-10 left-0 right-0 px-4 pt-5">
                 <Rating value={value.rating} size="small" readOnly />
                 <p className="text-gray-500 text-sm px-5">
                   {moment(value.created_date).format("ll")}
@@ -64,14 +64,16 @@ const Reviews = ({ id, response }) => {
                 {value.review}
               </span>
               {value.status === 0 ? (
-                <div className={`mt-5 gap-2 text-white font-bold text-[12px]`}>
+                <div
+                  className={`absolute bottom-4 px-4 mt-5 gap-2 text-white font-bold text-[12px]`}
+                >
                   <button
-                    className={`w-[40%] py-2 bg-[#12947c] rounded-lg mr-1 uppercase`}
+                    className={`w-[100px] py-2 bg-[#12947c] rounded-lg mr-1 uppercase`}
                   >
                     Approve
                   </button>
                   <button
-                    className={`w-[40%] py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase`}
+                    className={`w-[100px] py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase`}
                   >
                     Reject
                   </button>
@@ -80,13 +82,13 @@ const Reviews = ({ id, response }) => {
                 <>
                   {value.status === 1 ? (
                     <button
-                      className={`w-[40%] py-2 bg-[#12947c] rounded-lg mr-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
+                      className={`py-2 bg-[#12947c] rounded-lg mr-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
                     >
                       Approved
                     </button>
                   ) : (
                     <button
-                      className={`w-[40%] py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
+                      className={`py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
                     >
                       Rejected
                     </button>

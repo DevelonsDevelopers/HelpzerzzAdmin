@@ -67,8 +67,28 @@ const Topbar = ({ showNav, setShowNav }) => {
               leaveFrom="transform scale-100"
               leaveTo="transform scale-95"
             >
-              <Popover.Panel className="mr-8 md:mr-10 absolute -right-16 max-sm:right-0 z-50 mt-4 border-[1px] bg-white shadow-sm rounded-md max-w-xs min-w-[200px] py-3">
-                <center className="">Notifications</center>
+              <Popover.Panel className="mr-8 md:mr-10 absolute -right-16 max-sm:right-0 z-50 mt-4 border-[1px] bg-white shadow-sm rounded-md max-w-xs min-w-[300px] py-3">
+                <center className="">
+                  <div className="text-lg font-bold mb-3 mt-1">
+                    Notifications
+                  </div>
+                  <div className="border-[1px] p-4">
+                    <p className="text-left font-bold text-base">Monarch</p>
+                    <div className="flex justify-between">
+                      <p>Updated its profile pic</p>
+                      <p className="text-sm text-gray-400">2 hours ago</p>
+                    </div>
+                  </div>
+                  <div className="border-[1px] p-4">
+                    <p className="text-left font-bold text-base">
+                      Rising stars
+                    </p>
+                    <div className="flex justify-between">
+                      <p>added new project</p>
+                      <p className="text-sm text-gray-400">2 days ago</p>
+                    </div>
+                  </div>
+                </center>
               </Popover.Panel>
             </Transition>
           </Popover>
