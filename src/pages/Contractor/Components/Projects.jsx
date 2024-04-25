@@ -317,10 +317,10 @@ const Projects = ({ id, response }) => {
                   </div>
                 </div>
                 <div className="flex justify-left pb-3">
-                  <div className="w-8 ml-1 cursor-pointer hover:scale-125">
+                  {/* <div className="w-8 ml-1 cursor-pointer hover:scale-125">
                     <img src={editImage} alt="Edit" />
-                  </div>
-                  <div className="w-8 ml-5 cursor-pointer hover:scale-125">
+                  </div> */}
+                  <div className="w-8 ml-1 cursor-pointer hover:scale-125">
                     <img src={deleteImage} alt="Delete" />
                   </div>
                 </div>

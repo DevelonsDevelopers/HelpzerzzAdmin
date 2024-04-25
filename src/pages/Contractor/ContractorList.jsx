@@ -73,6 +73,7 @@ const ContractorList = () => {
               <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
                 Contractors
               </h1>
+
               <button
                 onClick={() => navigate("/contractors/add")}
                 className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
@@ -81,6 +82,9 @@ const ContractorList = () => {
                 <IoAdd className="ml-3" />
               </button>
             </div>
+            <h1 className="lg:text-xl md:text-lg text-sm font-[700] text-red-700">
+              (* - new contractors)
+            </h1>
             <div className="overflow-auto min-w-[300px]">
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
@@ -108,16 +112,30 @@ const ContractorList = () => {
                 </thead>
 
                 <tbody>
+                  {/* {id, name, email, phone, password, address, image, featured, checked, status, company_name, company_address, postal_code}) */}
+
                   {response?.contractors.map((value) => (
                     <tr className="text-[#000000] text-sm w-[100%]">
+                      {/* <h1>{}</h1> */}
                       <td
                         className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] pl-[3%] min-w-[50px] ${
                           value.company_name ? "" : "text-red-600"
                         }`}
                       >
-                        {value.company_name
-                          ? value.company_name
-                          : "Complete Details"}
+                        {value.company_name ? (
+                          value.email == null && value.phone == null ? (
+                            <>
+                              {value.company_name}
+                              <h1 className="lg:text-xl md:text-lg text-sm font-[700] text-red-700">
+                                *
+                              </h1>
+                            </>
+                          ) : (
+                            value.company_name
+                          )
+                        ) : (
+                          "Complete Details"
+                        )}
                       </td>
                       <td className="border-t-[1px] ">
                         <div
