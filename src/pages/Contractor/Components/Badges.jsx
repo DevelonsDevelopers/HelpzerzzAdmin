@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   addBadge,
-  badgeSuccessListener, deleteBadge,
+  badgeSuccessListener,
+  deleteBadge,
 } from "../../../api/reducers/contractor";
+import deleteImage from "../../../components/assets/delete.png";
 
 const Badges = ({ id, response }) => {
   const names = ["title", "subtitle", "date", "image"];
@@ -194,7 +196,9 @@ const Badges = ({ id, response }) => {
         </div>
       ) : (
         <>
-          <div className="max-w-[1200px]">
+          <div className="max-w-[1200px] flex justify-between">
+            <h3 className="text-2xl font-bold">Badges</h3>
+
             <button
               onClick={() => setAdd(true)}
               className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
@@ -202,13 +206,13 @@ const Badges = ({ id, response }) => {
               Add Badge
             </button>
           </div>
-          <div className={`flex flex-row flex-wrap gap-5 mt-6 `}>
+          <div className={`flex flex-row flex-wrap gap-5 mt-3 `}>
             {response?.contractorDetails?.badges?.map((value) => (
               <div
                 className={`flex flex-col flex-wrap text-center shadow-[rgba(0,0,15,0.05)_0px_0px_10px_5px] border-[1px] rounded-2xl bg-gray-50 w-[200px]`}
               >
                 <div
-                  className={`flex flex-col py-6 justify-center items-center`}
+                  className={`flex flex-col py-4 justify-center items-center`}
                 >
                   <img
                     className="w-20 h-20"
@@ -220,11 +224,12 @@ const Badges = ({ id, response }) => {
                     {value.subtitle}
                   </span>
                 </div>
-                <button onClick={() => dispatch(deleteBadge(value.id))}
-                  className={`mb-0 bg-red-700 rounded-b-2xl text-white py-2`}
+                <div
+                  onClick={() => dispatch(deleteBadge(value.id))}
+                  className="w-8 mx-auto cursor-pointer hover:scale-125 pb-2"
                 >
-                  Delete
-                </button>
+                  <img src={deleteImage} alt="Delete" />
+                </div>
               </div>
             ))}
           </div>

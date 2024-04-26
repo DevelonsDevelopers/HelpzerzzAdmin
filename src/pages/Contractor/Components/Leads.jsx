@@ -63,17 +63,17 @@ const Leads = ({ id, response }) => {
                     className=" border-t-[1px] pl-[3%] cursor-pointer"
                     onClick={() => navigate("/requests/details?id=" + value.id)}
                   >
-                    <div className="py-[2%] lg:text-sm md:text-sm text-sm font-semibold mx-auto min-w-[80px]">
+                    <div className="py-[2%] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
                       {value.subcategory}
                     </div>
                   </td>
                   <td className=" border-t-[1px]">
-                    <div className="py-[2%] text-[#12947c] lg:text-sm md:text-sm text-sm font-semibold mx-auto min-w-[80px]">
+                    <div className="py-[2%] text-[#12947c] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
                       {value?.time}
                     </div>
                   </td>
                   <td className=" border-t-[1px]">
-                    <div className=" lg:text-sm md:text-sm text-sm font-semibold mx-auto min-w-[80px] line-clamp-1 text-ellipsis">
+                    <div className=" md:text-base text-sm font-semibold mx-auto min-w-[80px] line-clamp-1 text-ellipsis">
                       {value?.details}
                     </div>
                   </td>

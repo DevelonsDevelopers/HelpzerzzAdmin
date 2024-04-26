@@ -11,11 +11,11 @@ import {
   editContractorDetails,
 } from "../../api/reducers/contractor";
 import Loading from "../../components/Loading";
-import { getActiveCategories } from "../../api/reducers/category";
+// import { getActiveCategories } from "../../api/reducers/category";
 import Details from "./Components/Details";
-import Affiliations from "./Components/Affiliations";
+// import Affiliations from "./Components/Affiliations";
 import Awards from "./Components/Awards";
-import Badges from "./Components/Badges";
+// import Badges from "./Components/Badges";
 import Projects from "./Components/Projects";
 import Reviews from "./Components/Reviews";
 import Areas from "./Components/Areas";
@@ -64,7 +64,7 @@ const ContractorDetails = () => {
           </h5>
           <Box
             sx={{ width: "95%", bgcolor: "background.paper" }}
-            className="mx-auto rounded-xl mt-[3rem]"
+            className="mx-auto rounded-xl flex mt-[3rem] items-center justify-center"
           >
             <Tabs
               value={tabValue}
@@ -73,9 +73,9 @@ const ContractorDetails = () => {
               variant="scrollable"
             >
               <Tab label="Details" />
-              <Tab label="Affiliations" />
+              {/* <Tab label="Affiliations" /> */}
               <Tab label="Awards" />
-              <Tab label="Badges" />
+              {/* <Tab label="Badges" /> */}
               <Tab label="Projects" />
               <Tab label="Reviews" />
               <Tab label="Service Areas" />
@@ -87,18 +87,18 @@ const ContractorDetails = () => {
           </Box>
           <div className=" mt-[1rem] rounded-xl md:px-[2rem] pt-5 pb-16 flex flex-col">
             {tabValue === 0 ? <Details id={ID} response={response} /> : null}
-            {tabValue === 1 ? (
+            {/* {tabValue === 1 ? (
               <Affiliations id={ID} response={response} />
-            ) : null}
-            {tabValue === 2 ? <Awards id={ID} response={response} /> : null}
-            {tabValue === 3 ? <Badges id={ID} response={response} /> : null}
-            {tabValue === 4 ? <Projects id={ID} response={response} /> : null}
-            {tabValue === 5 ? <Reviews id={ID} response={response} /> : null}
-            {tabValue === 6 ? <Areas id={ID} response={response} /> : null}
-            {tabValue === 7 ? <Highlights id={ID} response={response} /> : null}
-            {tabValue === 8 ? <Languages id={ID} response={response} /> : null}
-            {tabValue === 9 ? <Leads id={ID} response={response} /> : null}
-            {tabValue === 10 ? <Documents id={ID} response={response} /> : null}
+            ) : null} */}
+            {tabValue === 1 ? <Awards id={ID} response={response} /> : null}
+            {/* {tabValue === 3 ? <Badges id={ID} response={response} /> : null} */}
+            {tabValue === 2 ? <Projects id={ID} response={response} /> : null}
+            {tabValue === 3 ? <Reviews id={ID} response={response} /> : null}
+            {tabValue === 4 ? <Areas id={ID} response={response} /> : null}
+            {tabValue === 5 ? <Highlights id={ID} response={response} /> : null}
+            {tabValue === 6 ? <Languages id={ID} response={response} /> : null}
+            {tabValue === 7 ? <Leads id={ID} response={response} /> : null}
+            {tabValue === 8 ? <Documents id={ID} response={response} /> : null}
           </div>
         </div>
       )}
