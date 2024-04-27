@@ -1,20 +1,44 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ACTIVE_CONTRACTORS,
-    ALL_CONTRACTORS, ASSIGN_AREA, ASSIGN_CONTRACTOR, ASSIGN_HIGHLIGHT, ASSIGN_LANGUAGE, ASSIGNED_CONTRACTORS,
-    CONTRACTOR_REDUCER, CREATE_AFFILIATION, CREATE_AWARD, CREATE_BADGE,
+    ALL_CONTRACTORS,
+    APPROVE_REVIEW,
+    ASSIGN_AREA,
+    ASSIGN_CONTRACTOR,
+    ASSIGN_HIGHLIGHT,
+    ASSIGN_LANGUAGE,
+    ASSIGNED_CONTRACTORS,
+    CONTRACTOR_REDUCER,
+    CREATE_AFFILIATION,
+    CREATE_AWARD,
+    CREATE_BADGE,
     CREATE_CONTRACTOR,
-    CREATE_DETAILS, CREATE_PROJECT, DELETE_AFFILIATION, DELETE_AWARD, DELETE_BADGE,
-    DELETE_CONTRACTOR, DELETE_DOCUMENT, DELETE_PROJECT,
+    CREATE_DETAILS,
+    CREATE_PROJECT,
+    DELETE_AFFILIATION,
+    DELETE_AWARD,
+    DELETE_BADGE,
+    DELETE_CONTRACTOR,
+    DELETE_DOCUMENT,
+    DELETE_PROJECT,
+    DELETE_REVIEW,
     DETAILS_CONTRACTOR,
-    FEATURE_CONTRACTOR, POPULAR_CONTRACTORS, RECENT_CONTRACTORS, SINGLE_CONTRACTOR,
-    STATUS_CONTRACTOR, UNASSIGN_AREA, UNASSIGN_HIGHLIGHT, UNASSIGN_LANGUAGE, UPDATE_CONTRACTOR,
+    FEATURE_CONTRACTOR,
+    POPULAR_CONTRACTORS,
+    RECENT_CONTRACTORS, REJECT_REVIEW,
+    SINGLE_CONTRACTOR,
+    STATUS_CONTRACTOR,
+    UNASSIGN_AREA,
+    UNASSIGN_HIGHLIGHT,
+    UNASSIGN_LANGUAGE,
+    UPDATE_CONTRACTOR,
     UPDATE_DETAILS,
 } from "../../utils/constants";
 import contractorService from "../services/contractorService";
 import uploadService from "../services/uploadService";
 import requestContractorService from "../services/requestContractorService";
 import emailService from "../services/emailService";
+import reviewService from "../services/reviewService";
 
 const initialState = {
     loading: false,
@@ -128,6 +152,36 @@ export const addProject = createAsyncThunk(CREATE_PROJECT, (data) => {
 export const deleteProject = createAsyncThunk(DELETE_PROJECT, (id) => {
     return contractorService.deleteProject(id).then(response => {
         if (response.success) {
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const deleteContractorReview = createAsyncThunk(DELETE_REVIEW, (id) => {
+    return reviewService.delete(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const approveContractorReview = createAsyncThunk(APPROVE_REVIEW, (id) => {
+    return reviewService.approve(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const rejectContractorReview = createAsyncThunk(REJECT_REVIEW, (id) => {
+    return reviewService.reject(id).then(response => {
+        if (response.success){
             return id
         } else {
             return 0
@@ -564,6 +618,46 @@ const contractor = createSlice({
         //DELETE CONTRACTOR PROJECT
         builder.addCase(deleteProject.fulfilled, (state, action) => {
             state.contractorDetails.projects = state.contractorDetails?.projects?.filter(v => v.id !== action.payload)
+        })
+
+        //APPROVE REVIEW ////////////////////////////////////////
+        builder.addCase(approveContractorReview.pending, state => {
+
+        })
+        builder.addCase(approveContractorReview.fulfilled, (state, action) => {
+            const value = state.contractorDetails?.projects?.find(v => v.id === action.payload)
+            if (value) {
+                value.status = 1
+            }
+        })
+        builder.addCase(approveContractorReview.rejected, (state, action) => {
+
+        })
+
+        //REJECT REVIEW ////////////////////////////////////////
+        builder.addCase(rejectContractorReview.pending, state => {
+
+        })
+        builder.addCase(rejectContractorReview.fulfilled, (state, action) => {
+            const value = state.contractorDetails?.reviews?.find(v => v.id === action.payload)
+            if (value) {
+                value.status = 2
+            }
+        })
+        builder.addCase(rejectContractorReview.rejected, (state, action) => {
+
+        })
+
+        //DELETE REVIEW ////////////////////////////////////////
+        builder.addCase(deleteContractorReview.pending, state => {
+            state.deleting = true
+        })
+        builder.addCase(deleteContractorReview.fulfilled, (state, action) => {
+            state.deleting = false
+            state.reviews = state.contractorDetails?.reviews?.filter((value) => value.id !== action.payload)
+        })
+        builder.addCase(deleteContractorReview.rejected, (state, action) => {
+            state.deleting = false
         })
 
         //DELETE CONTRACTOR DOCUMENT

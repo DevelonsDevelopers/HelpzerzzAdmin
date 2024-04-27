@@ -19,15 +19,15 @@ export const getReviews = createAsyncThunk(ALL_REVIEWS, () => {
     return reviewService.fetchAll()
 })
 
-// export const deleteReview = createAsyncThunk(DELETE_REVIEW, (id) => {
-//     return categoryService.delete(id).then(response => {
-//         if (response.success){
-//             return id
-//         } else {
-//             return 0
-//         }
-//     })
-// })
+export const deleteReview = createAsyncThunk(DELETE_REVIEW, (id) => {
+    return reviewService.delete(id).then(response => {
+        if (response.success){
+            return id
+        } else {
+            return 0
+        }
+    })
+})
 
 export const approveReview = createAsyncThunk(APPROVE_REVIEW, (id) => {
     return reviewService.approve(id).then(response => {
@@ -100,6 +100,18 @@ const review = createSlice({
         })
         builder.addCase(rejectReview.rejected, (state, action) => {
 
+        })
+
+        //DELETE REVIEW ////////////////////////////////////////
+        builder.addCase(deleteReview.pending, state => {
+            state.deleting = true
+        })
+        builder.addCase(deleteReview.fulfilled, (state, action) => {
+            state.deleting = false
+            state.reviews = state.reviews.filter((value) => value.id !== action.payload)
+        })
+        builder.addCase(deleteReview.rejected, (state, action) => {
+            state.deleting = false
         })
     }
 })

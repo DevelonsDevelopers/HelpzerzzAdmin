@@ -25,6 +25,14 @@ const categoryService = {
             throw error.response.data
         }
     },
+    delete: async (id) => {
+        try {
+            const response = await axiosInstance.delete('/reviews/delete/' + id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    }
 }
 
 export default categoryService
