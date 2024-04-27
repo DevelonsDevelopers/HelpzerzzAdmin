@@ -34,7 +34,7 @@ const Reviews = ({ id, response }) => {
                   >
                     <Popover.Panel className="absolute right-0 border-[1px]  max-sm:right-0 z-50 bg-white shadow-sm rounded-md max-w-xs max-sm:w-[100px] w-[100px] py-4">
                       <center className="flex flex-col gap-2">
-                        <button className="text-[14px] font-[500]">Edit</button>
+                        {/* <button className="text-[14px] font-[500]">Edit</button> */}
                         <button className="text-[14px] font-[500]">
                           Delete
                         </button>

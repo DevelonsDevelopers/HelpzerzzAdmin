@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import PortalLayout from "../../layouts/PortalLayout";
 import Loading from "../../components/Loading";
 import {
   deleteCostGuide,
@@ -10,19 +9,15 @@ import {
   updateCostGuideStatus,
 } from "../../api/reducers/costGuide";
 import DeleteModal from "../../components/DeleteModal";
-import { FaCircleCheck } from "react-icons/fa6";
-import { IoIosCloseCircle } from "react-icons/io";
 import { FormControlLabel } from "@mui/material";
 import { Android12Switch, BpCheckbox } from "../../utils/components";
 import { IoAdd } from "react-icons/io5";
-
 import editImage from "../../components/assets/edit.png";
 import deleteImage from "../../components/assets/delete.png";
 
 const CostGuideList = () => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
-
   const response = useSelector((state) => state.costGuide);
 
   const navigate = useNavigate();

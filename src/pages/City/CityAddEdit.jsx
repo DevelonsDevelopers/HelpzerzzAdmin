@@ -7,10 +7,13 @@ import {
   successListener,
   updateCity,
 } from "../../api/reducers/city";
+import ButtonLoading from "../../components/ButtonLoading";
 
 const CityAddEdit = ({ edit = false }) => {
   const names = ["name", "state_code", "country_code", "longitude", "latitude"];
   const [error, setErrors] = useState([false, false, false, false, false]);
+  const [assignLoading, setAssignLoading] = useState(false);
+
   const [cityData, setCityData] = useState({
     name: "",
     state_code: "",
@@ -76,10 +79,15 @@ const CityAddEdit = ({ edit = false }) => {
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
+      setAssignLoading(true);
       if (edit) {
-        dispatch(updateCity(cityData));
+        dispatch(updateCity(cityData)).then(() => {
+          setAssignLoading(false);
+        });
       } else {
-        dispatch(addCity(cityData));
+        dispatch(addCity(cityData)).then(() => {
+          setAssignLoading(false);
+        });
       }
     }
   };
@@ -162,10 +170,11 @@ const CityAddEdit = ({ edit = false }) => {
           </div>
           <div className="flex justify-center mt-8">
             <button
+              disabled={assignLoading}
               className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
               onClick={() => handleSubmit()}
             >
-              Submit
+              {assignLoading ? <ButtonLoading /> : "Submit"}
             </button>
           </div>
         </div>

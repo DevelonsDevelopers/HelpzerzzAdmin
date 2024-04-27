@@ -101,7 +101,7 @@ const UserList = () => {
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] ">
                       Actions
                     </th>
-                    <th className="py-[2%] bg-gray-50 rounded-tr-xl text-center text-lg w-[1%]"></th>
+                    {/* <th className="py-[2%] bg-gray-50 rounded-tr-xl text-center text-lg w-[1%]"></th> */}
                   </tr>
                 </thead>
 
@@ -163,7 +163,7 @@ const UserList = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-[2%] w-[1%] border-t-[1px]">
+                      {/* <td className="py-[2%] w-[1%] border-t-[1px]">
                         <div className="flex items-center justify-center">
                           <div className="w-6 hover:scale-125 cursor-pointer">
                             <svg
@@ -187,7 +187,7 @@ const UserList = () => {
                             </svg>
                           </div>
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

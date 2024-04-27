@@ -7,13 +7,13 @@ import {
   successListener,
   updateCategory,
 } from "../../api/reducers/category";
-import PortalLayout from "../../layouts/PortalLayout";
 import Loading from "../../components/Loading";
 import { IMAGE_PATH } from "../../utils/constants";
+import ButtonLoading from "../../components/ButtonLoading";
 
 const CategoryAddEdit = ({ edit = false }) => {
   const names = ["name", "details", "image"];
-
+  const [assignLoading, setAssignLoading] = useState(false);
   const [errors, setErrors] = useState([false, false, false]);
   const [categoryData, setCategoryData] = useState({
     name: "",
@@ -21,15 +21,12 @@ const CategoryAddEdit = ({ edit = false }) => {
     image: "",
     tag: "",
   });
-
   const [file, setFile] = useState();
-
-  const response = useSelector((state) => state.category);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const response = useSelector((state) => state.category);
   const params = new URLSearchParams(location.search);
 
   useEffect(() => {
@@ -96,13 +93,23 @@ const CategoryAddEdit = ({ edit = false }) => {
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
+      setAssignLoading(true);
       if (edit) {
-        dispatch(updateCategory({ file: file, category: categoryData }));
+        dispatch(updateCategory({ file: file, category: categoryData })).then(
+          () => {
+            setAssignLoading(false);
+          }
+        );
       } else {
-        dispatch(addCategory({ file: file, category: categoryData }));
+        dispatch(addCategory({ file: file, category: categoryData })).then(
+          () => {
+            setAssignLoading(false);
+          }
+        );
       }
     }
   };
+  console.log(response);
 
   return (
     <>
@@ -210,12 +217,14 @@ const CategoryAddEdit = ({ edit = false }) => {
                 </div>
               </div>
             </div>
+
             <div className="flex justify-center mt-12">
               <button
+                disabled={assignLoading}
                 onClick={() => handleSubmit()}
                 className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
               >
-                Submit
+                {assignLoading ? <ButtonLoading /> : "Submit"}
               </button>
             </div>
           </div>

@@ -62,7 +62,7 @@ const LanguageList = () => {
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
                   <tr className="text-sm leading-normal">
-                    <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[1%]">
+                    <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%]">
                       ID
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
@@ -71,7 +71,7 @@ const LanguageList = () => {
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
                       Actions
                     </th>
-                    <th className="py-[2%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th>
+                    {/* <th className="py-[2%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th> */}
                   </tr>
                 </thead>
 
@@ -108,7 +108,7 @@ const LanguageList = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-[2%] w-[1%] border-t-[1px]">
+                      {/* <td className="py-[2%] w-[1%] border-t-[1px]">
                         <div className="flex items-center justify-center">
                           <div className="w-6 hover:scale-125 cursor-pointer">
                             <svg
@@ -132,7 +132,7 @@ const LanguageList = () => {
                             </svg>
                           </div>
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

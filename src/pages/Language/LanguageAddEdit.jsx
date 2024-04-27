@@ -8,10 +8,13 @@ import {
   updateLanguage,
 } from "../../api/reducers/language";
 import Loading from "../../components/Loading";
+import ButtonLoading from "../../components/ButtonLoading";
 
 const LanguageAddEdit = ({ edit = false }) => {
   const names = ["language"];
   const [error, setErrors] = useState([false]);
+  const [assignLoading, setAssignLoading] = useState(false);
+
   const [languageData, setLanguageData] = useState({
     language: "",
   });
@@ -71,10 +74,16 @@ const LanguageAddEdit = ({ edit = false }) => {
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
+      setAssignLoading(true);
+
       if (edit) {
-        dispatch(updateLanguage(languageData));
+        dispatch(updateLanguage(languageData)).then(() => {
+          setAssignLoading(false);
+        });
       } else {
-        dispatch(addLanguage(languageData));
+        dispatch(addLanguage(languageData)).then(() => {
+          setAssignLoading(false);
+        });
       }
     }
   };
@@ -111,10 +120,11 @@ const LanguageAddEdit = ({ edit = false }) => {
 
             <div className="flex justify-center mt-8">
               <button
+                disabled={assignLoading}
                 onClick={() => handleSubmit()}
                 className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
               >
-                Submit
+                {assignLoading ? <ButtonLoading /> : "Submit"}
               </button>
             </div>
           </div>

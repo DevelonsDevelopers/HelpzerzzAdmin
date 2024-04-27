@@ -8,10 +8,14 @@ import {
 } from "../../../api/reducers/contractor";
 import { useNavigate } from "react-router-dom";
 import deleteImage from "../../../components/assets/delete.png";
+import DeleteModal from "../../../components/DeleteModal";
+import ButtonLoading from "../../../components/ButtonLoading";
 
 const Affiliations = ({ id, response }) => {
   const names = ["title", "subtitle", "date", "image"];
-
+  const [open, setOpen] = useState(false);
+  const [assignLoading, setAssignLoading] = useState(false);
+  const [deleteID, setDeleteID] = useState();
   const [errors, setErrors] = useState([false, false, false, false]);
   const [affiliationData, setAffiliationData] = useState({
     contractor: 0,
@@ -71,12 +75,32 @@ const Affiliations = ({ id, response }) => {
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
-      dispatch(addAffiliation({ file: file, affiliation: affiliationData }));
+      setAssignLoading(true);
+      dispatch(
+        addAffiliation({ file: file, affiliation: affiliationData })
+      ).then(() => {
+        setAssignLoading(false);
+      });
     }
+  };
+
+  const initiateDelete = (id) => {
+    setOpen(!open);
+    setDeleteID(id);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteAffiliation(deleteID));
   };
 
   return (
     <div>
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        deleteFunction={handleDelete}
+        deleting={response.deleting}
+      />
       {add ? (
         <div>
           <div className="lg:grid lg:grid-cols-2 lg:gap-2 flex-wrap">
@@ -190,10 +214,11 @@ const Affiliations = ({ id, response }) => {
           </div>
           <div className="flex justify-center mt-12">
             <button
+              disabled={assignLoading}
               onClick={() => handleSubmit()}
               className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
             >
-              Submit
+              {assignLoading ? <ButtonLoading /> : "Submit"}
             </button>
           </div>
         </div>
@@ -228,7 +253,7 @@ const Affiliations = ({ id, response }) => {
                   </span>
                 </div>
                 <div
-                  onClick={() => dispatch(deleteAffiliation(value.id))}
+                  onClick={() => initiateDelete(value.id)}
                   className="w-8 mx-auto cursor-pointer hover:scale-125 pb-2"
                 >
                   <img src={deleteImage} alt="Delete" />

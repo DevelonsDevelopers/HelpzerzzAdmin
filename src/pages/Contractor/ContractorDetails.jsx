@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import JoditEditor from "jodit-react";
-import PortalLayout from "../../layouts/PortalLayout";
 import { Box, Tab, Tabs } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addContractorDetails,
-  contractorDetails,
-  detailsSuccessListener,
-  editContractorDetails,
-} from "../../api/reducers/contractor";
+import { contractorDetails } from "../../api/reducers/contractor";
 import Loading from "../../components/Loading";
 // import { getActiveCategories } from "../../api/reducers/category";
 import Details from "./Components/Details";

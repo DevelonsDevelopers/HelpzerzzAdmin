@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PortalLayout from "../../layouts/PortalLayout";
 import { useNavigate } from "react-router-dom";
 import {
   deleteCategory,
@@ -12,16 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/Loading";
 import DeleteModal from "../../components/DeleteModal";
 import { IoAdd } from "react-icons/io5";
-import { Checkbox, FormControlLabel, styled, Switch } from "@mui/material";
+import { FormControlLabel } from "@mui/material";
 import { Android12Switch, BpCheckbox } from "../../utils/components";
-
 import editImage from "../../components/assets/edit.png";
 import deleteImage from "../../components/assets/delete.png";
 
 const CategoryList = () => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
-
   const response = useSelector((state) => state.category);
 
   const navigate = useNavigate();

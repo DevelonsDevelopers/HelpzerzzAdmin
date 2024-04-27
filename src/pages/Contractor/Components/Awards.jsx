@@ -5,16 +5,17 @@ import {
   addAward,
   awardSuccessListener,
   deleteAward,
-  deleteBadge,
 } from "../../../api/reducers/contractor";
 import { useNavigate } from "react-router-dom";
 import deleteImage from "../../../components/assets/delete.png";
 import Affiliations from "./Affiliations";
 import Badges from "./Badges";
-import { useLocation } from "react-router-dom";
+import ButtonLoading from "../../../components/ButtonLoading";
+import DeleteModal from "../../../components/DeleteModal";
 
 const Awards = ({ id, response }) => {
   const names = ["title", "subtitle", "date", "image"];
+  const [assignLoading, setAssignLoading] = useState(false);
 
   const [errors, setErrors] = useState([false, false, false, false]);
   const [awardData, setAwardData] = useState({
@@ -26,6 +27,8 @@ const Awards = ({ id, response }) => {
   });
   const [add, setAdd] = useState(false);
   const [file, setFile] = useState();
+  const [open, setOpen] = useState(false);
+  const [deleteID, setDeleteID] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,13 +75,32 @@ const Awards = ({ id, response }) => {
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
-      dispatch(addAward({ file: file, award: awardData }));
+      setAssignLoading(true);
+
+      dispatch(addAward({ file: file, award: awardData })).then(() => {
+        setAssignLoading(false);
+      });
     }
+  };
+
+  const initiateDelete = (id) => {
+    setOpen(!open);
+    setDeleteID(id);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteAward(deleteID));
   };
 
   return (
     <>
       <div>
+        <DeleteModal
+          open={open}
+          setOpen={setOpen}
+          deleteFunction={handleDelete}
+          deleting={response.deleting}
+        />
         {add ? (
           <div>
             <div className="lg:grid lg:grid-cols-2 lg:gap-2 flex-wrap">
@@ -192,10 +214,11 @@ const Awards = ({ id, response }) => {
             </div>
             <div className="flex justify-center mt-12">
               <button
+                disabled={assignLoading}
                 onClick={() => handleSubmit()}
                 className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
               >
-                Submit
+                {assignLoading ? <ButtonLoading /> : "Submit"}
               </button>
             </div>
           </div>
@@ -229,7 +252,7 @@ const Awards = ({ id, response }) => {
                     </span>
                   </div>
                   <div
-                    onClick={() => dispatch(deleteAward(value.id))}
+                    onClick={() => initiateDelete(value.id)}
                     className="w-8 mx-auto cursor-pointer hover:scale-125 pb-2"
                   >
                     <img src={deleteImage} alt="Delete" />

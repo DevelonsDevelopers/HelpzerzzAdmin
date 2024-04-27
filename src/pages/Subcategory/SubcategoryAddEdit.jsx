@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PortalLayout from "../../layouts/PortalLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -9,6 +8,8 @@ import {
   updateSubcategory,
 } from "../../api/reducers/subcategory";
 import { getActiveCategories } from "../../api/reducers/category";
+import ButtonLoading from "../../components/ButtonLoading";
+import Loading from "../../components/Loading";
 
 const SubcategoryAddEdit = ({ edit = false }) => {
   const names = ["category", "name"];
@@ -17,7 +18,7 @@ const SubcategoryAddEdit = ({ edit = false }) => {
     category: "",
     name: "",
   });
-
+  const [assignLoading, setAssignLoading] = useState(false);
   const response = useSelector((state) => state.subcategory);
   const categoryResponse = useSelector((state) => state.category);
 
@@ -33,6 +34,7 @@ const SubcategoryAddEdit = ({ edit = false }) => {
     }
   }, [dispatch]);
 
+  console.log(response);
   useEffect(() => {
     if (edit) {
       if (params.get("id")) {
@@ -80,10 +82,15 @@ const SubcategoryAddEdit = ({ edit = false }) => {
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
+      setAssignLoading(true);
       if (edit) {
-        dispatch(updateSubcategory(subcategoryData));
+        dispatch(updateSubcategory(subcategoryData)).then(() => {
+          setAssignLoading(false);
+        });
       } else {
-        dispatch(addSubcategory(subcategoryData));
+        dispatch(addSubcategory(subcategoryData)).then(() => {
+          setAssignLoading(false);
+        });
       }
     }
   };
@@ -95,58 +102,63 @@ const SubcategoryAddEdit = ({ edit = false }) => {
                 <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
             </div>
         </center> */}
-      <div>
-        <h1 className="text-center font-[800] text-[25px] uppercase mt-5">
-          Add Subcategory
-        </h1>
-        <div className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto">
-          <div className="min-w-[250px]">
-            <div>
-              <div className="sm:w-[50%] w-full px-5 py-2 mt-2 mx-auto">
-                <label className="block text-[12px] ml-3 font-medium uppercase">
-                  Category
-                </label>
-                <select
-                  name={names[0]}
-                  value={subcategoryData.category}
-                  onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
-                  id="grid-state"
-                >
-                  <option hidden>Select Category</option>
-                  {categoryResponse.activeCategories.map((value) => (
-                    <option value={value.id}>{value.name}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="sm:w-[50%] w-full px-5 py-2 mt-2 mx-auto">
-                <label className="block text-[12px] ml-3 font-medium uppercase">
-                  Subcategory Name
-                </label>
-                <input
-                  value={subcategoryData.name}
-                  type="text"
-                  name={names[1]}
-                  onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
-                    error[0] ? "border-red-600" : "border-gray-300"
-                  }`}
-                  placeholder="Enter Subcategory Name Here"
-                />
+      {response.subcategoryLoading ? (
+        <Loading />
+      ) : (
+        <div>
+          <h1 className="text-center font-[800] text-[25px] uppercase mt-5">
+            Add Subcategory
+          </h1>
+          <div className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto">
+            <div className="min-w-[250px]">
+              <div>
+                <div className="sm:w-[50%] w-full px-5 py-2 mt-2 mx-auto">
+                  <label className="block text-[12px] ml-3 font-medium uppercase">
+                    Category
+                  </label>
+                  <select
+                    name={names[0]}
+                    value={subcategoryData.category}
+                    onChange={(e) => handleChange(e)}
+                    className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                    id="grid-state"
+                  >
+                    <option hidden>Select Category</option>
+                    {categoryResponse.activeCategories.map((value) => (
+                      <option value={value.id}>{value.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="sm:w-[50%] w-full px-5 py-2 mt-2 mx-auto">
+                  <label className="block text-[12px] ml-3 font-medium uppercase">
+                    Subcategory Name
+                  </label>
+                  <input
+                    value={subcategoryData.name}
+                    type="text"
+                    name={names[1]}
+                    onChange={(e) => handleChange(e)}
+                    className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
+                      error[0] ? "border-red-600" : "border-gray-300"
+                    }`}
+                    placeholder="Enter Subcategory Name Here"
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => handleSubmit()}
-              className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
-            >
-              Submit
-            </button>
+            <div className="flex justify-center mt-8">
+              <button
+                disabled={assignLoading}
+                onClick={() => handleSubmit()}
+                className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
+              >
+                {assignLoading ? <ButtonLoading /> : "Submit"}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

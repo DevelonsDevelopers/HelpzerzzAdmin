@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import editImage from "../../../components/assets/edit.png";
 import deleteImage from "../../../components/assets/delete.png";
 import {
-  addBadge,
   addProject,
   deleteProject,
   projectSuccessListener,
 } from "../../../api/reducers/contractor";
 import { getSubcategories } from "../../../api/reducers/subcategory";
 import FileResizer from "react-image-file-resizer";
+import DeleteModal from "../../../components/DeleteModal";
 
 const resizeFile = (file) =>
   new Promise((resolve) => {
@@ -31,7 +31,8 @@ const resizeFile = (file) =>
 
 const Projects = ({ id, response }) => {
   const names = ["title", "details", "subcategory", "date"];
-
+  const [open, setOpen] = useState(false);
+  const [deleteID, setDeleteID] = useState();
   const [errors, setErrors] = useState([false, false, false, false]);
   const [projectData, setProjectData] = useState({
     contractor: 0,
@@ -41,8 +42,15 @@ const Projects = ({ id, response }) => {
     date: "",
     images: "",
   });
+  const initiateDelete = (id) => {
+    setOpen(!open);
+    setDeleteID(id);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteProject(deleteID));
+  };
   const [add, setAdd] = useState(false);
-  const [file, setFile] = useState();
   const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
   const [limitLength, setLimitLength] = useState();
@@ -137,6 +145,12 @@ const Projects = ({ id, response }) => {
 
   return (
     <div>
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        deleteFunction={handleDelete}
+        deleting={response.deleting}
+      />
       {add ? (
         <div>
           <div className="lg:grid lg:grid-cols-2 lg:gap-2 flex-wrap">
@@ -318,12 +332,12 @@ const Projects = ({ id, response }) => {
                   </div>
                 </div>
                 <div className="flex justify-left pb-3">
-                  <div className="w-8 ml-1 cursor-pointer hover:scale-125">
+                  {/* <div className="w-8 ml-1 cursor-pointer hover:scale-125">
                     <img src={editImage} alt="Edit" />
-                  </div>
+                  </div> */}
                   <div
-                    onClick={() => dispatch(deleteProject(value.id))}
-                    className="w-8 ml-5 cursor-pointer hover:scale-125"
+                    onClick={() => initiateDelete(value.id)}
+                    className="w-8 ml-1 cursor-pointer hover:scale-125"
                   >
                     <img src={deleteImage} alt="Delete" />
                   </div>

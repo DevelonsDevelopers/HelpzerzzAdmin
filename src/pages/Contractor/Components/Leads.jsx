@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import moment from "moment";
-import { Android12Switch, BpCheckbox } from "../../../utils/components";
-import editImage from "../../../components/assets/edit.png";
 import deleteImage from "../../../components/assets/delete.png";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../../../components/DeleteModal";
@@ -63,17 +60,14 @@ const Leads = ({ id, response }) => {
               {response?.contractorDetails?.leads?.map((value) => (
                 <tr className="text-[#000000] text-sm w-[100%] ">
                   <td
-                    className=" border-t-[1px] pl-[3%] cursor-pointer"
+                    className=" border-t-[1px] pl-[3%] text-blue-700 underline cursor-pointer"
                     onClick={() => navigate("/requests/details?id=" + value.id)}
                   >
                     <div className="py-[2%] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
                       {value.customer_name}
                     </div>
                   </td>
-                  <td
-                    className=" border-t-[1px] pl-[3%] cursor-pointer"
-                    onClick={() => navigate("/requests/details?id=" + value.id)}
-                  >
+                  <td className=" border-t-[1px] pl-[3%] ">
                     <div className="py-[2%] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
                       {value.subcategory_name}
                     </div>
@@ -98,12 +92,11 @@ const Leads = ({ id, response }) => {
                   </td> */}
                   <td className="py-[2%] w-[1%] border-t-[1px]">
                     <div className="flex items-center justify-center">
-                      <div className="w-8 ml-2 cursor-pointer hover:scale-125 ">
-                        <img
-                          src={deleteImage}
-                          onClick={() => initiateDelete(value.id)}
-                          alt="Delete"
-                        />
+                      <div
+                        className="w-8 ml-2 cursor-pointer hover:scale-125"
+                        onClick={() => initiateDelete(value.id)}
+                      >
+                        <img src={deleteImage} alt="Delete" />
                       </div>
                     </div>
                   </td>

@@ -75,7 +75,7 @@ const HighlightList = () => {
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
                       Actions
                     </th>
-                    <th className="py-[2%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th>
+                    {/* <th className="py-[2%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th> */}
                   </tr>
                 </thead>
 
@@ -120,7 +120,7 @@ const HighlightList = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-[2%] w-[1%] border-t-[1px]">
+                      {/* <td className="py-[2%] w-[1%] border-t-[1px]">
                         <div className="flex items-center justify-center">
                           <div className="w-6 hover:scale-125 cursor-pointer">
                             <svg
@@ -144,7 +144,7 @@ const HighlightList = () => {
                             </svg>
                           </div>
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

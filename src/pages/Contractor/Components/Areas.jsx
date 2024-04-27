@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { assignArea, unAssignArea } from "../../../api/reducers/contractor";
+import ButtonLoading from "../../../components/ButtonLoading";
 
 const Areas = ({ id, response }) => {
   const dispatch = useDispatch();
+  const [loadingState, setLoadingState] = useState({});
 
-  const Assign = (city) => {
-    dispatch(assignArea({ contractor: id, city: city }));
+  const Assign = async (city) => {
+    setLoadingState((prevState) => ({
+      ...prevState,
+      [city]: true,
+    }));
+    await dispatch(assignArea({ contractor: id, city: city })).then(() => {
+      setLoadingState((prevState) => ({
+        ...prevState,
+        [city]: false,
+      }));
+    });
   };
 
-  const unAssign = (id) => {
-    dispatch(unAssignArea(id));
+  const unAssign = async (id) => {
+    setLoadingState((prevState) => ({
+      ...prevState,
+      [id]: true,
+    }));
+    await dispatch(unAssignArea(id)).then(() => {
+      setLoadingState((prevState) => ({
+        ...prevState,
+        [id]: false,
+      }));
+    });
   };
 
   return (
@@ -74,17 +94,27 @@ const Areas = ({ id, response }) => {
                     <div className="py-[2%] text-[#12947c] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
                       {value.assigned === 0 ? (
                         <button
+                          disabled={loadingState[value.id]}
                           className={`rounded-md bg-black px-10 py-1 text-white`}
                           onClick={() => Assign(value.id)}
                         >
-                          Assign
+                          {loadingState[value.id] ? (
+                            <ButtonLoading />
+                          ) : (
+                            "Assign"
+                          )}
                         </button>
                       ) : (
                         <button
+                          disabled={loadingState[value.assigned]}
                           onClick={() => unAssign(value.assigned)}
                           className={`rounded-md bg-[#12947c] px-10 py-1 text-white`}
                         >
-                          Assigned
+                          {loadingState[value.assigned] ? (
+                            <ButtonLoading />
+                          ) : (
+                            "Assigned"
+                          )}
                         </button>
                       )}
                     </div>

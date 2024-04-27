@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   acceptRequest,
   getRequest,
@@ -13,16 +13,7 @@ import {
 } from "../../api/reducers/contractor";
 import Loading from "../../components/Loading";
 import moment from "moment";
-
-const data = [
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-];
+import ButtonLoading from "../../components/ButtonLoading";
 
 const RequestDetails = () => {
   const [requestData, setRequestData] = useState();
@@ -31,14 +22,20 @@ const RequestDetails = () => {
   const [contractors, setContractors] = useState([]);
   const [searchedContractors, setSearchedContractors] = useState();
   const [search, setSearch] = useState("");
-
   const response = useSelector((state) => state.request);
   const contractorResponse = useSelector((state) => state.contractor);
+  const [assignLoading, setAssignLoading] = useState(null);
 
   const dispatch = useDispatch();
   const location = useLocation();
 
   const params = new URLSearchParams(location.search);
+
+  const assign = async (request, contractor, buttonId) => {
+    setAssignLoading(buttonId);
+    await dispatch(assignContractor({ request, contractor }));
+    setAssignLoading(null);
+  };
 
   useEffect(() => {
     if (params.get("id")) {
@@ -67,10 +64,6 @@ const RequestDetails = () => {
       )
     );
   }, [search]);
-
-  const assign = (request, contractor) => {
-    dispatch(assignContractor({ request, contractor }));
-  };
 
   const handleRejectClick = () => {
     setShowConfirmation(true);
@@ -237,17 +230,29 @@ const RequestDetails = () => {
                             <h1 className="text-[13px]">{value.address}</h1>
                           </div>
                           <button
-                            disabled={value.assigned !== 0}
+                            disabled={
+                              value.assigned !== 0 || assignLoading === value.id
+                            }
                             className={`${
                               value.assigned !== 0
                                 ? "bg-[#12947c] text-white cursor-not-allowed"
                                 : "bg-black text-white"
                             } ml-auto mt-auto px-4 rounded-lg py-[3px]`}
                             onClick={() =>
-                              assign(params.get("id"), value.contractor)
+                              assign(
+                                params.get("id"),
+                                value.contractor,
+                                value.id
+                              )
                             }
                           >
-                            {value.assigned !== 0 ? "Assigned" : "Assign"}
+                            {assignLoading === value.id ? (
+                              <ButtonLoading />
+                            ) : value.assigned !== 0 ? (
+                              "Assigned"
+                            ) : (
+                              "Assign"
+                            )}
                           </button>
                         </div>
                       ))}

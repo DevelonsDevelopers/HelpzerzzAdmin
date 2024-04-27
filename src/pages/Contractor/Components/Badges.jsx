@@ -8,11 +8,15 @@ import {
   deleteBadge,
 } from "../../../api/reducers/contractor";
 import deleteImage from "../../../components/assets/delete.png";
+import DeleteModal from "../../../components/DeleteModal";
+import ButtonLoading from "../../../components/ButtonLoading";
 
 const Badges = ({ id, response }) => {
   const names = ["title", "subtitle", "date", "image"];
-
+  const [open, setOpen] = useState(false);
+  const [deleteID, setDeleteID] = useState();
   const [errors, setErrors] = useState([false, false, false, false]);
+  const [assignLoading, setAssignLoading] = useState(false);
   const [badgeData, setBadgeData] = useState({
     contractor: 0,
     subtitle: "",
@@ -68,12 +72,31 @@ const Badges = ({ id, response }) => {
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
-      dispatch(addBadge({ file: file, badge: badgeData }));
+      setAssignLoading(true);
+
+      dispatch(addBadge({ file: file, badge: badgeData })).then(() => {
+        setAssignLoading(false);
+      });
     }
+  };
+
+  const initiateDelete = (id) => {
+    setOpen(!open);
+    setDeleteID(id);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteBadge(deleteID));
   };
 
   return (
     <div>
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        deleteFunction={handleDelete}
+        deleting={response.deleting}
+      />
       {add ? (
         <div>
           <div className="lg:grid lg:grid-cols-2 lg:gap-2 flex-wrap">
@@ -187,10 +210,11 @@ const Badges = ({ id, response }) => {
           </div>
           <div className="flex justify-center mt-12">
             <button
+              disabled={assignLoading}
               onClick={() => handleSubmit()}
               className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
             >
-              Submit
+              {assignLoading ? <ButtonLoading /> : "Submit"}
             </button>
           </div>
         </div>
@@ -225,7 +249,7 @@ const Badges = ({ id, response }) => {
                   </span>
                 </div>
                 <div
-                  onClick={() => dispatch(deleteBadge(value.id))}
+                  onClick={() => initiateDelete(value.id)}
                   className="w-8 mx-auto cursor-pointer hover:scale-125 pb-2"
                 >
                   <img src={deleteImage} alt="Delete" />
