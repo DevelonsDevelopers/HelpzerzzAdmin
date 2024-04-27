@@ -34,13 +34,7 @@ const ContractorDetails = () => {
       setID(params.get("id"));
     }
   }, []);
-  const handleAccept = () => {
-    response.contractors.checked = 1;
-  };
 
-  const handleReject = () => {
-    response.contractors.checked = 0;
-  };
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
@@ -63,16 +57,10 @@ const ContractorDetails = () => {
               : "-"}
           </h5>
           <div className="flex justify-center items-center text-center gap-2 mt-6">
-            <button
-              onClick={handleAccept}
-              className="flex bg-[#12947c] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110"
-            >
+            <button className="flex bg-[#12947c] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110">
               Accept
             </button>
-            <button
-              onClick={handleReject}
-              className="flex bg-[#fd3d3a] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110"
-            >
+            <button className="flex bg-[#fd3d3a] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110">
               Reject
             </button>
             <button className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl items-center sm:text-base text-xs justify-center hover:scale-110">
