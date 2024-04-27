@@ -297,10 +297,10 @@ const Projects = ({ id, response }) => {
         </div>
       ) : (
         <>
-          <div className="max-w-[1200px]">
+          <div className="">
             <button
               onClick={() => setAdd(true)}
-              className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110 max-w-[900px]"
+              className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
             >
               Add Project
             </button>

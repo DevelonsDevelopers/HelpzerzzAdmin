@@ -224,7 +224,7 @@ const Awards = ({ id, response }) => {
           </div>
         ) : (
           <>
-            <div className="max-w-[1200px] flex justify-between">
+            <div className="flex justify-between">
               <h3 className="text-2xl font-bold">Awards</h3>
               <button
                 onClick={() => setAdd(true)}

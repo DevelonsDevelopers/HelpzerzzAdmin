@@ -3,12 +3,30 @@ import { IMAGE_PATH } from "../../../utils/constants";
 import { Rating } from "@mui/material";
 import moment from "moment";
 import { Popover, Transition } from "@headlessui/react";
+import DeleteModal from "../../../components/DeleteModal";
 
 const Reviews = ({ id, response }) => {
+  const [open, setOpen] = useState(false);
+  const [deleteID, setDeleteID] = useState();
   const [openMenu, setOpenMenu] = useState();
   console.log(response);
+
+  const initiateDelete = (id) => {
+    setOpen(!open);
+    setDeleteID(id);
+  };
+
+  const handleDelete = () => {
+    // dispatch(deleteRequest(deleteID));
+  };
   return (
     <div>
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        deleteFunction={handleDelete}
+        deleting={response.deleting}
+      />
       <div className={`flex flex-row flex-wrap gap-5 mt-6 `}>
         {response?.contractorDetails?.reviews?.map((value) => (
           <div
@@ -35,7 +53,10 @@ const Reviews = ({ id, response }) => {
                     <Popover.Panel className="absolute right-0 border-[1px]  max-sm:right-0 z-50 bg-white shadow-sm rounded-md max-w-xs max-sm:w-[100px] w-[100px] py-4">
                       <center className="flex flex-col gap-2">
                         {/* <button className="text-[14px] font-[500]">Edit</button> */}
-                        <button className="text-[14px] font-[500]">
+                        <button
+                          className="text-[14px] font-[500] cursor-pointer"
+                          onClick={() => initiateDelete(value.id)}
+                        >
                           Delete
                         </button>
                       </center>
@@ -82,13 +103,13 @@ const Reviews = ({ id, response }) => {
                 <>
                   {value.status === 1 ? (
                     <button
-                      className={`py-2 bg-[#12947c] rounded-lg mr-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
+                      className={`absolute bottom-4 w-[100px] left-[30%]  py-2 bg-[#12947c] rounded-lg mr-1 uppercase text-[12px] font-bold text-white cursor-not-allowed`}
                     >
                       Approved
                     </button>
                   ) : (
                     <button
-                      className={`py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase mt-5 text-[12px] font-bold text-white cursor-not-allowed`}
+                      className={`absolute bottom-4 w-[100px] left-[30%] py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase text-[12px] font-bold text-white cursor-not-allowed`}
                     >
                       Rejected
                     </button>
