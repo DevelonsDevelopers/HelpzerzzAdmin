@@ -52,12 +52,11 @@ const Areas = ({ id, response }) => {
         <div className="overflow-auto min-w-[300px]">
           <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
             <thead>
-              <tr className="text-sm leading-normal w-full">
-                <th className="py-[2%] bg-gray-50 rounded-tl-xl w-[3%] pl-[3%]"></th>
-                <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[4%] pl-[3%] text-left">
+              <tr className="text-sm leading-normal w-full justify-between">
+                <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md pl-[3%] text-left">
                   Postal Code
                 </th>
-                <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[4%] text-left">
+                <th className="py-[2%] bg-gray-50 md:text-lg text-md  text-left">
                   Status
                 </th>
               </tr>
@@ -66,7 +65,6 @@ const Areas = ({ id, response }) => {
             <tbody>
               {response?.contractorDetails?.areas?.map((value) => (
                 <tr className="text-[#000000] text-sm w-[100%] ">
-                  <td className=" border-t-[1px]"></td>
                   <td className=" border-t-[1px] pl-[3%] cursor-pointer">
                     <div className="py-[2%] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
                       {value?.name} - {value.state_code}

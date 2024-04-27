@@ -6,6 +6,8 @@ import { IoMdHome } from "react-icons/io";
 import { RiPagesFill, RiSendPlaneFill } from "react-icons/ri";
 import { BiSolidCategory } from "react-icons/bi";
 import { FaUserGroup } from "react-icons/fa6";
+import { MdRateReview } from "react-icons/md";
+import { FaCity } from "react-icons/fa";
 
 const Sidebar = forwardRef(({}, ref) => {
   const location = useLocation();
@@ -124,7 +126,7 @@ const Sidebar = forwardRef(({}, ref) => {
             <div>
               <button
                 type="button"
-                onClick={() => handleSelection(9)}
+                onClick={() => handleSelection(10)}
                 className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/requests")
                     ? "text-[#0D14FD]"
@@ -133,7 +135,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 aria-controls="dropdown-example"
                 data-collapse-toggle="dropdown-example"
               >
-                <RiSendPlaneFill
+                <MdRateReview
                   className={`lg:text-xl md:text-lg mx-[6px] text-gray-700`}
                 />
                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
@@ -141,7 +143,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 </span>
                 <svg
                   className={`w-3 h-3 ${
-                    open[0]
+                    open[10]
                       ? "-rotate-180 duration-300"
                       : "rotate-0 duration-300"
                   }`}
@@ -161,7 +163,7 @@ const Sidebar = forwardRef(({}, ref) => {
               </button>
               <ul
                 id="dropdown-example"
-                className={`${open[9] ? "" : "hidden"} py-2 space-y-2`}
+                className={`${open[10] ? "" : "hidden"} py-2 space-y-2`}
               >
                 <li>
                   <a
@@ -279,7 +281,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 aria-controls="dropdown-example"
                 data-collapse-toggle="dropdown-example"
               >
-                <FaUserGroup
+                <FaCity
                   className={`lg:text-xl md:text-lg mx-[6px] text-gray-700`}
                 />
                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
