@@ -4,12 +4,20 @@ import { Rating } from "@mui/material";
 import moment from "moment";
 import { Popover, Transition } from "@headlessui/react";
 import DeleteModal from "../../../components/DeleteModal";
+import {useDispatch} from "react-redux";
+import {
+    approveContractorReview,
+    deleteContractorReview,
+    rejectContractorReview
+} from "../../../api/reducers/contractor";
+import {deleteReview} from "../../../api/reducers/review";
 
 const Reviews = ({ id, response }) => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
   const [openMenu, setOpenMenu] = useState();
-  console.log(response);
+
+  const dispatch = useDispatch()
 
   const initiateDelete = (id) => {
     setOpen(!open);
@@ -17,8 +25,9 @@ const Reviews = ({ id, response }) => {
   };
 
   const handleDelete = () => {
-    // dispatch(deleteRequest(deleteID));
+    dispatch(deleteContractorReview(deleteID))
   };
+
   return (
     <div>
       <DeleteModal
@@ -85,7 +94,7 @@ const Reviews = ({ id, response }) => {
                 {value.review}
               </span>
               {value.status === 0 ? (
-                <div
+                <div onClick={() => dispatch(approveContractorReview(value.id))}
                   className={`absolute bottom-4 px-4 mt-5 gap-2 text-white font-bold text-[12px]`}
                 >
                   <button
@@ -93,7 +102,7 @@ const Reviews = ({ id, response }) => {
                   >
                     Approve
                   </button>
-                  <button
+                  <button onClick={() => dispatch(rejectContractorReview(value.id))}
                     className={`w-[100px] py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase`}
                   >
                     Reject

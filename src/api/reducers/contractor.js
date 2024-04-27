@@ -625,7 +625,7 @@ const contractor = createSlice({
 
         })
         builder.addCase(approveContractorReview.fulfilled, (state, action) => {
-            const value = state.contractorDetails?.projects?.find(v => v.id === action.payload)
+            const value = state.contractorDetails?.reviews?.find(v => v.id === action.payload)
             if (value) {
                 value.status = 1
             }
@@ -654,7 +654,7 @@ const contractor = createSlice({
         })
         builder.addCase(deleteContractorReview.fulfilled, (state, action) => {
             state.deleting = false
-            state.reviews = state.contractorDetails?.reviews?.filter((value) => value.id !== action.payload)
+            state.contractorDetails.reviews = state.contractorDetails?.reviews?.filter((value) => value.id !== action.payload)
         })
         builder.addCase(deleteContractorReview.rejected, (state, action) => {
             state.deleting = false
