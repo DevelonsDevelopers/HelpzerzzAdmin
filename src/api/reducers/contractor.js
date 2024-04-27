@@ -20,7 +20,7 @@ import {
     DELETE_BADGE,
     DELETE_CONTRACTOR,
     DELETE_DOCUMENT,
-    DELETE_PROJECT,
+    DELETE_PROJECT, DELETE_REQUEST,
     DELETE_REVIEW,
     DETAILS_CONTRACTOR,
     FEATURE_CONTRACTOR,
@@ -39,6 +39,7 @@ import uploadService from "../services/uploadService";
 import requestContractorService from "../services/requestContractorService";
 import emailService from "../services/emailService";
 import reviewService from "../services/reviewService";
+import requestService from "../services/requestService";
 
 const initialState = {
     loading: false,
@@ -309,6 +310,16 @@ export const contractorDetails = createAsyncThunk(DETAILS_CONTRACTOR, (id) => {
 
 export const deleteContractor = createAsyncThunk(DELETE_CONTRACTOR, (id) => {
     return contractorService.delete(id).then(response => {
+        if (response.success) {
+            return id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const deleteContractorLeads = createAsyncThunk(DELETE_REQUEST, (id) => {
+    return requestService.delete(id).then(response => {
         if (response.success) {
             return id
         } else {
@@ -663,6 +674,11 @@ const contractor = createSlice({
         //DELETE CONTRACTOR DOCUMENT
         builder.addCase(deleteDocument.fulfilled, (state, action) => {
             state.contractorDetails.documents = state.contractorDetails?.documents?.filter(v => v.id !== action.payload)
+        })
+
+        //DELETE CONTRACTOR DOCUMENT
+        builder.addCase(deleteContractorLeads.fulfilled, (state, action) => {
+            state.contractorDetails.leads = state.contractorDetails?.leads?.filter(v => v.id !== action.payload)
         })
 
         //UPDATE CONTRACTOR DETAILS /////////////////////////////////////////

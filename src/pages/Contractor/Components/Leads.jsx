@@ -3,7 +3,7 @@ import deleteImage from "../../../components/assets/delete.png";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../../../components/DeleteModal";
 import { useDispatch } from "react-redux";
-import { deleteContractor } from "../../../api/reducers/contractor";
+import {deleteContractor, deleteContractorLeads} from "../../../api/reducers/contractor";
 
 const Leads = ({ id, response }) => {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,7 @@ const Leads = ({ id, response }) => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteContractor(deleteID));
+    dispatch(deleteContractorLeads(deleteID));
   };
 
   console.log(response);
