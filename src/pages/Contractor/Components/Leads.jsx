@@ -39,10 +39,13 @@ const Leads = ({ id, response }) => {
             <thead>
               <tr className="text-sm leading-normal w-full">
                 <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] pl-[3%] text-left">
-                  Category
+                  Customer
+                </th>
+                <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] pl-[3%] text-left">
+                  SubCategory
                 </th>
                 <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
-                  Timeframe
+                  Time Frame
                 </th>
                 <th className="py-[2%] bg-gray-50 md:text-lg   text-md w-[3%] text-left">
                   Message
@@ -64,7 +67,15 @@ const Leads = ({ id, response }) => {
                     onClick={() => navigate("/requests/details?id=" + value.id)}
                   >
                     <div className="py-[2%] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
-                      {value.subcategory}
+                      {value.customer_name}
+                    </div>
+                  </td>
+                  <td
+                    className=" border-t-[1px] pl-[3%] cursor-pointer"
+                    onClick={() => navigate("/requests/details?id=" + value.id)}
+                  >
+                    <div className="py-[2%] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
+                      {value.subcategory_name}
                     </div>
                   </td>
                   <td className=" border-t-[1px]">
