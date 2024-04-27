@@ -26,9 +26,9 @@ const ContractorList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!response.fetched) {
+    // if (!response.fetched) {
       dispatch(getContractors());
-    }
+    // }
   }, [dispatch]);
 
   const initiateDelete = (id) => {

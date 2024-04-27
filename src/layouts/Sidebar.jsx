@@ -128,7 +128,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 type="button"
                 onClick={() => handleSelection(10)}
                 className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
-                  location.pathname.includes("/requests")
+                  location.pathname.includes("/reviews")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
                 } transition duration-75 rounded-lg group bg-[#f2f9ff]  hover:text-[#0D14FD] mt-3`}
