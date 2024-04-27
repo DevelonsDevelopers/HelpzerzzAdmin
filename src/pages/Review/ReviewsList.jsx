@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import moment from "moment";
-import { useLocation } from "react-router-dom";
 import { Rating } from "@mui/material";
+import DeleteModal from "../../components/DeleteModal";
 import {
   approveReview,
   getReviews,
   rejectReview,
+  deleteReview,
 } from "../../api/reducers/review";
+import deleteImage from "../../components/assets/delete.png";
 
 const ReviewsList = () => {
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [deleteID, setDeleteID] = useState();
   const dispatch = useDispatch();
   const response = useSelector((state) => state.review);
 
   useEffect(() => {
     dispatch(getReviews());
   }, []);
+
+  const initiateDelete = (id) => {
+    setOpen(!open);
+    setDeleteID(id);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteReview(deleteID));
+  };
 
   console.log(response);
 
@@ -29,6 +39,12 @@ const ReviewsList = () => {
         <Loading />
       ) : (
         <div>
+          <DeleteModal
+            open={open}
+            setOpen={setOpen}
+            deleteFunction={handleDelete}
+            deleting={response.deleting}
+          />
           <div className="w-full flex flex-col justify-center">
             <div className="flex justify-between w-[100%] m-auto">
               <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
@@ -131,15 +147,10 @@ const ReviewsList = () => {
                       </td>
                       <td className="py-[2%] w-[1%] border-t-[1px]">
                         <div
-                          className="flex items-center lg:text-lg md:text-md text-sm justify-center text-center text-blue-700 cursor-pointer hover:scale-110"
-                          onClick={() =>
-                            navigate("/contractors/details?id=" + value.id)
-                          }
+                          className="w-8 ml-2 cursor-pointer hover:scale-125"
+                          onClick={() => initiateDelete(value.id)}
                         >
-                          <div className="flex">
-                            Details
-                            <AiOutlineArrowRight className="ml-2 mt-1" />
-                          </div>
+                          <img src={deleteImage} alt="Delete" />
                         </div>
                       </td>
                     </tr>

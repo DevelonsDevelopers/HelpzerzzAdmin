@@ -134,6 +134,7 @@ const Details = ({ id, response }) => {
             }
           />
         </div>
+
         <div className="w-[100%] px-5 py-2 mt-2">
           <label className="block text-[12px] ml-3 font-medium uppercase">
             Category
