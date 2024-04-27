@@ -11,6 +11,7 @@ import customer from "../reducers/customer";
 import city from "../reducers/city";
 import highlight from "../reducers/highlight";
 import language from "../reducers/language";
+import review from "../reducers/review";
 
 const store = configureStore({
     reducer: {
@@ -25,7 +26,8 @@ const store = configureStore({
         customer: customer,
         city: city,
         highlight: highlight,
-        language: language
+        language: language,
+        review: review
     }
 })
 
