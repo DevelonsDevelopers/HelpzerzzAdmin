@@ -17,9 +17,9 @@ const RequestList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!response.fetched) {
+    // if (!response.fetched) {
       dispatch(getRequests());
-    }
+    // }
   }, [dispatch]);
 
   const initiateDelete = (id) => {
