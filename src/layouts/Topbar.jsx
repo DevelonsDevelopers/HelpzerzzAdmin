@@ -1,15 +1,17 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {HiMenuAlt2} from "react-icons/hi";
 import {Popover, Transition} from "@headlessui/react";
 import {CiUser} from "react-icons/ci";
 import {FaBell} from "react-icons/fa";
-import {IoSearchOutline} from "react-icons/io5";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
-import {FaMagnifyingGlass} from "react-icons/fa6";
+import { io } from "socket.io-client"
 
 const Topbar = ({showNav, setShowNav, setSearch}) => {
+    const socket = useMemo(() => io("https://api.helperzz.com"), []);
+
     const [openMenu, setOpenMenu] = useState();
+    const [notifications, setNotifications] = useState([])
 
     const navigate = useNavigate();
 
@@ -19,6 +21,14 @@ const Topbar = ({showNav, setShowNav, setSearch}) => {
 
         if (!token) {
             navigate("/login");
+        } else {
+            socket.on("connect", () => {
+                console.log("connected", socket.id)
+
+            })
+            socket.on("newRequest", (value) => {
+                console.log(value)
+            })
         }
     }, []);
 
@@ -73,22 +83,15 @@ const Topbar = ({showNav, setShowNav, setSearch}) => {
                                     <div className="text-lg font-bold mb-3 mt-1">
                                         Notifications
                                     </div>
-                                    <div className="border-[1px] p-4">
-                                        <p className="text-left font-bold text-base">Monarch</p>
-                                        <div className="flex justify-between">
-                                            <p>Updated its profile pic</p>
-                                            <p className="text-sm text-gray-400">2 hours ago</p>
+                                    {notifications.map(value => (
+                                        <div className="border-[1px] p-4">
+                                            <p className="text-left font-bold text-base">Monarch</p>
+                                            <div className="flex justify-between">
+                                                <p>Updated its profile pic</p>
+                                                <p className="text-sm text-gray-400">2 hours ago</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="border-[1px] p-4">
-                                        <p className="text-left font-bold text-base">
-                                            Rising stars
-                                        </p>
-                                        <div className="flex justify-between">
-                                            <p>added new project</p>
-                                            <p className="text-sm text-gray-400">2 days ago</p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </center>
                             </Popover.Panel>
                         </Transition>
