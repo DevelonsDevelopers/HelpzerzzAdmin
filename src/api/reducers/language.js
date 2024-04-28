@@ -3,7 +3,7 @@ import {
     ALL_LANGUAGES,
     CREATE_LANGUAGE,
     DELETE_LANGUAGE,
-    HIGHLIGHT_REDUCER,
+    HIGHLIGHT_REDUCER, LANGUAGE_REDUCER,
     SINGLE_LANGUAGE,
     UPDATE_LANGUAGE
 } from "../../utils/constants";
@@ -56,7 +56,7 @@ export const deleteLanguage = createAsyncThunk(DELETE_LANGUAGE, (id) => {
 })
 
 const language = createSlice({
-    name: HIGHLIGHT_REDUCER,
+    name: LANGUAGE_REDUCER,
     initialState,
     reducers: {
         successListener: (state) => {
