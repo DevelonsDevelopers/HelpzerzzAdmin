@@ -10,12 +10,13 @@ import {
   deleteContractorReview,
   rejectContractorReview,
 } from "../../../api/reducers/contractor";
-import { deleteReview } from "../../../api/reducers/review";
+import ButtonLoading from "../../../components/ButtonLoading";
 
 const Reviews = ({ id, response }) => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
   const [openMenu, setOpenMenu] = useState();
+  const [loadingState, setLoadingState] = useState({});
 
   const dispatch = useDispatch();
 
@@ -39,10 +40,10 @@ const Reviews = ({ id, response }) => {
       <div className={`flex flex-row flex-wrap gap-5 mt-6 `}>
         {response?.contractorDetails?.reviews?.map((value) => (
           <div
-            className={`flex flex-wrap w-[280px] min-h-[350px] text-center shadow-[rgba(0,0,15,0.05)_0px_0px_10px_5px] border-[1px] rounded-2xl bg-gray-50`}
+            className={`flex flex-wrap w-[280px] flex-col py-3 px-4 justify-between text-center shadow-[rgba(0,0,15,0.05)_0px_0px_10px_5px] border-[1px] rounded-2xl bg-gray-50`}
           >
-            <div className={`flex flex-col py-3 justify-center px-4`}>
-              <span className="flex text-left w-full justify-between align-center mt-2 ">
+            <div className="text-left leading-[16px]">
+              <span className="flex text-left w-full justify-between align-top mt-2 ">
                 <span className={`font-bold text-left`}>{value.title}</span>
                 <Popover className="">
                   <Popover.Button onClick={() => setOpenMenu(!openMenu)}>
@@ -79,7 +80,7 @@ const Reviews = ({ id, response }) => {
                   {moment(value.created_date).format("ll")}
                 </p>
               </div>
-              <div className={`grid grid-cols-3 gap-2 mt-2 h-[70px]`}>
+              <div className={`grid grid-cols-3 gap-2 my-2`}>
                 {value.images.map((img) => (
                   <img
                     className="w-20 h-20 rounded-xl"
@@ -87,18 +88,20 @@ const Reviews = ({ id, response }) => {
                     alt=""
                   />
                 ))}
-              </div>{" "}
+              </div>
               <span
-                className={`mt-2 py-3 min-h-[100px] text-left font-medium text-[12px]`}
+                className={`mt-2 py-3 text-left justify-start font-medium text-[12px]`}
               >
                 {value.review}
               </span>
+            </div>
+            <div>
               {value.status === 0 ? (
                 <div
-                  onClick={() => dispatch(approveContractorReview(value.id))}
                   className={`px-4 mt-5 gap-2 text-white font-bold text-[12px]`}
                 >
                   <button
+                    onClick={() => dispatch(approveContractorReview(value.id))}
                     className={`w-[100px] py-2 bg-[#12947c] rounded-lg mr-1 uppercase`}
                   >
                     Approve
@@ -111,23 +114,27 @@ const Reviews = ({ id, response }) => {
                   </button>
                 </div>
               ) : (
-                <>
+                <div className="gap-2 w-full px-auto text-white font-bold text-[12px] mx-auto flex justify-center items-center">
                   {value.status === 1 ? (
                     <button
-                      className={` w-[100px] flex justify-center items-center py-2 bg-[#12947c] rounded-lg mr-1 uppercase text-[12px] font-bold text-white cursor-not-allowed`}
+                      onClick={() => dispatch(rejectContractorReview(value.id))}
+                      className={` w-[100px] mt-5  py-2 bg-[#12947c] rounded-lg mr-1 uppercase text-[12px] font-bold text-white cursor-pointer`}
                     >
                       Approved
                     </button>
                   ) : (
                     <button
-                      className={`w-[100px] flex justify-center items-center py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase text-[12px] font-bold text-white cursor-not-allowed`}
+                      onClick={() =>
+                        dispatch(approveContractorReview(value.id))
+                      }
+                      className={`w-[100px] mt-5 py-2 bg-[#fd3d3a] rounded-lg ml-1 uppercase text-[12px] font-bold text-white cursor-pointer`}
                     >
                       Rejected
                     </button>
                   )}
-                </>
+                </div>
               )}
-            </div>
+            </div>{" "}
           </div>
         ))}
       </div>
