@@ -1,169 +1,189 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import PortalLayout from "../../layouts/PortalLayout";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import {
-  deleteUser,
-  getUsers,
-  updateUserStatus,
+    deleteUser,
+    getUsers,
+    updateUserStatus,
 } from "../../api/reducers/user";
 import Loading from "../../components/Loading";
 import DeleteModal from "../../components/DeleteModal";
-import { FormControlLabel } from "@mui/material";
-import { Android12Switch } from "../../utils/components";
-import { updateCategoryStatus } from "../../api/reducers/category";
-import { IoAdd } from "react-icons/io5";
+import {FormControlLabel} from "@mui/material";
+import {Android12Switch} from "../../utils/components";
+import {updateCategoryStatus} from "../../api/reducers/category";
+import {IoAdd} from "react-icons/io5";
 import toast from "react-hot-toast";
 
 import editImage from "../../components/assets/edit.png";
 import deleteImage from "../../components/assets/delete.png";
 
-const UserList = () => {
-  const [open, setOpen] = useState(false);
-  const [deleteID, setDeleteID] = useState();
+const UserList = ({search}) => {
+    const [open, setOpen] = useState(false);
+    const [deleteID, setDeleteID] = useState();
+    const [data, setData] = useState([])
+    const [searchData, setSearchData] = useState([])
 
-  const response = useSelector((state) => state.user);
+    const response = useSelector((state) => state.user);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!response.fetched) {
-      dispatch(getUsers());
-    }
-  }, [dispatch]);
+    useEffect(() => {
+        if (!response.fetched) {
+            dispatch(getUsers());
+        }
+    }, [dispatch]);
 
-  const initiateDelete = (id) => {
-    setOpen(!open);
-    setDeleteID(id);
-  };
+    useEffect(() => {
+        setSearchData(response.users)
+    }, [response.users]);
 
-  const handleDelete = () => {
-    if (response.users.length === 1) {
-      toast.error("You must have single user to have access to Admin");
-    } else {
-      dispatch(deleteUser(deleteID));
-    }
-  };
+    useEffect(() => {
+        if (search.length > 0) {
+            setData(searchData.filter(v => {
+                return v.name.toLowerCase().includes(search.toLowerCase()) || v.username.toLowerCase().includes(search.toLowerCase()) || v.email.toLowerCase().includes(search.toLowerCase())
+            }))
+        } else {
+            setData(searchData)
+        }
+    }, [search])
 
-  const handleStatus = (id, val) => {
-    let status = 0;
-    if (val === 0) {
-      status = 1;
-    }
-    dispatch(updateUserStatus({ id, status }));
-  };
+    const initiateDelete = (id) => {
+        setOpen(!open);
+        setDeleteID(id);
+    };
 
-  return (
-    <>
-      {response.loading ? (
-        <Loading />
-      ) : (
-        <div>
-          <DeleteModal
-            open={open}
-            setOpen={setOpen}
-            deleteFunction={handleDelete}
-            deleting={response.deleting}
-          />
-          <div className="w-full flex flex-col justify-center">
-            <div className="flex justify-between w-[100%] m-auto">
-              <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
-                Manage Users
-              </h1>
-              <button
-                onClick={() => navigate("/users/add")}
-                className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
-              >
-                Add User
-                <IoAdd className="ml-3" />
-              </button>
-            </div>
-            <div className="overflow-auto min-w-[300px]">
-              <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6">
-                <thead>
-                  <tr className="text-sm leading-normal w-full">
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md text-center w-[1%]">
-                      ID
-                    </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
-                      Name
-                    </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
-                      Username
-                    </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
-                      Email
-                    </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
-                      Status
-                    </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] ">
-                      Actions
-                    </th>
-                    {/* <th className="py-[2%] bg-gray-50 rounded-tr-xl text-center text-lg w-[1%]"></th> */}
-                  </tr>
-                </thead>
+    const handleDelete = () => {
+        if (response.users.length === 1) {
+            toast.error("You must have single user to have access to Admin");
+        } else {
+            dispatch(deleteUser(deleteID));
+        }
+    };
 
-                <tbody>
-                  {response?.users?.map((value) => (
-                    <tr className="text-[#000000] text-sm w-[100%]">
-                      <td className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto border-t-[1px] text-center min-w-[50px]">
-                        {value.id}
-                      </td>
-                      <td className="border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center min-w-[100px]">
-                          {value.name}
+    const handleStatus = (id, val) => {
+        let status = 0;
+        if (val === 0) {
+            status = 1;
+        }
+        dispatch(updateUserStatus({id, status}));
+    };
+
+    return (
+        <>
+            {response.loading ? (
+                <Loading/>
+            ) : (
+                <div>
+                    <DeleteModal
+                        open={open}
+                        setOpen={setOpen}
+                        deleteFunction={handleDelete}
+                        deleting={response.deleting}
+                    />
+                    <div className="w-full flex flex-col justify-center">
+                        <div className="flex justify-between w-[100%] m-auto">
+                            <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
+                                Manage Users
+                            </h1>
+                            <button
+                                onClick={() => navigate("/users/add")}
+                                className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
+                            >
+                                Add User
+                                <IoAdd className="ml-3"/>
+                            </button>
                         </div>
-                      </td>
+                        <div className="overflow-auto min-w-[300px]">
+                            <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6">
+                                <thead>
+                                <tr className="text-sm leading-normal w-full">
+                                    <th className="py-[2%] bg-gray-50 md:text-lg text-md text-center w-[1%]">
+                                        ID
+                                    </th>
+                                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
+                                        Name
+                                    </th>
+                                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
+                                        Username
+                                    </th>
+                                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left">
+                                        Email
+                                    </th>
+                                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
+                                        Status
+                                    </th>
+                                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] ">
+                                        Actions
+                                    </th>
+                                    {/* <th className="py-[2%] bg-gray-50 rounded-tr-xl text-center text-lg w-[1%]"></th> */}
+                                </tr>
+                                </thead>
 
-                      <td className="border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center min-w-[100px]">
-                          {value.username}
-                        </div>
-                      </td>
+                                <tbody>
+                                {data.map((value) => (
+                                    <tr className="text-[#000000] text-sm w-[100%]">
+                                        <td className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto border-t-[1px] text-center min-w-[50px]">
+                                            {value.id}
+                                        </td>
+                                        <td className="border-t-[1px]">
+                                            <div
+                                                className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center min-w-[100px]">
+                                                {value.name}
+                                            </div>
+                                        </td>
 
-                      <td className="border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto  justify-center min-w-[150px]">
-                          {value.email}
-                        </div>
-                      </td>
+                                        <td className="border-t-[1px]">
+                                            <div
+                                                className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center min-w-[100px]">
+                                                {value.username}
+                                            </div>
+                                        </td>
 
-                      <td
-                        onClick={() => handleStatus(value.id, value.status)}
-                        className="border-t-[1px] cursor-pointer  pl-[1%]"
-                      >
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[50px] mx-auto justify-center">
-                          <FormControlLabel
-                            className={"mx-auto"}
-                            control={
-                              <Android12Switch
-                                checked={value.status}
-                                color={"success"}
-                              />
-                            }
-                          />
-                        </div>
-                      </td>
-                      <td className="py-[2%] w-[2%] border-t-[1px]">
-                        <div className="flex items-center justify-center">
-                          <div
-                            className="w-8 mr-2 cursor-pointer hover:scale-125"
-                            onClick={() =>
-                              navigate("/users/edit?id=" + value.id)
-                            }
-                          >
-                            <img src={editImage} alt="Edit" />
-                          </div>
-                          <div
-                            className="w-8 ml-2 cursor-pointer hover:scale-125"
-                            onClick={() => initiateDelete(value.id)}
-                          >
-                            <img src={deleteImage} alt="Delete" />
-                          </div>
-                        </div>
-                      </td>
-                      {/* <td className="py-[2%] w-[1%] border-t-[1px]">
+                                        <td className="border-t-[1px]">
+                                            <div
+                                                className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto  justify-center min-w-[150px]">
+                                                {value.email}
+                                            </div>
+                                        </td>
+
+                                        <td
+                                            onClick={() => handleStatus(value.id, value.status)}
+                                            className="border-t-[1px] cursor-pointer  pl-[1%]"
+                                        >
+                                            <div
+                                                className="py-[2%] lg:text-lg md:text-md text-sm font-medium w-[50px] mx-auto justify-center">
+                                                <FormControlLabel
+                                                    className={"mx-auto"}
+                                                    control={
+                                                        <Android12Switch
+                                                            checked={value.status}
+                                                            color={"success"}
+                                                        />
+                                                    }
+                                                />
+                                            </div>
+                                        </td>
+                                        <td className="py-[2%] w-[2%] border-t-[1px]">
+                                            <div className="flex items-center justify-center">
+                                                <div
+                                                    className="w-8 mr-2 cursor-pointer hover:scale-125"
+                                                    onClick={() =>
+                                                        navigate("/users/edit?id=" + value.id)
+                                                    }
+                                                >
+                                                    <img src={editImage} alt="Edit"/>
+                                                </div>
+                                                <div
+                                                    className="w-8 ml-2 cursor-pointer hover:scale-125"
+                                                    onClick={() => initiateDelete(value.id)}
+                                                >
+                                                    <img src={deleteImage} alt="Delete"/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        {/* <td className="py-[2%] w-[1%] border-t-[1px]">
                         <div className="flex items-center justify-center">
                           <div className="w-6 hover:scale-125 cursor-pointer">
                             <svg
@@ -188,16 +208,16 @@ const UserList = () => {
                           </div>
                         </div>
                       </td> */}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
+    );
 };
 
 export default UserList;

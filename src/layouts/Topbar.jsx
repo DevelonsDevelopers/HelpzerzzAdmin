@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import {FaMagnifyingGlass} from "react-icons/fa6";
 
-const Topbar = ({showNav, setShowNav}) => {
+const Topbar = ({showNav, setShowNav, setSearch}) => {
     const [openMenu, setOpenMenu] = useState();
 
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ const Topbar = ({showNav, setShowNav}) => {
             </div>
             <div className="flex w-full font-[600]">
                 {/* <FaMagnifyingGlass /> */}
-                <input
+                <input onChange={(e) => setSearch(e.target.value)}
                     type="search"
                     name="search"
                     id="search"

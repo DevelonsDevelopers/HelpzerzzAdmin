@@ -4,7 +4,7 @@ import { Transition } from "@headlessui/react";
 import Sidebar from "./Sidebar";
 import { useLocation } from "react-router-dom";
 
-const PortalLayout = ({ children }) => {
+const PortalLayout = ({ children, setSearch }) => {
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
   const sidebarRef = useRef(true);
@@ -44,7 +44,7 @@ const PortalLayout = ({ children }) => {
         children
       ) : (
         <div>
-          <Topbar showNav={showNav} setShowNav={setShowNav} />
+          <Topbar showNav={showNav} setShowNav={setShowNav} setSearch={setSearch} />
           <Transition
             as={Fragment}
             show={showNav}
