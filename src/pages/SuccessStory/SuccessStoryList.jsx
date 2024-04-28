@@ -3,39 +3,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import {
-  deleteContractor,
-  getContractors,
-  updateContractorFeature,
-  updateContractorStatus,
-} from "../../api/reducers/contractor";
+  deleteStory,
+  getStories,
+  updateStoryPopular,
+  updateStoryStatus,
+} from "../../api/reducers/successStory";
 import DeleteModal from "../../components/DeleteModal";
 import { FormControlLabel } from "@mui/material";
 import { Android12Switch, BpCheckbox } from "../../utils/components";
 import { IoAdd } from "react-icons/io5";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import editImage from "../../components/assets/edit.png";
 import deleteImage from "../../components/assets/delete.png";
 
-const ContractorList = ({ search }) => {
+const SuccessStoryList = ({ search }) => {
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
   const [searchData, setSearchData] = useState([]);
   const [data, setData] = useState([]);
 
-  const response = useSelector((state) => state.contractor);
+  const response = useSelector((state) => state.successStory);
 
+  console.log(response);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     // if (!response.fetched) {
-    dispatch(getContractors());
+    dispatch(getStories());
     // }
   }, [dispatch]);
 
   useEffect(() => {
-    setSearchData(response.contractors);
-  }, [response.contractors]);
+    setSearchData(response.stories);
+  }, [response.stories]);
 
   useEffect(() => {
     if (search) {
@@ -61,7 +61,7 @@ const ContractorList = ({ search }) => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteContractor(deleteID));
+    dispatch(deleteStory(deleteID));
   };
 
   const handleStatus = (id, val) => {
@@ -69,7 +69,7 @@ const ContractorList = ({ search }) => {
     if (val === 0) {
       status = 1;
     }
-    dispatch(updateContractorStatus({ id, status }));
+    dispatch(updateStoryStatus({ id, status }));
   };
 
   const handleFeatured = (id, val) => {
@@ -77,9 +77,10 @@ const ContractorList = ({ search }) => {
     if (val === 0) {
       featured = 1;
     }
-    dispatch(updateContractorFeature({ id, featured }));
+    dispatch(updateStoryPopular({ id, featured }));
   };
-
+  //   {loading, storyLoading, deleting, noData, success, fetched, stories, story, error, storyError}
+  //   {id, title, subtitle, description, youtube_link, popular, status, created_at})
   return (
     <>
       {response.loading ? (
@@ -95,92 +96,76 @@ const ContractorList = ({ search }) => {
           <div className="w-full flex flex-col justify-center">
             <div className="flex justify-center w-[100%] m-auto">
               <h1 className="lg:text-3xl md:text-2xl text-xl font-[700]">
-                Contractors
+                Success Stories
               </h1>
 
               <button
-                onClick={() => navigate("/contractors/add")}
+                onClick={() => navigate("/story/add")}
                 className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
               >
-                Add Contractor
+                Add Story
                 <IoAdd className="ml-3" />
               </button>
             </div>
-            {/* <h1 className="lg:text-lg md:text-base text-sm font-[500] text-red-700">
-                            (* - new contractors)
-                        </h1> */}
+
             <div className="overflow-auto min-w-[300px]">
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
                   <tr className="text-sm leading-normal w-full">
                     <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] pl-[3%] text-left">
-                      Company
+                      Title
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
-                      Address
+                      Sub-Title
                     </th>
+
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left">
-                      Name
+                      Thumbnail
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
-                      Featured
+                      Popular
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
                       Status
-                    </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
-                      Actions
                     </th>
                     <th className="py-[2%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  {/* {id, name, email, phone, password, address, image, featured, checked, status, company_name, company_address, postal_code}) */}
-
                   {data.map((value) => (
-                    <tr
-                      className={`text-[#000000] text-sm w-[100%]  ${
-                        value.checked === 0 ? "bg-amber-50" : ""
-                      }`}
-                    >
+                    <tr className={`text-[#000000] text-sm w-[100%] `}>
                       <td
-                        className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] pl-[3%] min-w-[50px] ${
-                          value.company_name ? "" : "text-red-600"
-                        }   `}
+                        className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] pl-[3%] min-w-[50px] `}
                       >
-                        {value.company_name
-                          ? value.company_name
-                          : "Complete Details"}
+                        {value.title}
                       </td>
                       <td className="border-t-[1px] ">
                         <div
-                          className={`py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[150px] ${
-                            value.company_address ? "" : "text-red-600"
-                          }`}
+                          className={`py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[150px] `}
                         >
-                          {value.company_address
-                            ? value.company_address
-                            : "Complete Details"}
+                          {value.subtitle}
                         </div>
                       </td>
                       <td className=" border-t-[1px]">
                         <div className="py-[2%] lg:text-sm md:text-sm text-sm font-bold mx-auto min-w-[80px]">
-                          {value.name}
+                          {" "}
+                          <iframe
+                            width="100"
+                            height="60"
+                            src="https://www.youtube.com/embed/tmg6d3T_T6Q"
+                            title="thumnail"
+                          ></iframe>{" "}
                         </div>
                       </td>
                       <td
-                        onClick={() => handleFeatured(value.id, value.featured)}
-                        className={`py-[2%] w-[1%] border-t-[1px] text-[15px] font-bold cursor-pointer hover:scale-105 items-center ${
-                          value.featured === 1
-                            ? "text-green-800"
-                            : "text-red-700"
-                        }`}
+                        onClick={() => handleFeatured(value.id, value.popular)}
+                        className={`py-[2%] w-[1%] border-t-[1px] text-[15px] font-bold cursor-pointer hover:scale-105 items-center `}
                       >
                         <center>
                           <BpCheckbox
                             className="mx-auto"
-                            checked={value.featured}
+                            checked={value.popular}
                           />
                         </center>
                       </td>
@@ -205,7 +190,7 @@ const ContractorList = ({ search }) => {
                           <div
                             className="w-8 mr-2 cursor-pointer hover:scale-125"
                             onClick={() =>
-                              navigate("/contractors/edit?id=" + value.id)
+                              navigate("/story/edit?id=" + value.id)
                             }
                           >
                             <img src={editImage} alt="Edit" />
@@ -215,19 +200,6 @@ const ContractorList = ({ search }) => {
                             onClick={() => initiateDelete(value.id)}
                           >
                             <img src={deleteImage} alt="Delete" />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="py-[2%] w-[1%] border-t-[1px]">
-                        <div
-                          className="flex items-center lg:text-lg md:text-md text-sm justify-center text-center text-blue-700 cursor-pointer hover:scale-110"
-                          onClick={() =>
-                            navigate("/contractors/details?id=" + value.id)
-                          }
-                        >
-                          <div className="flex">
-                            Details{" "}
-                            <AiOutlineArrowRight className="ml-2 mt-1" />
                           </div>
                         </div>
                       </td>
@@ -243,4 +215,4 @@ const ContractorList = ({ search }) => {
   );
 };
 
-export default ContractorList;
+export default SuccessStoryList;

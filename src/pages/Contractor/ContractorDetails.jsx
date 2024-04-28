@@ -16,32 +16,46 @@ import Highlights from "./Components/Highlights";
 import Languages from "./Components/Languages";
 import Leads from "./Components/Leads";
 import Documents from "./Components/Documents";
-
+import RequestInfoModal from "../../components/RequestInfoModal";
+import AcceptModal from "../../components/AcceptModal";
+import RejectModal from "../../components/RejectModal";
 const ContractorDetails = () => {
   const [tabValue, setTabValue] = React.useState(0);
   const [ID, setID] = useState();
-
+  const [requestOpen, setRequestOpen] = useState(false);
+  const [acceptOpen, setAcceptOpen] = useState(false);
+  const [rejectOpen, setRejectOpen] = useState(false);
   const response = useSelector((state) => state.contractor);
-
   const dispatch = useDispatch();
   const location = useLocation();
-
   const params = new URLSearchParams(location.search);
-
   useEffect(() => {
     if (params.get("id")) {
       dispatch(contractorDetails(params.get("id")));
       setID(params.get("id"));
     }
   }, []);
-
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
-
   console.log(response);
   return (
     <>
+      <RequestInfoModal
+        open={requestOpen}
+        setOpen={setRequestOpen}
+        deleteFunction={() => {}}
+      />
+      <AcceptModal
+        open={acceptOpen}
+        setOpen={setAcceptOpen}
+        deleteFunction={() => {}}
+      />
+      <RejectModal
+        open={rejectOpen}
+        setOpen={setRejectOpen}
+        deleteFunction={() => {}}
+      />
       {response.detailsLoading ? (
         <Loading />
       ) : (
@@ -57,13 +71,22 @@ const ContractorDetails = () => {
               : "-"}
           </h5>
           <div className="flex justify-center items-center text-center gap-2 mt-6">
-            <button className="flex bg-[#12947c] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110">
+            <button
+              onClick={() => setAcceptOpen(!acceptOpen)}
+              className="flex bg-[#12947c] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110"
+            >
               Accept
             </button>
-            <button className="flex bg-[#fd3d3a] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110">
+            <button
+              onClick={() => setRejectOpen(!rejectOpen)}
+              className="flex bg-[#fd3d3a] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl  items-center sm:text-base text-xs justify-center hover:scale-110"
+            >
               Reject
             </button>
-            <button className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl items-center sm:text-base text-xs justify-center hover:scale-110">
+            <button
+              onClick={() => setRequestOpen(!requestOpen)}
+              className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl items-center sm:text-base text-xs justify-center hover:scale-110"
+            >
               Request Info
             </button>
           </div>

@@ -1,4 +1,4 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import user from "../reducers/user";
 import category from "../reducers/category";
 import blog from "../reducers/blog";
@@ -12,23 +12,25 @@ import city from "../reducers/city";
 import highlight from "../reducers/highlight";
 import language from "../reducers/language";
 import review from "../reducers/review";
+import successStory from "../reducers/successStory";
 
 const store = configureStore({
-    reducer: {
-        user: user,
-        category: category,
-        blog: blog,
-        contractor: contractor,
-        costGuide: costGuide,
-        subcategory: subcategory,
-        testimonial: testimonial,
-        request: request,
-        customer: customer,
-        city: city,
-        highlight: highlight,
-        language: language,
-        review: review
-    }
-})
+  reducer: {
+    user: user,
+    category: category,
+    blog: blog,
+    contractor: contractor,
+    costGuide: costGuide,
+    subcategory: subcategory,
+    testimonial: testimonial,
+    request: request,
+    customer: customer,
+    city: city,
+    highlight: highlight,
+    language: language,
+    review: review,
+    successStory: successStory,
+  },
+});
 
-export default store
+export default store;
