@@ -73,10 +73,10 @@ const Areas = ({ id, response }) => {
           <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
             <thead>
               <tr className="text-sm leading-normal w-full justify-between">
-                <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md pl-[3%] text-left">
-                  Postal Code
+                <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md pl-[3%]  text-left">
+                  City
                 </th>
-                <th className="py-[2%] bg-gray-50 md:text-lg text-md  text-left">
+                <th className="py-[2%] bg-gray-50 w-[20%] md:text-lg text-md  text-left">
                   Status
                 </th>
               </tr>
@@ -91,7 +91,7 @@ const Areas = ({ id, response }) => {
                     </div>
                   </td>
                   <td className=" border-t-[1px]">
-                    <div className="py-[2%] text-[#12947c] md:text-base text-sm font-semibold mx-auto min-w-[80px]">
+                    <div className="py-[2%] text-[#12947c] md:text-base text-sm font-semibold mx-auto">
                       {value.assigned === 0 ? (
                         <button
                           disabled={loadingState[value.id]}
