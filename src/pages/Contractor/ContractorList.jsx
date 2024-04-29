@@ -113,7 +113,10 @@ const ContractorList = ({ search }) => {
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
                   <tr className="text-sm leading-normal w-full">
-                    <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] pl-[3%] text-left">
+                  <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] pl-[3%] text-left">
+                      Date
+                    </th>
+                    <th className="py-[2%] bg-gray-50 rounded-tl-xl md:text-lg text-md w-[2%] text-left">
                       Company
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left">
@@ -144,8 +147,13 @@ const ContractorList = ({ search }) => {
                         value.checked === 0 ? "bg-amber-50" : ""
                       }`}
                     >
+                       <td className=" border-t-[1px]">
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto pl-[3%] min-w-[80px]">
+                          {value.created_at}
+                        </div>
+                      </td>
                       <td
-                        className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px] pl-[3%] min-w-[50px] ${
+                        className={`py-[2%] w-[3%] lg:text-lg md:text-md text-sm font-medium border-t-[1px]  min-w-[50px] ${
                           value.company_name ? "" : "text-red-600"
                         }   `}
                       >
@@ -165,7 +173,7 @@ const ContractorList = ({ search }) => {
                         </div>
                       </td>
                       <td className=" border-t-[1px]">
-                        <div className="py-[2%] lg:text-sm md:text-sm text-sm font-bold mx-auto min-w-[80px]">
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[80px]">
                           {value.name}
                         </div>
                       </td>

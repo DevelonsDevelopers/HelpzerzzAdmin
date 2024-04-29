@@ -126,12 +126,11 @@ const ReviewsList = ({ search }) => {
 
                       <td className="border-t-[1px] pl-[1%]">
                         <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
-                          {
-                            customerResponse.customers.find(
-                              (customer) =>
-                                customer.name === value.customer_name
-                            )?.email
-                          }
+                          {customerResponse.customers.map((customer) =>
+                            customer.name === value.customer_name
+                              ? customer.email
+                              : null
+                          )}
                         </div>
                       </td>
 
