@@ -41,22 +41,17 @@ const AcceptModal = ({ open, setOpen, acceptFunction }) => {
           </svg>
         </div>
         <div className="w-[350px] py-7 px-5 text-center">
-          <svg
-            className="mx-auto mb-4 text-gray-400 w-9 h-9 :text-gray-200"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          </svg>
-          <h3 className="font-bold">Are you sure you want to accept?</h3>
+          <h3 className="font-bold pb-4">Write your message</h3>
+
+          <textarea
+            value=""
+            name=""
+            minLength="30"
+            maxLength="500"
+            rows="7"
+            placeholder="Enter details here"
+            className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1}`}
+          />
           <div className="mt-5">
             <button
               onClick={() => handleClose()}
@@ -66,7 +61,7 @@ const AcceptModal = ({ open, setOpen, acceptFunction }) => {
             </button>
             <button
               onClick={() => handleRequest()}
-              className="w-[120px] ml-1 rounded-xl bg-[#12947c] text-white py-2 font-medium hover:bg-red-700"
+              className="w-[120px] ml-1 rounded-xl bg-[#12947c] text-white py-2 font-medium hover:bg-[#12948f]"
             >
               Accept
             </button>
