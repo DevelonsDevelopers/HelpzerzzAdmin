@@ -6,6 +6,7 @@ import {FaBell} from "react-icons/fa";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import { io } from "socket.io-client"
+import moment from "moment";
 
 const Topbar = ({showNav, setShowNav, setSearch}) => {
     const socket = useMemo(() => io("https://api.helperzz.com"), []);
@@ -22,12 +23,13 @@ const Topbar = ({showNav, setShowNav, setSearch}) => {
         if (!token) {
             navigate("/login");
         } else {
-            socket.on("connect", () => {
-                console.log("connected", socket.id)
-
-            })
             socket.on("newRequest", (value) => {
-                console.log(value)
+                const notification = { title: "New Service Request", message: `${value.subcategory_name} request ${value.time}`, time: moment(value.created_at).fromNow() }
+                const tempNotifcations = [...notifications]
+                if (!tempNotifcations.includes(notification)){
+                    tempNotifcations.unshift(notification)
+                    setNotifications(tempNotifcations)
+                }
             })
         }
     }, []);
@@ -85,10 +87,10 @@ const Topbar = ({showNav, setShowNav, setSearch}) => {
                                     </div>
                                     {notifications.map(value => (
                                         <div className="border-[1px] p-4">
-                                            <p className="text-left font-bold text-base">Monarch</p>
+                                            <p className="text-left font-bold text-base">{value.title}</p>
                                             <div className="flex justify-between">
-                                                <p>Updated its profile pic</p>
-                                                <p className="text-sm text-gray-400">2 hours ago</p>
+                                                <p className={`text-[12px] text-start`}>{value.message}</p>
+                                                <p className="text-[10px] text-gray-400">{value.time}</p>
                                             </div>
                                         </div>
                                     ))}

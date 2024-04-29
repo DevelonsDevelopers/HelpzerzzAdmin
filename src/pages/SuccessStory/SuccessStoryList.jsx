@@ -42,11 +42,8 @@ const SuccessStoryList = ({ search }) => {
       setData(
         searchData.filter((value) => {
           return (
-            value.company_name.toLowerCase().includes(search.toLowerCase()) ||
-            value.company_address
-              .toLowerCase()
-              .includes(search.toLowerCase()) ||
-            value.name.toLowerCase().includes(search.toLowerCase())
+            value.title.toLowerCase().includes(search.toLowerCase()) ||
+            value.subtitle.toLowerCase().includes(search.toLowerCase())
           );
         })
       );
@@ -73,11 +70,11 @@ const SuccessStoryList = ({ search }) => {
   };
 
   const handleFeatured = (id, val) => {
-    let featured = 0;
+    let popular = 0;
     if (val === 0) {
-      featured = 1;
+      popular = 1;
     }
-    dispatch(updateStoryPopular({ id, featured }));
+    dispatch(updateStoryPopular({ id, popular }));
   };
   //   {loading, storyLoading, deleting, noData, success, fetched, stories, story, error, storyError}
   //   {id, title, subtitle, description, youtube_link, popular, status, created_at})
@@ -149,13 +146,12 @@ const SuccessStoryList = ({ search }) => {
                       </td>
                       <td className=" border-t-[1px]">
                         <div className="py-[2%] lg:text-sm md:text-sm text-sm font-bold mx-auto min-w-[80px]">
-                          {" "}
-                          <iframe
+                          <img
                             width="100"
                             height="60"
-                            src="https://www.youtube.com/embed/tmg6d3T_T6Q"
-                            title="thumnail"
-                          ></iframe>{" "}
+                            src={`http://img.youtube.com/vi/${value.youtube_link.split("=")[1]}/hqdefault.jpg`}
+                            alt="thumnail"
+                          />
                         </div>
                       </td>
                       <td
