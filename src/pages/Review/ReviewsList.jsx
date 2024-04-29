@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/Loading";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { Rating } from "@mui/material";
 import DeleteModal from "../../components/DeleteModal";
@@ -19,7 +20,11 @@ const ReviewsList = ({ search }) => {
   const [deleteID, setDeleteID] = useState();
   const dispatch = useDispatch();
   const response = useSelector((state) => state.review);
+  const customerResponse = useSelector((state) => state.customer);
 
+  const navigate = useNavigate();
+
+  console.log(customerResponse);
   useEffect(() => {
     dispatch(getReviews());
   }, []);
@@ -77,19 +82,25 @@ const ReviewsList = ({ search }) => {
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
                   <tr className="text-sm leading-normal">
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left pl-[2%]">
-                      Timeline
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[2%]">
+                      Date
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[4%]">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%] ">
+                      Name
+                    </th>
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%] ">
+                      Email
+                    </th>
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%] ">
                       Contractor Name
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[4%]">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%]">
                       Title
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left pl-[2%]">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left pl-[1%]">
                       Review
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left pl-[2%]">
+                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left pl-[1%]">
                       Rating
                     </th>
                     <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
@@ -106,24 +117,49 @@ const ReviewsList = ({ search }) => {
                           {moment(value.created_date).format("ll")}
                         </div>
                       </td>
-                      <td className="border-t-[1px] pl-[4%]">
+
+                      <td className="border-t-[1px] pl-[1%]">
                         <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
+                          {value.customer_name}
+                        </div>
+                      </td>
+
+                      <td className="border-t-[1px] pl-[1%]">
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
+                          {
+                            customerResponse.customers.find(
+                              (customer) =>
+                                customer.name === value.customer_name
+                            )?.email
+                          }
+                        </div>
+                      </td>
+
+                      <td className="border-t-[1px] pl-[1%]">
+                        <div
+                          className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center text-blue-700 underline cursor-pointer"
+                          onClick={() =>
+                            navigate(
+                              "/contractors/details?id=" + value.contractor
+                            )
+                          }
+                        >
                           {value.company_name}
                         </div>
                       </td>
-                      <td className="border-t-[1px] pl-[4%]">
+                      <td className="border-t-[1px] pl-[1%]">
                         <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
                           {value.title}
                         </div>
                       </td>
 
-                      <td className="border-t-[1px] pl-[2%]">
+                      <td className="border-t-[1px] pl-[1%]">
                         <div className="lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center line-clamp-2 text-ellipsis">
                           {value.review}
                         </div>
                       </td>
 
-                      <td className="border-t-[1px] pl-[2%]">
+                      <td className="border-t-[1px] pl-[1%]">
                         <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
                           <Rating value={value.rating} size="small" readOnly />
                         </div>

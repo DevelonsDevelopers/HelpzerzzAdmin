@@ -93,59 +93,65 @@ const RequestList = ({ search }) => {
               <table className="rounded-xl p-5 bg-white w-[100%] m-auto mt-6 shadow-lg">
                 <thead>
                   <tr className="text-sm leading-normal">
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left pl-[2%]">
-                      Timeline
+                    <th className="py-[1.5%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[2%]">
+                      Date
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[3%]">
+                    <th className="py-[1.5%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%]">
                       Customer Name
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[3%] text-left pl-[3%]">
+                    <th className="py-[1.5%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%]">
                       Message
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[4%]">
+                    <th className="py-[1.5%] bg-gray-50 md:text-lg text-md w-[2%] text-left pl-[1%]">
                       Home Type
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%] text-left pl-[2%]">
+                    <th className="py-[1.5%] bg-gray-50 md:text-lg text-md w-[1%] text-left pl-[1%]">
                       Timeline
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
+                    <th className="py-[1.5%] bg-gray-50 md:text-lg text-md w-[1%]">
                       Status
                     </th>
-                    <th className="py-[2%] bg-gray-50 md:text-lg text-md w-[1%]">
+                    <th className="py-[1.5%] bg-gray-50 md:text-lg text-md w-[1%]">
                       Actions
                     </th>
-                    <th className="py-[2%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th>
+                    <th className="py-[1.5%] bg-gray-50 rounded-tr-xl md:text-lg text-md w-[1%]"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {data.map((value) => (
                     <tr className="text-[#000000] text-sm w-full">
                       <td className="border-t-[1px] pl-[2%]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
+                        <div className="py-[1.5%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
                           {moment(value.created_at).format("ll")}
                         </div>
                       </td>
-                      <td className="border-t-[1px] pl-[3%]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
+                      <td className="border-t-[1px] pl-[1%]">
+                        <div className="py-[1.5%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
                           {value.name}
                         </div>
                       </td>
-                      <td className="border-t-[1px] pl-[3%]">
+                      <td className="border-t-[1px] pl-[1%]">
                         <div className="lg:text-lg md:text-md text-sm font-medium mx-auto justify-center line-clamp-1 text-ellipsis">
-                          {value.details}
+                          {value.details === "" ? (
+                            <div className="text-sm text-red-600 font-medium mx-auto justify-center">
+                              NA
+                            </div>
+                          ) : (
+                            value.details
+                          )}
                         </div>
                       </td>
-                      <td className="border-t-[1px] pl-[4%]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
+                      <td className="border-t-[1px] pl-[1%]">
+                        <div className="py-[1.5%] lg:text-lg md:text-md text-sm font-medium  mx-auto  justify-center">
                           {value.home_type}
                         </div>
                       </td>
-                      <td className="border-t-[1px] pl-[2%]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
+                      <td className="border-t-[1px] pl-[1%]">
+                        <div className="py-[1.5%] lg:text-lg md:text-md text-sm font-medium  mx-auto justify-center">
                           {value.time}
                         </div>
                       </td>
-                      <td className="py-[2%] w-[2%] border-t-[1px] text-center font-bold lg:text-lg md:text-md text-sm hover:scale-110">
+                      <td className="py-[1.5%] border-t-[1px] text-center font-bold lg:text-lg md:text-md text-sm hover:scale-110">
                         <p
                           className={`w-[100px] mx-auto rounded-2xl py-1 px-2 text-white ${
                             value.status === 1
@@ -162,7 +168,7 @@ const RequestList = ({ search }) => {
                             : "Pending"}
                         </p>
                       </td>
-                      <td className="py-[2%] w-[2%] border-t-[1px]">
+                      <td className="py-[1.5%] border-t-[1px]">
                         <div className="flex items-center justify-center">
                           <div
                             className="w-8  cursor-pointer hover:scale-125"
@@ -172,7 +178,7 @@ const RequestList = ({ search }) => {
                           </div>
                         </div>
                       </td>
-                      <td className="py-[2%] w-[1%] border-t-[1px]">
+                      <td className="py-[1.5%] border-t-[1px]">
                         <div
                           className="flex items-center justify-center text-center text-blue-700 cursor-pointer hover:scale-110"
                           onClick={() =>
