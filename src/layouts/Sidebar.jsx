@@ -8,6 +8,7 @@ import { BiSolidCategory } from "react-icons/bi";
 import { FaUserGroup } from "react-icons/fa6";
 import { MdRateReview } from "react-icons/md";
 import { FaCity } from "react-icons/fa";
+import { IoDocumentTextSharp } from "react-icons/io5";
 
 const Sidebar = forwardRef(({}, ref) => {
   const location = useLocation();
@@ -830,7 +831,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 aria-controls="dropdown-example"
                 data-collapse-toggle="dropdown-example"
               >
-                <FaCity
+                <IoDocumentTextSharp
                   className={`lg:text-xl md:text-lg mx-[6px] text-gray-700`}
                 />
                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
