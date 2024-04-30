@@ -15,6 +15,7 @@ import { IoAdd } from "react-icons/io5";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import editImage from "../../components/assets/edit.png";
 import deleteImage from "../../components/assets/delete.png";
+import moment from "moment";
 
 const ContractorList = ({ search }) => {
   const [open, setOpen] = useState(false);
@@ -147,9 +148,9 @@ const ContractorList = ({ search }) => {
                         value.checked === 0 ? "bg-amber-50" : ""
                       }`}
                     >
-                       <td className=" border-t-[1px]">
-                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto pl-[3%] min-w-[80px]">
-                          {value.created_at}
+                       <td className=" border-t-[1px] pl-[3%]">
+                        <div className="py-[2%] lg:text-lg md:text-md text-sm font-medium mx-auto min-w-[80px]">
+                          {moment(value.created_date).format("ll")}
                         </div>
                       </td>
                       <td
