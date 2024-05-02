@@ -129,7 +129,7 @@ function App() {
         <Route path="/story" element={<SuccessStoryList search={search} />} />
         <Route path="/story/add" element={<SuccessStoryAdd />} />
         <Route path="/story/edit" element={<SuccessStoryAdd edit={true} />} />
-        <Route path="/contractorrequest" element={<ContractorRequestList />}/>
+        <Route path="/contractorrequest" element={<ContractorRequestList search={search} />}/>
         <Route path="/contractorrequest/details" element={<ContractorRequestDetails />} />
       </Routes>
     </PortalLayout>

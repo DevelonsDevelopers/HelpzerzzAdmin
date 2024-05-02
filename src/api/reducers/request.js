@@ -8,8 +8,7 @@ import {
     SINGLE_REQUEST
 } from "../../utils/constants";
 import requestService from "../services/requestService";
-import requestContractorService from "../services/requestContractorService";
-import {updateCategoryStatus} from "./category";
+
 
 
 const initialState = {
