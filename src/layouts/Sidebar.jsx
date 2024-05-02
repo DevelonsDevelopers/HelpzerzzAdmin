@@ -68,7 +68,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 </span>
               </button>
             </div>
-
+            {/*Requests*/}
             <div>
               <button
                 type="button"
@@ -120,6 +120,62 @@ const Sidebar = forwardRef(({}, ref) => {
                     className="cursor-pointer flex items-center p-2 text-[13px] text-gray-800 transition duration-75 rounded-lg pl-11 group  bg-gray-50  w-[84%] m-auto hover:font-bold"
                   >
                     Manage Requests{" "}
+                  </a>
+                </li>
+              </ul>
+            </div>
+            {/*ContractorRequest*/}
+            <div>
+              <button
+                type="button"
+                onClick={() => handleSelection(12)}
+                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                  location.pathname.includes("/contractorrequest")
+                    ? "text-[#0D14FD]"
+                    : "text-gray-700"
+                } transition duration-75 rounded-lg group bg-[#f2f9ff]  hover:text-[#0D14FD] mt-3`}
+                aria-controls="dropdown-example"
+                data-collapse-toggle="dropdown-example"
+              >
+                <RiSendPlaneFill
+                  className={`lg:text-xl md:text-lg mx-[6px] text-gray-700`}
+                />
+                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
+                  Contractor Request
+                </span>
+                <svg
+                  className={`w-3 h-3 ${
+                    open[12]
+                      ? "-rotate-180 duration-300"
+                      : "rotate-0 duration-300"
+                  }`}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <ul
+                id="dropdown-example"
+                className={`${open[12] ? "" : "hidden"} py-2 space-y-2`}
+              >
+                <li>
+                  <a
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate("/contractorrequest");
+                    }}
+                    className="cursor-pointer flex items-center p-2 text-[13px] text-gray-800 transition duration-75 rounded-lg pl-11 group  bg-gray-50  w-[84%] m-auto hover:font-bold"
+                  >
+                    Manage Contractor Requests{" "}
                   </a>
                 </li>
               </ul>

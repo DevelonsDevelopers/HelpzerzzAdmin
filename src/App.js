@@ -31,6 +31,8 @@ import ReviewsList from "./pages/Review/ReviewsList";
 import { useState } from "react";
 import SuccessStoryList from "./pages/SuccessStory/SuccessStoryList";
 import SuccessStoryAdd from "./pages/SuccessStory/SuccessStoryAdd";
+import ContractorRequestList from "./pages/ContractorRequest/ContractorRequestList";
+import ContractorRequestDetails from "./pages/ContractorRequest/ContractorRequestDetails";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -127,6 +129,8 @@ function App() {
         <Route path="/story" element={<SuccessStoryList search={search} />} />
         <Route path="/story/add" element={<SuccessStoryAdd />} />
         <Route path="/story/edit" element={<SuccessStoryAdd edit={true} />} />
+        <Route path="/contractorrequest" element={<ContractorRequestList />}/>
+        <Route path="/contractorrequest/details" element={<ContractorRequestDetails />} />
       </Routes>
     </PortalLayout>
   );
