@@ -1,6 +1,6 @@
 import {
     ACTIVE_CATEGORIES,
-    ALL_CATEGORIES,
+    ALL_CATEGORIES, BANNER_CATEGORY,
     CATEGORY_REDUCER,
     CREATE_CATEGORY,
     DELETE_CATEGORY,
@@ -105,6 +105,16 @@ export const updateCategoryFeature = createAsyncThunk(FEATURE_CATEGORY, (data) =
 
 export const updateCategoryPopular = createAsyncThunk(POPULAR_CATEGORY, (data) => {
     return categoryService.changePopular(data).then(response => {
+        if (response.success){
+            return data.id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const updateCategoryBanner = createAsyncThunk(BANNER_CATEGORY, (data) => {
+    return categoryService.changeBanner(data).then(response => {
         if (response.success){
             return data.id
         } else {
@@ -258,6 +268,24 @@ const category = createSlice({
             }
         })
         builder.addCase(updateCategoryPopular.rejected, (state, action) => {
+
+        })
+
+        //BANNER CATEGORY ////////////////////////////////////////
+        builder.addCase(updateCategoryBanner.pending, state => {
+
+        })
+        builder.addCase(updateCategoryBanner.fulfilled, (state, action) => {
+            const value = state.categories.find(v => v.id === action.payload)
+            if (value) {
+                if (value.popular === 0) {
+                    value.popular = 1
+                } else {
+                    value.popular = 0
+                }
+            }
+        })
+        builder.addCase(updateCategoryBanner.rejected, (state, action) => {
 
         })
     }

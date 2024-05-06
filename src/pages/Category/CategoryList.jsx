@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   deleteCategory,
-  getCategories,
+  getCategories, updateCategoryBanner,
   updateCategoryFeature,
   updateCategoryPopular,
   updateCategoryStatus,
@@ -84,6 +84,14 @@ const CategoryList = ({ search }) => {
     dispatch(updateCategoryFeature({ id, featured }));
   };
 
+  const handleBanner = (id, val) => {
+    let banner = 0;
+    if (val === 0) {
+      banner = 1;
+    }
+    dispatch(updateCategoryBanner({ id, banner }));
+  };
+
   return (
     <>
       {response.loading ? (
@@ -129,6 +137,9 @@ const CategoryList = ({ search }) => {
                     </th>
                     <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
                       Actions
+                    </th>
+                    <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
+                      Popular
                     </th>
                     <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
                       Popular
@@ -203,6 +214,15 @@ const CategoryList = ({ search }) => {
                         <FormControlLabel
                           className={"mx-auto"}
                           control={<Android12Switch checked={value.popular} />}
+                        />
+                      </td>
+                      <td
+                          onClick={() => handleBanner(value.id, value.banner)}
+                          className="py-[2%] w-[1%] pl-[2%] border-t-[1px] text-center lg:text-lg md:text-md text-sm font-bold cursor-pointer hover:scale-105 items-center justify-center"
+                      >
+                        <FormControlLabel
+                            className={"mx-auto"}
+                            control={<Android12Switch checked={value.banner} />}
                         />
                       </td>
                     </tr>

@@ -72,6 +72,14 @@ const categoryService = {
         } catch (error) {
             throw error.response.data
         }
+    },
+    changeBanner: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/categories/banner', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
     }
 }
 

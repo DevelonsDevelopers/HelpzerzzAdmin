@@ -158,7 +158,7 @@ const BlogAddEdit = ({ edit = false }) => {
                     id="grid-state"
                   >
                     <option hidden>Select Category</option>
-                    <option>Guide</option>
+                    <option>Update</option>
                     <option>Improvement</option>
                     <option>Design</option>
                   </select>
