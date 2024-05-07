@@ -142,7 +142,7 @@ const CategoryList = ({ search }) => {
                       Popular
                     </th>
                     <th className="py-[2%] bg-gray-50 text-center md:text-lg text-md w-[1%]">
-                      Popular
+                      Banner
                     </th>
                   </tr>
                 </thead>

@@ -278,10 +278,10 @@ const category = createSlice({
         builder.addCase(updateCategoryBanner.fulfilled, (state, action) => {
             const value = state.categories.find(v => v.id === action.payload)
             if (value) {
-                if (value.popular === 0) {
-                    value.popular = 1
+                if (value.banner === 0) {
+                    value.banner = 1
                 } else {
-                    value.popular = 0
+                    value.banner = 0
                 }
             }
         })

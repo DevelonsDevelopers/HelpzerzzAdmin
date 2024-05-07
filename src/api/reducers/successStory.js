@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
-    ALL_STORIES,
+    ALL_STORIES, CREATE_BLOG,
     CREATE_STORY,
     DELETE_STORY,
     POPULAR_STORY,
@@ -9,6 +9,8 @@ import {
     UPDATE_STORY
 } from "../../utils/constants";
 import successStoryService from "../services/successStoryService";
+import uploadService from "../services/uploadService";
+import blogService from "../services/blogService";
 
 const initialState = {
     loading: false,
@@ -23,8 +25,13 @@ const initialState = {
     storyError: '',
 }
 
-export const addStory = createAsyncThunk(CREATE_STORY, (story) => {
-    return successStoryService.create(story)
+export const addStory = createAsyncThunk(CREATE_BLOG, (data) => {
+    return uploadService.single(data.file).then(file => {
+        let story = data.story;
+        story.image = file.fileName
+        console.log(story, 'story')
+        return successStoryService.create(story)
+    })
 })
 
 export const updateStory = createAsyncThunk(UPDATE_STORY, (story) => {
