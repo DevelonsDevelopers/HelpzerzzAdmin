@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
     ACTIVE_CONTRACTORS,
-    ALL_CONTRACTORS,
+    ALL_CONTRACTORS, APPROVE_CONTRACTOR,
     APPROVE_REVIEW,
     ASSIGN_AREA,
     ASSIGN_CONTRACTOR,
@@ -25,7 +25,7 @@ import {
     DETAILS_CONTRACTOR,
     FEATURE_CONTRACTOR,
     POPULAR_CONTRACTORS,
-    RECENT_CONTRACTORS, REJECT_REVIEW,
+    RECENT_CONTRACTORS, REJECT_CONTRACTOR, REJECT_REVIEW,
     SINGLE_CONTRACTOR,
     STATUS_CONTRACTOR,
     UNASSIGN_AREA,
@@ -69,6 +69,7 @@ const initialState = {
     contractorError: '',
     detailsError: '',
     assignedError: '',
+    approveReject: false,
 }
 
 export const addContractor = createAsyncThunk(CREATE_CONTRACTOR, (data) => {
@@ -348,6 +349,26 @@ export const updateContractorFeature = createAsyncThunk(FEATURE_CONTRACTOR, (dat
     })
 })
 
+export const approveContractor = createAsyncThunk(APPROVE_CONTRACTOR, (data) => {
+    return contractorService.approve(data).then(response => {
+        if (response.success) {
+            return data.id
+        } else {
+            return 0
+        }
+    })
+})
+
+export const rejectContractor = createAsyncThunk(REJECT_CONTRACTOR, (data) => {
+    return contractorService.reject(data).then(response => {
+        if (response.success) {
+            return data.id
+        } else {
+            return 0
+        }
+    })
+})
+
 const contractor = createSlice({
     name: CONTRACTOR_REDUCER,
     initialState,
@@ -369,6 +390,9 @@ const contractor = createSlice({
         },
         projectSuccessListener: (state) => {
             state.projectSuccess = false
+        },
+        approveRejectListener: (state) => {
+            state.approveReject = false
         },
     },
     extraReducers: builder => {
@@ -739,6 +763,30 @@ const contractor = createSlice({
         builder.addCase(updateContractorFeature.rejected, (state, action) => {
 
         })
+
+        //APPROVE CONTRACTOR ////////////////////////////////////////
+        builder.addCase(approveContractor.pending, state => {
+            state.approveReject = false
+        })
+        builder.addCase(approveContractor.fulfilled, (state, action) => {
+            state.approveReject = true
+            state.contractors = state.contractors.filter((value) => value.id !== action.payload)
+        })
+        builder.addCase(approveContractor.rejected, (state, action) => {
+            state.approveReject = false
+        })
+
+        //APPROVE CONTRACTOR ////////////////////////////////////////
+        builder.addCase(rejectContractor.pending, state => {
+            state.approveReject = false
+        })
+        builder.addCase(rejectContractor.fulfilled, (state, action) => {
+            state.approveReject = true
+            state.contractors = state.contractors.filter((value) => value.id !== action.payload)
+        })
+        builder.addCase(rejectContractor.rejected, (state, action) => {
+            state.approveReject = false
+        })
     }
 })
 
@@ -749,5 +797,6 @@ export const {
     affiliationSuccessListener,
     awardSuccessListener,
     badgeSuccessListener,
-    projectSuccessListener
+    projectSuccessListener,
+    approveRejectListener
 } = contractor.actions

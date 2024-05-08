@@ -9,6 +9,14 @@ const emailService = {
             throw error
         }
     },
+    infoContractor: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/mailer/infoContractor', payload)
+            return response.data
+        } catch (error) {
+            throw error
+        }
+    },
 }
 
 export default emailService

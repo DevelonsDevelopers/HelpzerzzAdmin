@@ -146,6 +146,8 @@ const ContractorList = ({ search }) => {
                     <tr
                       className={`text-[#000000] text-sm w-[100%]  ${
                         value.checked === 0 ? "bg-amber-50" : ""
+                      } ${
+                          value.status === 2 ? "bg-red-100" : ""
                       }`}
                     >
                        <td className=" border-t-[1px] pl-[3%]">
@@ -202,8 +204,9 @@ const ContractorList = ({ search }) => {
                             className={"mx-auto"}
                             control={
                               <Android12Switch
-                                checked={value.status}
+                                checked={value.status === 1}
                                 color={"success"}
+                                disabled={value.status === 2}
                               />
                             }
                           />

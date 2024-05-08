@@ -240,6 +240,22 @@ const contractorService = {
         } catch (error) {
             throw error.response.data
         }
+    },
+    approve: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/approve/' + payload.id, payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    reject: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/reject/' + payload.id, payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
     }
 }
 

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Dialog } from "@mui/material";
+import JoditEditor from "jodit-react";
 
 const RequestInfoModal = ({ open, setOpen, requestInfoFunction }) => {
   const [clicked, setClicked] = useState(false);
+  const [detail , setDetail] = useState()
+
 
   const handleClose = () => {
     setOpen(!open);
   };
   const handleRequest = () => {
-    requestInfoFunction();
+    requestInfoFunction(detail);
     setClicked(true);
   };
 
@@ -18,6 +21,9 @@ const RequestInfoModal = ({ open, setOpen, requestInfoFunction }) => {
       onClose={handleClose}
       aria-labelledby="dialog-title"
       PaperProps={{ style: { borderRadius: 20, padding: 15 } }}
+      style={{ zIndex:99999 }}
+      maxWidth={'md'}
+      fullWidth={true}
     >
       <div className="relative w-full bg-white">
         <div
@@ -40,16 +46,11 @@ const RequestInfoModal = ({ open, setOpen, requestInfoFunction }) => {
             />
           </svg>
         </div>
-        <div className="w-[350px] py-7 px-5 text-center">
+        <div className=" py-7 px-5 text-center">
           <h3 className="font-bold pb-4">Write your message to request info</h3>
-          <textarea
-            value=""
-            name=""
-            minLength="30"
-            maxLength="500"
-            rows="7"
-            placeholder="Enter details here"
-            className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1}`}
+          <JoditEditor
+              value={detail}
+              onChange={(e) => setDetail(e.target)}
           />
           <div className="mt-5">
             <button
