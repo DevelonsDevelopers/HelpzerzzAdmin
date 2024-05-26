@@ -14,6 +14,7 @@ import language from "../reducers/language";
 import review from "../reducers/review";
 import successStory from "../reducers/successStory";
 import contractorRequest from "../reducers/contractorRequest";
+import contact from "../reducers/contact";
 
 const store = configureStore({
   reducer: {
@@ -31,7 +32,8 @@ const store = configureStore({
     language: language,
     review: review,
     successStory: successStory,
-    contractorRequest: contractorRequest
+    contractorRequest: contractorRequest,
+    contact : contact
   },
 });
 
