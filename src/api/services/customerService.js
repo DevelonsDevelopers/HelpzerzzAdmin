@@ -9,6 +9,14 @@ const customerService = {
             throw error.response.data
         }
     },
+    changeStatus: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/customers/status', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
 }
 
 export default customerService

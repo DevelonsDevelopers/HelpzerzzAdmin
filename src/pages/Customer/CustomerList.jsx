@@ -6,7 +6,7 @@ import DeleteModal from "../../components/DeleteModal";
 import { Android12Switch } from "../../utils/components";
 import { FormControlLabel } from "@mui/material";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { getCustomers } from "../../api/reducers/customer";
+import {getCustomers, updateCustomerStatus} from "../../api/reducers/customer";
 
 const CustomerList = ({ search }) => {
   const [open, setOpen] = useState(false);
@@ -55,11 +55,11 @@ const CustomerList = ({ search }) => {
   };
 
   const handleStatus = (id, val) => {
-    // let status = 0;
-    // if (val === 0) {
-    //     status = 1
-    // }
-    // dispatch(updateContractorStatus({id, status}))
+    let status = 0;
+    if (val === 0) {
+        status = 1
+    }
+    dispatch(updateCustomerStatus({id, status}))
   };
 
   return (
