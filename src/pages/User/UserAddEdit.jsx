@@ -9,6 +9,7 @@ import {
 } from "../../api/reducers/user";
 import ButtonLoading from "../../components/ButtonLoading";
 import Loading from "../../components/Loading";
+import { IoIosEyeOff, IoMdEye } from "react-icons/io";
 
 const UserAddEdit = ({ edit = false }) => {
   const names = ["name", "username", "email", "password"];
@@ -20,6 +21,8 @@ const UserAddEdit = ({ edit = false }) => {
     password: "",
   });
   const [assignLoading, setAssignLoading] = useState(false);
+
+  const [viewPassword, setViewPassword] = useState(false);
 
   const response = useSelector((state) => state.user);
 
@@ -66,7 +69,8 @@ const UserAddEdit = ({ edit = false }) => {
     setUserData((data) => ({ ...data, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let tempErrors = [...error];
     for (let i = 0; i < names.length; i++) {
       let name = names[i];
@@ -96,7 +100,10 @@ const UserAddEdit = ({ edit = false }) => {
           <h1 className="text-center text-[25px] font-[800] mt-5 uppercase">
             Add User
           </h1>
-          <div className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto">
+          <form
+            onSubmit={(e) => handleSubmit(e)}
+            className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto"
+          >
             <div className="lg:grid lg:grid-cols-2 flex-wrap mt-3">
               <div className="w-[100%] px-5 py-2 mt-2">
                 <label className="block text-[12px] ml-3 font-medium uppercase">
@@ -105,9 +112,10 @@ const UserAddEdit = ({ edit = false }) => {
                 <input
                   type="text"
                   name={names[0]}
+                  required
                   value={userData.name}
                   onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] `}
                   placeholder="Enter Your Name"
                 />
               </div>
@@ -118,6 +126,7 @@ const UserAddEdit = ({ edit = false }) => {
                 <input
                   type="text"
                   name={names[1]}
+                  required
                   value={userData.username}
                   onChange={(e) => handleChange(e)}
                   className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
@@ -133,6 +142,7 @@ const UserAddEdit = ({ edit = false }) => {
                 <input
                   type="email"
                   name={names[2]}
+                  required
                   value={userData.email}
                   onChange={(e) => handleChange(e)}
                   className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
@@ -144,25 +154,46 @@ const UserAddEdit = ({ edit = false }) => {
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={viewPassword ? "password" : "text"}
                   name={names[3]}
+                  required
                   value={userData.password}
                   onChange={(e) => handleChange(e)}
                   className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
                   placeholder="Enter Your Password"
                 />
+                {viewPassword ? (
+                  <div
+                    className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
+                    onClick={() => setViewPassword(false)}
+                  >
+                    <IoIosEyeOff />
+                  </div>
+                ) : (
+                  <div
+                    className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
+                    onClick={() => setViewPassword(true)}
+                  >
+                    <IoMdEye />
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex justify-center mt-8">
-              <button
-                disabled={assignLoading}
-                className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
-                onClick={() => handleSubmit()}
-              >
-                {assignLoading ? <ButtonLoading /> : "Submit"}
-              </button>
+              {assignLoading ? (
+                <button className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase">
+                  <ButtonLoading />
+                </button>
+              ) : (
+                <input
+                  type="submit"
+                  value={"Submit"}
+                  disabled={assignLoading}
+                  className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
+                />
+              )}
             </div>
-          </div>
+          </form>
         </div>
       )}
     </>

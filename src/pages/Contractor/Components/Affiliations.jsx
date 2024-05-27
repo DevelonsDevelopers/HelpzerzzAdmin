@@ -204,6 +204,8 @@ const Affiliations = ({ id, response }) => {
                   <input
                     type="file"
                     id="dropzone-file"
+                    accept="image/*"
+
                     name={names[3]}
                     className="hidden"
                     onChange={convertToBase64}

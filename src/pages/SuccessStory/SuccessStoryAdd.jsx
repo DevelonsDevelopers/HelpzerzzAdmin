@@ -224,6 +224,8 @@ const SuccessStoryAdd = ({edit = false}) => {
                                         <input
                                             type="file"
                                             id="dropzone-file"
+                                            accept="image/*"
+
                                             name={names[5]}
                                             className="hidden"
                                             onChange={(e) => convertToBase64(e)}

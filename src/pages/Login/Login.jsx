@@ -61,16 +61,13 @@ const Login = () => {
                     <form action="">
                         <div className="relative mt-6">
                             <input onChange={(e) => handleChange(e)} type="email" name="email" id="email" placeholder="Email Address"
-                                   className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"/>
-                            <label htmlFor="email"
-                                   className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Email
-                                Address</label>
+                                   className="peer mt-1 w-full border-b-2 rounded-md px-2 border-gray-300 px-0 py-1   focus:border-gray-500 focus:outline-none"/>
+                            
                         </div>
                         <div className="relative mt-6">
                             <input onChange={(e) => handleChange(e)} type="password" name="password" id="password" placeholder="Password"
-                                   className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"/>
-                            <label htmlFor="password"
-                                   className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Password</label>
+                                   className="peer peer mt-1 w-full border-b-2 rounded-md px-2 border-gray-300 px-0 py-1  focus:border-gray-500 focus:outline-none"/>
+                             
                         </div>
                         <div className="my-6">
                             {submitting ?

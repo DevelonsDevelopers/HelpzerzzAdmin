@@ -209,6 +209,8 @@ const CategoryAddEdit = ({ edit = false }) => {
                     <input
                       type="file"
                       id="dropzone-file"
+                      accept="image/*"
+
                       name={names[2]}
                       className="hidden"
                       onChange={convertToBase64}

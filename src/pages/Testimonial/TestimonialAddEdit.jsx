@@ -113,7 +113,9 @@ const TestimonialAddEdit = ({ edit = false }) => {
                   name={names[0]}
                   value={testimonialData.name}
                   onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] ${
+                    error[0] ? "border-red-600" : "border-gray-300"
+                  } `}
                   placeholder="Enter Name Here"
                 />
               </div>
@@ -126,7 +128,9 @@ const TestimonialAddEdit = ({ edit = false }) => {
                   name={names[1]}
                   value={testimonialData.email}
                   onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] ${
+                    error[1] ? "border-red-600" : "border-gray-300"
+                  }`}
                   placeholder="Enter Email Here"
                 />
               </div>
@@ -141,7 +145,9 @@ const TestimonialAddEdit = ({ edit = false }) => {
                   name={names[2]}
                   value={testimonialData.location}
                   onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] ${
+                    error[2] ? "border-red-600" : "border-gray-300"
+                  }`}
                   placeholder="Enter Location Here"
                 />
               </div>
@@ -156,7 +162,9 @@ const TestimonialAddEdit = ({ edit = false }) => {
                   name={names[3]}
                   value={testimonialData.rating}
                   onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] ${
+                    error[3] ? "border-red-600" : "border-gray-300"
+                  }`}
                   placeholder="Enter Rating Here"
                 />
               </div>
@@ -170,7 +178,9 @@ const TestimonialAddEdit = ({ edit = false }) => {
                 name={names[4]}
                 value={testimonialData.review}
                 onChange={(e) => handleChange(e)}
-                className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] ${
+                  error[4] ? "border-red-600" : "border-gray-300"
+                }`}
                 placeholder="Enter Review Here"
               />
             </div>

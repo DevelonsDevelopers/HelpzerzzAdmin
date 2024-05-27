@@ -26,6 +26,12 @@ const UserList = ({search}) => {
 
     const response = useSelector((state) => state.user);
 
+    useEffect(() => {
+        setData(response?.users)
+    },[response])
+
+
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -39,15 +45,15 @@ const UserList = ({search}) => {
         setSearchData(response.users)
     }, [response.users]);
 
-    useEffect(() => {
-        if (search.length > 0) {
-            setData(searchData.filter(v => {
-                return v.name.toLowerCase().includes(search.toLowerCase()) || v.username.toLowerCase().includes(search.toLowerCase()) || v.email.toLowerCase().includes(search.toLowerCase())
-            }))
-        } else {
-            setData(searchData)
-        }
-    }, [search])
+    // useEffect(() => {
+    //     if (search.length > 0) {
+    //         setData(searchData.filter(v => {
+    //             return v.name.toLowerCase().includes(search.toLowerCase()) || v.username.toLowerCase().includes(search.toLowerCase()) || v.email.toLowerCase().includes(search.toLowerCase())
+    //         }))
+    //     } else {
+    //         setData(searchData)
+    //     }
+    // }, [search])
 
     const initiateDelete = (id) => {
         setOpen(!open);

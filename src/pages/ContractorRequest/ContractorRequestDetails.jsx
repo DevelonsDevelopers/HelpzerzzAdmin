@@ -84,24 +84,7 @@ const ContractorRequestDetails = () => {
                                 </button>
                             </div>
                         )}
-                        <div className="flex mx-auto mb-5">
-                            {requestData?.status === 1 ? (
-                                <button
-                                    className="md:text-lg text-md bg-green-800 text-white font-semibold ml-auto mt-auto sm:px-7 px-3 rounded-lg py-2">
-                                    ACCEPTED
-                                </button>
-                            ) : requestData?.status === 2 ? (
-                                <button
-                                    className="md:text-lg text-md bg-red-700 text-white font-semibold ml-auto mt-auto sm:px-7 px-3 rounded-lg py-2">
-                                    REJECTED
-                                </button>
-                            ) : (
-                                <button
-                                    className="md:text-lg text-md bg-gray-700 text-white font-semibold ml-auto mt-auto sm:px-7 px-3 rounded-lg py-2">
-                                    Pending
-                                </button>
-                            )}
-                        </div>
+                         
 
                         {showConfirmation && (
                             <div

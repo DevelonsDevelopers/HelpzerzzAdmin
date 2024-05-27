@@ -277,6 +277,8 @@ const Projects = ({ id, response }) => {
                   <input
                     type="file"
                     id="dropzone-file"
+                    accept="image/*"
+
                     name={names[3]}
                     className="hidden"
                     onChange={(e) => handleFileChange(e)}

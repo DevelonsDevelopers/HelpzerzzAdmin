@@ -11,6 +11,7 @@ import {
   updateContractor,
 } from "../../api/reducers/contractor";
 import { IMAGE_PATH } from "../../utils/constants";
+import { IoIosEyeOff, IoMdEye } from "react-icons/io";
 
 const ContractorAddEdit = ({ edit = false }) => {
   const names = ["name", "email", "phone", "password", "address", "image"];
@@ -34,6 +35,8 @@ const ContractorAddEdit = ({ edit = false }) => {
   });
   const [file, setFile] = useState();
   const [assignLoading, setAssignLoading] = useState(false);
+
+  const [viewPassword , setViewPassword] = useState(false)
 
   const response = useSelector((state) => state.contractor);
 
@@ -98,7 +101,8 @@ const ContractorAddEdit = ({ edit = false }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let tempErrors = [...error];
     for (let i = 0; i < names.length; i++) {
       let name = names[i];
@@ -138,7 +142,10 @@ const ContractorAddEdit = ({ edit = false }) => {
           <h1 className="text-center font-[800] text-[25px] uppercase mt-5">
             Add Contractor
           </h1>
-          <div className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto">
+          <form
+            onSubmit={(e) => handleSubmit(e)}
+            className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto"
+          >
             <div className="lg:grid lg:grid-cols-2 flex-wrap mt-3">
               <div>
                 <div className="w-[100%] px-5 py-2">
@@ -149,6 +156,7 @@ const ContractorAddEdit = ({ edit = false }) => {
                     value={contractorData.name}
                     type="text"
                     name={names[0]}
+                    required
                     onChange={(e) => handleChange(e)}
                     className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
                       error[0] ? "border-red-600" : "border-gray-300"
@@ -163,8 +171,9 @@ const ContractorAddEdit = ({ edit = false }) => {
                   </label>
                   <input
                     value={contractorData.email}
-                    type="text"
+                    type="email"
                     name={names[1]}
+                    required
                     onChange={(e) => handleChange(e)}
                     className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
                       error[0] ? "border-red-600" : "border-gray-300"
@@ -179,8 +188,9 @@ const ContractorAddEdit = ({ edit = false }) => {
                   </label>
                   <input
                     value={contractorData.phone}
-                    type="text"
+                    type="number"
                     name={names[2]}
+                    required
                     onChange={(e) => handleChange(e)}
                     className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
                       error[2] ? "border-red-600" : "border-gray-300"
@@ -196,14 +206,30 @@ const ContractorAddEdit = ({ edit = false }) => {
                     </label>
                     <input
                       value={contractorData.password}
-                      type="text"
+                      type={viewPassword ? 'password' : 'text'}
                       name={names[3]}
+                      required
                       onChange={(e) => handleChange(e)}
                       className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
                         error[0] ? "border-red-600" : "border-gray-300"
                       }`}
                       placeholder="Enter Password"
                     />
+                      {viewPassword ? (
+                  <div
+                    className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
+                    onClick={() => setViewPassword(false)}
+                  >
+                    <IoIosEyeOff />
+                  </div>
+                ) : (
+                  <div
+                    className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
+                    onClick={() => setViewPassword(true)}
+                  >
+                    <IoMdEye />
+                  </div>
+                )}
                   </div>
                 ) : null}
               </div>
@@ -260,6 +286,8 @@ const ContractorAddEdit = ({ edit = false }) => {
                     <input
                       type="file"
                       id="dropzone-file"
+                      accept="image/*"
+                      required
                       name={names[5]}
                       className="hidden"
                       onChange={(e) => convertToBase64(e)}
@@ -276,6 +304,7 @@ const ContractorAddEdit = ({ edit = false }) => {
               <input
                 value={contractorData.address}
                 type="text"
+                required
                 name={names[4]}
                 onChange={(e) => handleChange(e)}
                 className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
@@ -286,15 +315,23 @@ const ContractorAddEdit = ({ edit = false }) => {
             </div>
 
             <div className="flex justify-center mt-8">
-              <button
-                disabled={assignLoading}
-                onClick={() => handleSubmit()}
-                className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
-              >
-                {assignLoading ? <ButtonLoading /> : "Submit"}
-              </button>
+              {assignLoading ? (
+                <button
+                  disabled={assignLoading}
+                  className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
+                >
+                  <ButtonLoading />
+                </button>
+              ) : (
+                <input
+                  type="submit"
+                  value={"Submit"}
+                  disabled={assignLoading}
+                  className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
+                />
+              )}
             </div>
-          </div>
+          </form>
         </div>
       )}
     </>

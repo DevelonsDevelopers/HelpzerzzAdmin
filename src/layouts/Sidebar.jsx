@@ -54,7 +54,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => navigate("/")}
-                className={`flex items-center w-[85%] p-2 mx-auto  lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto  lg:text-base md:text-sm ${
                   location.pathname === "/" ? "text-[#0D14FD]" : "text-gray-700"
                 } transition duration-75 rounded-lg group bg-[#f2f9ff]  hover:text-[#0D14FD]`}
                 aria-controls="dropdown-example"
@@ -73,7 +73,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(0)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/requests")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -129,8 +129,8 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(12)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
-                  location.pathname.includes("/contractorrequest")
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
+                  location.pathname.includes("/contractorrequest") || location.pathname.includes("/contractorRequest") 
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
                 } transition duration-75 rounded-lg group bg-[#f2f9ff]  hover:text-[#0D14FD] mt-3`}
@@ -138,7 +138,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 data-collapse-toggle="dropdown-example"
               >
                 <RiSendPlaneFill
-                  className={`lg:text-xl md:text-lg mx-[6px] text-gray-700`}
+                  className={`lg:text-xl md:text-lg ml-[6px] text-gray-700`}
                 />
                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
                   Contractor Request
@@ -185,7 +185,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(10)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/reviews")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -241,8 +241,8 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(1)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
-                  location.pathname.includes("/categories")
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
+                  location.pathname.includes("/categories") || location.pathname.includes("/subcategories")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
                 } transition duration-75 rounded-lg group bg-[#f2f9ff] hover:text-[#0D14FD] mt-3`}
@@ -331,7 +331,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(8)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/cities")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -398,7 +398,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(2)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/contractors")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -465,7 +465,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(3)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/customers")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -521,7 +521,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(4)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/blogs")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -588,7 +588,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(5)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/costGuides")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -655,7 +655,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(6)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/testimonials")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -722,7 +722,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(7)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/users")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -789,7 +789,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(9)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/utils")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -879,7 +879,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(11)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/cities")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
@@ -945,7 +945,7 @@ const Sidebar = forwardRef(({}, ref) => {
               <button
                 type="button"
                 onClick={() => handleSelection(11)}
-                className={`flex items-center w-[85%] p-2 mx-auto lg:text-base md:text-sm ${
+                className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/cities")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
