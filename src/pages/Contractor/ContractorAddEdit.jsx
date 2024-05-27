@@ -37,7 +37,7 @@ const ContractorAddEdit = ({ edit = false }) => {
   const [file, setFile] = useState();
   const [assignLoading, setAssignLoading] = useState(false);
 
-  const [viewPassword, setViewPassword] = useState(false);
+  const [viewPassword, setViewPassword] = useState(true);
 
   const response = useSelector((state) => state.contractor);
 
