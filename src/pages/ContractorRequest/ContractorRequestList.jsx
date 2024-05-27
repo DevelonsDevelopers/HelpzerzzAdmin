@@ -99,7 +99,7 @@ const ContractorRequestList = ({search}) => {
                                     <td className="border-t-[1px] pl-[3%]">
                                         <div
                                             className="py-[1.5%] lg:text-lg md:text-md text-sm font-medium mx-auto justify-center">
-                                            {value.contractor}
+                                            {value.customer_name}
                                         </div>
                                     </td>
                                     <td className="border-t-[1px] pl-[2%]">

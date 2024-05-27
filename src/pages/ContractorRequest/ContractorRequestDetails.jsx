@@ -197,10 +197,10 @@ const ContractorRequestDetails = () => {
                                         </h1>
                                     </div>
                                 </div>
-                                <div className="border-[1px] border-gray-500 bg-white rounded-2xl shadow-md p-4 my-2 ">
-                                    <h1>Detail :</h1>
-                                    <h1 className="ml-2 mt-4">{requestData?.details}</h1>
-                                </div>
+                                {/*<div className="border-[1px] border-gray-500 bg-white rounded-2xl shadow-md p-4 my-2 ">*/}
+                                {/*    <h1>Detail :</h1>*/}
+                                {/*    <h1 className="ml-2 mt-4">{requestData?.details}</h1>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>
