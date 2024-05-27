@@ -12,6 +12,7 @@ import {
 } from "../../api/reducers/contractor";
 import { IMAGE_PATH } from "../../utils/constants";
 import { IoIosEyeOff, IoMdEye } from "react-icons/io";
+import { PatternFormat } from "react-number-format";
 
 const ContractorAddEdit = ({ edit = false }) => {
   const names = ["name", "email", "phone", "password", "address", "image"];
@@ -36,7 +37,7 @@ const ContractorAddEdit = ({ edit = false }) => {
   const [file, setFile] = useState();
   const [assignLoading, setAssignLoading] = useState(false);
 
-  const [viewPassword , setViewPassword] = useState(false)
+  const [viewPassword, setViewPassword] = useState(false);
 
   const response = useSelector((state) => state.contractor);
 
@@ -127,6 +128,7 @@ const ContractorAddEdit = ({ edit = false }) => {
       }
     }
   };
+  console.log('contractor data' , contractorData);
 
   return (
     <>
@@ -186,7 +188,19 @@ const ContractorAddEdit = ({ edit = false }) => {
                   <label className="block text-[12px] ml-3 font-medium uppercase">
                     Phone
                   </label>
-                  <input
+
+                  <PatternFormat
+                    type="tel"
+                    format="+1 (###) ###-####"
+                    name={names[2]}
+                    placeholder="Enter Contractor Phone"
+                    onChange={(e) => handleChange(e)}
+                     className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
+                      error[2] ? "border-red-600" : "border-gray-300"
+                    }`}
+                    required
+                  />
+                  {/* <input
                     value={contractorData.phone}
                     type="number"
                     name={names[2]}
@@ -196,7 +210,7 @@ const ContractorAddEdit = ({ edit = false }) => {
                       error[2] ? "border-red-600" : "border-gray-300"
                     }`}
                     placeholder="Enter Contractor Phone"
-                  />
+                  /> */}
                 </div>
 
                 {!edit ? (
@@ -206,7 +220,7 @@ const ContractorAddEdit = ({ edit = false }) => {
                     </label>
                     <input
                       value={contractorData.password}
-                      type={viewPassword ? 'password' : 'text'}
+                      type={viewPassword ? "password" : "text"}
                       name={names[3]}
                       required
                       onChange={(e) => handleChange(e)}
@@ -215,21 +229,21 @@ const ContractorAddEdit = ({ edit = false }) => {
                       }`}
                       placeholder="Enter Password"
                     />
-                      {viewPassword ? (
-                  <div
-                    className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
-                    onClick={() => setViewPassword(false)}
-                  >
-                    <IoIosEyeOff />
-                  </div>
-                ) : (
-                  <div
-                    className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
-                    onClick={() => setViewPassword(true)}
-                  >
-                    <IoMdEye />
-                  </div>
-                )}
+                    {viewPassword ? (
+                      <div
+                        className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
+                        onClick={() => setViewPassword(false)}
+                      >
+                        <IoIosEyeOff />
+                      </div>
+                    ) : (
+                      <div
+                        className="w-6 cursor-pointer ml-auto mt-[-2rem] mr-3 text-xl"
+                        onClick={() => setViewPassword(true)}
+                      >
+                        <IoMdEye />
+                      </div>
+                    )}
                   </div>
                 ) : null}
               </div>
