@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getActiveCategories } from "../../../api/reducers/category";
 import ButtonLoading from "../../../components/ButtonLoading";
+import cityService from "../../../api/services/cityService";
 
 const Details = ({ id, response }) => {
   const [assignLoading, setAssignLoading] = useState(false);
@@ -25,6 +26,7 @@ const Details = ({ id, response }) => {
     "address",
     "description",
     "trust_seal",
+    "City",
   ];
   const [error, setErrors] = useState([
     false,
@@ -52,6 +54,7 @@ const Details = ({ id, response }) => {
     website: "",
     description: "",
     trust_seal: 0,
+    city:''
   });
 
   useEffect(() => {
@@ -66,6 +69,21 @@ const Details = ({ id, response }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [cities , setCities] = useState([])
+
+  useEffect(() => {
+      const getCities = async () => {
+          try {
+              const response = await cityService.fetchAll();
+              setCities(response.cities);
+              console.log('cities ', response)
+          } catch (error) {
+              console.error(error);
+          }
+      };
+      getCities()
+  },[])
 
   useEffect(() => {
     if (!categoryResponse.activeFetched) {
@@ -249,21 +267,8 @@ const Details = ({ id, response }) => {
             />
           </div>
         </div>
-
+        <div className="flex gap-4">
         <div className="w-[100%] px-5 py-2 mt-2">
-          <label className="block text-[12px] ml-3 font-medium uppercase">
-            Address
-          </label>
-          <input
-            type="text"
-            name={names[8]}
-            value={detailsData.address}
-            className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
-            placeholder="Enter Contractor Address"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div className="w-[40%] px-5 py-2 mt-2">
           <label className="block text-[12px] ml-3 font-medium uppercase">
             Trust Seal
           </label>
@@ -278,6 +283,38 @@ const Details = ({ id, response }) => {
             <option value={1}>Yes</option>
           </select>
         </div>
+        <div className="w-[100%] px-5 py-2 mt-2">
+            <label className="block text-[12px] ml-3 font-medium uppercase">
+              City
+            </label>
+            <select
+              name={names[11]}
+              value={detailsData.city}
+              onChange={(e) => handleChange(e)}
+              className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+              id="grid-state"
+            >
+              <option hidden>Select Ciry</option>
+              {cities.map((value) => (
+                <option value={value.id}>{value.name}</option>
+              ))}
+            </select>
+          </div>
+          </div>
+        <div className="w-[100%] px-5 py-2 mt-2">
+          <label className="block text-[12px] ml-3 font-medium uppercase">
+            Address
+          </label>
+          <input
+            type="text"
+            name={names[8]}
+            value={detailsData.address}
+            className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+            placeholder="Enter Contractor Address"
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        
         <div className="w-[100%] px-5 py-2 mt-8">
           <label className="block text-[12px] ml-3 font-medium uppercase">
             Description
