@@ -26,7 +26,7 @@ const Details = ({ id, response }) => {
     "address",
     "description",
     "trust_seal",
-    "City",
+    "city",
   ];
   const [error, setErrors] = useState([
     false,
@@ -48,7 +48,6 @@ const Details = ({ id, response }) => {
     postal_code: "",
     category: "",
     skills: "",
-    service_areas: "",
     availability_days: "",
     availability_hours: "",
     website: "",
@@ -56,6 +55,8 @@ const Details = ({ id, response }) => {
     trust_seal: 0,
     city:''
   });
+
+  console.log('detail data' , detailsData);
 
   useEffect(() => {
     if (id) {
@@ -204,7 +205,7 @@ const Details = ({ id, response }) => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <div className="w-[100%] px-5 py-2 mt-2">
+          {/* <div className="w-[100%] px-5 py-2 mt-2">
             <label className="block text-[12px] ml-3 font-medium uppercase">
               Service Areas
             </label>
@@ -218,7 +219,7 @@ const Details = ({ id, response }) => {
                 "pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1"
               }
             />
-          </div>
+          </div> */}
           <div className="w-[100%] px-5 py-2 mt-2">
             <label className="block text-[12px] ml-3 font-medium uppercase">
               Availibility Days

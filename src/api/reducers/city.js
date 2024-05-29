@@ -5,6 +5,7 @@ import {
     UPDATE_CITY,
 } from "../../utils/constants";
 import cityService from "../services/cityService";
+import toast from "react-hot-toast";
 
 const initialState = {
     loading: false,
@@ -104,6 +105,8 @@ const city = createSlice({
         })
         builder.addCase(addCity.rejected, (state, action) => {
             state.success = false
+            console.log('error' , action)
+            toast.error('unexpected error occured')
         })
 
         //EDIT LANGUAGE //////////////////////////////////////////

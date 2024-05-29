@@ -71,7 +71,8 @@ const CityAddEdit = ({ edit = false }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let tempErrors = [...error];
     for (let i = 0; i < names.length; i++) {
       let name = names[i];
@@ -98,7 +99,10 @@ const CityAddEdit = ({ edit = false }) => {
         <h1 className="text-center text-[25px] font-[800] mt-5 uppercase">
           {edit ? "Edit City" : "Add City"}
         </h1>
-        <div className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto">
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className="bg-white md:mt-[3rem] mt-3 rounded-xl lg:px-[8rem] px-2 md:py-16 py-8 flex flex-col md:mx-8 mx-auto"
+        >
           <div className="lg:grid lg:grid-cols-2 flex-wrap mt-3">
             <div className="w-[100%] px-5 py-2 mt-2">
               <label className="block text-[12px] ml-3 font-medium uppercase">
@@ -107,6 +111,7 @@ const CityAddEdit = ({ edit = false }) => {
               <input
                 type="text"
                 name={names[0]}
+                required
                 value={cityData.name}
                 onChange={(e) => handleChange(e)}
                 className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
@@ -120,6 +125,7 @@ const CityAddEdit = ({ edit = false }) => {
               <input
                 type="text"
                 name={names[1]}
+                required
                 value={cityData.state_code}
                 onChange={(e) => handleChange(e)}
                 className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
@@ -135,6 +141,7 @@ const CityAddEdit = ({ edit = false }) => {
               <input
                 type="text"
                 name={names[2]}
+                required
                 value={cityData.country_code}
                 onChange={(e) => handleChange(e)}
                 className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
@@ -148,6 +155,7 @@ const CityAddEdit = ({ edit = false }) => {
               <input
                 type="text"
                 name={names[3]}
+                required
                 value={cityData.longitude}
                 onChange={(e) => handleChange(e)}
                 className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
@@ -161,6 +169,7 @@ const CityAddEdit = ({ edit = false }) => {
               <input
                 type="text"
                 name={names[4]}
+                required
                 value={cityData.latitude}
                 onChange={(e) => handleChange(e)}
                 className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
@@ -169,15 +178,23 @@ const CityAddEdit = ({ edit = false }) => {
             </div>
           </div>
           <div className="flex justify-center mt-8">
-            <button
-              disabled={assignLoading}
-              className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
-              onClick={() => handleSubmit()}
-            >
-              {assignLoading ? <ButtonLoading /> : "Submit"}
-            </button>
+            {assignLoading ? (
+              <button
+                disabled={assignLoading}
+                className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
+              >
+                <ButtonLoading />
+              </button>
+            ) : (
+              <input
+                type="submit"
+                value={"Submit"}
+                disabled={assignLoading}
+                className="bg-blue-600 cursor-pointer text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
+              />
+            )}
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
