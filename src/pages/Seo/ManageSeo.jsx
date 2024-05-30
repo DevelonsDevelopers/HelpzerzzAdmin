@@ -1,9 +1,14 @@
 import React from 'react'
 import deleteImage from "../../components/assets/delete.png";
 import editImage from "../../components/assets/edit.png";
+import { useNavigate } from 'react-router-dom';
 
 
 const ManageSeo = () => {
+
+    const navigate = useNavigate()
+
+
   return (
     <div>
        <div className="w-full flex flex-col justify-center">
@@ -82,9 +87,9 @@ const ManageSeo = () => {
                                             <div className="flex items-center justify-center">
                                                 <div
                                                     className="w-8 mr-2 cursor-pointer hover:scale-125"
-                                                    // onClick={() =>
-                                                    //     navigate("/users/edit?id=" + value.id)
-                                                    // }
+                                                    onClick={() =>
+                                                        navigate("/seo/edit?id=" + 14)
+                                                    }
                                                 >
                                                     <img src={editImage} alt="Edit"/>
                                                 </div>

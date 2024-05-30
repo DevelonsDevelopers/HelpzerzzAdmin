@@ -16,7 +16,7 @@ const SeoAddEdit = ({edit = false}) => {
             <div className="lg:grid lg:grid-cols-2 flex-wrap mt-3">
               <div className="w-[100%] px-5 py-2 mt-2">
                 <label className="block text-[12px] ml-3 font-medium uppercase">
-                  Header name
+                  Page Name
                 </label>
                 <input
                   type="text"
@@ -25,7 +25,37 @@ const SeoAddEdit = ({edit = false}) => {
                 //   value={userData.name}
                 //   onChange={(e) => handleChange(e)}
                   className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] `}
-                  placeholder="Enter Header Name"
+                  placeholder="Enter Page Name"
+                />
+              </div>
+              <div className="w-[100%] px-5 py-2 mt-2">
+                <label className="block text-[12px] ml-3 font-medium uppercase">
+                  Route
+                </label>
+                <input
+                  type="text"
+                //   name={names[1]}
+                  required
+                //   value={userData.username}
+                //   onChange={(e) => handleChange(e)}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                  placeholder="Enter Route"
+                />
+              </div>
+            </div>
+            <div className="lg:grid lg:grid-cols-2 flex-wrap mt-3">
+              <div className="w-[100%] px-5 py-2 mt-2">
+                <label className="block text-[12px] ml-3 font-medium uppercase">
+                  Title name
+                </label>
+                <input
+                  type="text"
+                //   name={names[0]}
+                  required
+                //   value={userData.name}
+                //   onChange={(e) => handleChange(e)}
+                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] `}
+                  placeholder="Enter Title Name"
                 />
               </div>
               <div className="w-[100%] px-5 py-2 mt-2">
