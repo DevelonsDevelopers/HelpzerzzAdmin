@@ -61,6 +61,9 @@ export const FEATURE_TESTIMONIAL = "FEATURE_TESTIMONIAL"
 
 //Contactus
 export const CONTACT_US = "CONTACT_US"
+//seo
+
+export const GET_SEO = "GET_SEO"
 
 
 //SEVICE REQUESTS

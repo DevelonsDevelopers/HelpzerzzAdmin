@@ -15,6 +15,7 @@ import review from "../reducers/review";
 import successStory from "../reducers/successStory";
 import contractorRequest from "../reducers/contractorRequest";
 import contact from "../reducers/contact";
+import seo from "../reducers/seo";
 
 const store = configureStore({
   reducer: {
@@ -33,7 +34,8 @@ const store = configureStore({
     review: review,
     successStory: successStory,
     contractorRequest: contractorRequest,
-    contact : contact
+    contact : contact,
+    seo : seo,
   },
 });
 
