@@ -37,7 +37,7 @@ import ContactUs from "./pages/Contact/ContactUs";
 import Detail from "./pages/Contact/Detail";
 import Seo from "./pages/Seo/SeoAddEdit";
 import SeoAddEdit from "./pages/Seo/SeoAddEdit";
-import ManageSeo from "./pages/Seo/ManageSeo";
+import SeoList from "./pages/Seo/SeoList";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -140,7 +140,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/contact/details" element={<Detail />} />
 
-        <Route path="/seo" element={<ManageSeo />} />
+        <Route path="/seo" element={<SeoList />} />
         <Route path="/seo/add" element={<SeoAddEdit />} />
         <Route path="/seo/edit" element={<SeoAddEdit  edit={true}/>} />
 

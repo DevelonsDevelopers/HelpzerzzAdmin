@@ -19,6 +19,7 @@ export const HIGHLIGHT_REDUCER = "HIGHLIGHT_REDUCER"
 export const LANGUAGE_REDUCER = "LANGUAGE_REDUCER"
 export const REVIEW_REDUCER = "REVIEW_REDUCER"
 export const STORY_REDUCER = "STORY_REDUCER"
+export const SEO_REDUCER = "SEO_REDUCER"
 
 
 //CATEGORY
@@ -61,10 +62,13 @@ export const FEATURE_TESTIMONIAL = "FEATURE_TESTIMONIAL"
 
 //Contactus
 export const CONTACT_US = "CONTACT_US"
-//seo
 
-export const GET_SEO = "GET_SEO"
-
+//SEO
+export const ALL_SEO = "ALL_SEO"
+export const SINGLE_SEO = "SINGLE_SEO"
+export const CREATE_SEO = "CREATE_SEO"
+export const UPDATE_SEO = "UPDATE_SEO"
+export const DELETE_SEO = "DELETE_SEO"
 
 //SEVICE REQUESTS
 export const ALL_REQUESTS = "ALL_REQUESTS"

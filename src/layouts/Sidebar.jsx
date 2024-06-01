@@ -27,6 +27,8 @@ const Sidebar = forwardRef(({}, ref) => {
     false,
     false,
     false,
+    false,
+    false,
   ]);
 
   const handleSelection = (index) => {
@@ -880,7 +882,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 type="button"
                 onClick={() => handleSelection(11)}
                 className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
-                  location.pathname.includes("/cities")
+                  location.pathname.includes("/story")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
                 } transition duration-75 rounded-lg group bg-[#f2f9ff]  hover:text-[#0D14FD] mt-3`}
@@ -895,7 +897,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 </span>
                 <svg
                   className={`w-3 h-3 ${
-                    open[8]
+                    open[11]
                       ? "-rotate-180 duration-300"
                       : "rotate-0 duration-300"
                   }`}
@@ -944,7 +946,7 @@ const Sidebar = forwardRef(({}, ref) => {
             <div>
               <button
                 type="button"
-                onClick={() => handleSelection(11)}
+                onClick={() => handleSelection(12)}
                 className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
                   location.pathname.includes("/contact")
                     ? "text-[#0D14FD]"
@@ -961,7 +963,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 </span>
                 <svg
                   className={`w-3 h-3 ${
-                    open[8]
+                    open[12]
                       ? "-rotate-180 duration-300"
                       : "rotate-0 duration-300"
                   }`}
@@ -981,7 +983,7 @@ const Sidebar = forwardRef(({}, ref) => {
               </button>
               <ul
                 id="dropdown-example"
-                className={`${open[11] ? "" : "hidden"} py-2 space-y-2`}
+                className={`${open[12] ? "" : "hidden"} py-2 space-y-2`}
               >
                 <li>
                   <a
@@ -1010,9 +1012,9 @@ const Sidebar = forwardRef(({}, ref) => {
             <div>
               <button
                 type="button"
-                onClick={() => handleSelection(11)}
+                onClick={() => handleSelection(13)}
                 className={`flex items-center w-[95%] p-2 mx-auto lg:text-base md:text-sm ${
-                  location.pathname.includes("/contact")
+                  location.pathname.includes("/seo")
                     ? "text-[#0D14FD]"
                     : "text-gray-700"
                 } transition duration-75 rounded-lg group bg-[#f2f9ff]  hover:text-[#0D14FD] mt-3`}
@@ -1027,7 +1029,7 @@ const Sidebar = forwardRef(({}, ref) => {
                 </span>
                 <svg
                   className={`w-3 h-3 ${
-                    open[8]
+                    open[13]
                       ? "-rotate-180 duration-300"
                       : "rotate-0 duration-300"
                   }`}
@@ -1047,7 +1049,7 @@ const Sidebar = forwardRef(({}, ref) => {
               </button>
               <ul
                 id="dropdown-example"
-                className={`${open[11] ? "" : "hidden"} py-2 space-y-2`}
+                className={`${open[13] ? "" : "hidden"} py-2 space-y-2`}
               >
                 <li>
                   <a
@@ -1060,20 +1062,20 @@ const Sidebar = forwardRef(({}, ref) => {
                   Seo Tags
                   </a>
                 </li>
-                {/* <li>
+                <li>
                   <a
                     onClick={(e) => {
                       e.preventDefault();
-                      navigate("/story/add");
+                      navigate("/seo/add");
                     }}
                     className="cursor-pointer flex items-center p-2 text-[13px] text-gray-800 transition duration-75 rounded-lg pl-11 group  bg-gray-50 w-[84%] m-auto hover:font-bold"
                   >
-                    Add Story
+                    Add SEO Tag
                   </a>
-                </li> */}
+                </li>
               </ul>
             </div>
-            
+
 
           </div>
         </div>
