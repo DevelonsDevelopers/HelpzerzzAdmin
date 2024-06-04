@@ -12,9 +12,9 @@ import {
     CREATE_AFFILIATION,
     CREATE_AWARD,
     CREATE_BADGE,
-    CREATE_CONTRACTOR,
+    CREATE_CONTRACTOR, CREATE_CONTRACTOR_SEO,
     CREATE_DETAILS,
-    CREATE_PROJECT,
+    CREATE_PROJECT, CREATE_SEO,
     DELETE_AFFILIATION,
     DELETE_AWARD,
     DELETE_BADGE,
@@ -31,8 +31,8 @@ import {
     UNASSIGN_AREA,
     UNASSIGN_HIGHLIGHT,
     UNASSIGN_LANGUAGE,
-    UPDATE_CONTRACTOR,
-    UPDATE_DETAILS,
+    UPDATE_CONTRACTOR, UPDATE_CONTRACTOR_SEO,
+    UPDATE_DETAILS, UPDATE_SEO,
 } from "../../utils/constants";
 import contractorService from "../services/contractorService";
 import uploadService from "../services/uploadService";
@@ -51,6 +51,7 @@ const initialState = {
     success: false,
     successID: 0,
     detailSuccess: false,
+    seoSuccess: false,
     affiliationSuccess: false,
     awardSuccess: false,
     badgeSuccess: false,
@@ -235,6 +236,16 @@ export const editContractorDetails = createAsyncThunk(UPDATE_DETAILS, (data) => 
     })
 })
 
+export const addContractorSeo = createAsyncThunk(CREATE_CONTRACTOR_SEO, (data) => {
+    return contractorService.createSeo(data)
+})
+
+export const editContractorSeo = createAsyncThunk(UPDATE_CONTRACTOR_SEO, (data) => {
+    return contractorService.updateSeo(data).then(response => {
+        return !!response.success;
+    })
+})
+
 export const getContractors = createAsyncThunk(ALL_CONTRACTORS, () => {
     return contractorService.fetchAll()
 })
@@ -378,6 +389,9 @@ const contractor = createSlice({
         },
         detailsSuccessListener: (state) => {
             state.detailSuccess = false
+        },
+        seoSuccessListener: (state) => {
+            state.seo = false
         },
         affiliationSuccessListener: (state) => {
             state.affiliationSuccess = false
@@ -591,6 +605,28 @@ const contractor = createSlice({
             state.detailSuccess = false
         })
 
+        //ADD CONTRACTOR SEO /////////////////////////////////////////
+        builder.addCase(addContractorSeo.pending, state => {
+            state.seoSuccess = false
+        })
+        builder.addCase(addContractorSeo.fulfilled, (state, action) => {
+            state.seoSuccess = true
+        })
+        builder.addCase(addContractorSeo.rejected, (state, action) => {
+            state.seoSuccess = false
+        })
+
+        //UPDATE CONTRACTOR SEO /////////////////////////////////////////
+        builder.addCase(editContractorSeo.pending, state => {
+            state.seoSuccess = false
+        })
+        builder.addCase(editContractorSeo.fulfilled, (state, action) => {
+            state.seoSuccess = true
+        })
+        builder.addCase(editContractorSeo.rejected, (state, action) => {
+            state.seoSuccess = false
+        })
+
         //ADD CONTRACTOR AFFILIATION /////////////////////////////////////////
         builder.addCase(addAffiliation.pending, state => {
             state.affiliationSuccess = false
@@ -794,6 +830,7 @@ export default contractor.reducer
 export const {
     successListener,
     detailsSuccessListener,
+    seoSuccessListener,
     affiliationSuccessListener,
     awardSuccessListener,
     badgeSuccessListener,

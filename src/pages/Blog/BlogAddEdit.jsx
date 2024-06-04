@@ -13,8 +13,10 @@ import ButtonLoading from "../../components/ButtonLoading";
 import Loading from "../../components/Loading";
 
 const BlogAddEdit = ({ edit = false }) => {
-  const names = ["title", "category", "author", "subtitle", "content", "image"];
+  const names = ["title", "category", "author", "subtitle", "content", "image" , "seo_title" , "seo_description"];
   const [error, setErrors] = useState([
+    false,
+    false,
     false,
     false,
     false,
@@ -29,6 +31,8 @@ const BlogAddEdit = ({ edit = false }) => {
     subtitle: "",
     content: "",
     image: "",
+    seo_title:"" ,
+    seo_description :""
   });
   const [file, setFile] = useState();
   const [assignLoading, setAssignLoading] = useState(false);
@@ -278,6 +282,44 @@ const BlogAddEdit = ({ edit = false }) => {
                 />
               </div>
             </div>
+            <h2 className="mt-2 text-center font-semibold text-[12px] text-lg  uppercase">
+              Seo
+            </h2>
+
+            <div className='flex gap-3'>
+              <div className="w-[100%] px-5 py-2 mt-2">
+                <label className="block text-[12px] ml-3 font-medium uppercase">
+                  Title
+                </label>
+                <input
+                    value={blogData.seo_title}
+                    type="text"
+                    name={names[6]}
+                    onChange={(e) => handleChange(e)}
+                    className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
+                        error[6] ? "border-red-600" : "border-gray-300"
+                    }`}
+                    placeholder="Enter seo title"
+                />
+              </div>
+              <div className="w-[100%] px-5 py-2 mt-2">
+                <label className="block text-[12px] ml-3 font-medium uppercase">
+                  Description
+                </label>
+                <input
+                    value={blogData.subtitle}
+                    type="text"
+                    name={names[7]}
+                    onChange={(e) => handleChange(e)}
+                    className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
+                        error[7] ? "border-red-600" : "border-gray-300"
+                    }`}
+                    placeholder="Enter seo description"
+                />
+              </div>
+
+            </div>
+
 
             <div className="flex justify-center mt-8">
               <button

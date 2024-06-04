@@ -41,6 +41,22 @@ const contractorService = {
             throw error.response.data
         }
     },
+    createSeo: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/contractors/createSeo', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    updateSeo: async (payload) => {
+        try {
+            const response = await axiosInstance.put('/contractors/updateSeo', payload)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     createAffiliation: async (payload) => {
         try {
             const response = await axiosInstance.post('/contractors/createAffiliation', payload)

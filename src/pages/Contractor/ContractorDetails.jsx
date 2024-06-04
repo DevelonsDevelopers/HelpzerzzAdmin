@@ -26,6 +26,7 @@ import RequestInfoModal from "../../components/RequestInfoModal";
 import AcceptModal from "../../components/AcceptModal";
 import RejectModal from "../../components/RejectModal";
 import emailService from "../../api/services/emailService";
+import SEO from "./Components/Seo";
 
 const ContractorDetails = () => {
 
@@ -147,6 +148,7 @@ const ContractorDetails = () => {
                             <Tab label="Languages"/>
                             <Tab label="Leads"/>
                             <Tab label="Documents"/>
+                            <Tab label="SEO"/>
                         </Tabs>
                     </Box>
                     <div className=" mt-[1rem] rounded-xl md:px-[2rem] pt-5 pb-16 flex flex-col">
@@ -163,6 +165,7 @@ const ContractorDetails = () => {
                         {tabValue === 6 ? <Languages id={ID} response={response}/> : null}
                         {tabValue === 7 ? <Leads id={ID} response={response}/> : null}
                         {tabValue === 8 ? <Documents id={ID} response={response}/> : null}
+                        {tabValue === 9 ? <SEO id={ID} response={response}/> : null}
                     </div>
                 </div>
             )}
