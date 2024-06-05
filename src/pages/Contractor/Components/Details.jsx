@@ -13,24 +13,22 @@ import cityService from "../../../api/services/cityService";
 
 const Details = ({ id, response }) => {
   const [assignLoading, setAssignLoading] = useState(false);
- 
+
   const names = [
     "company_name",
     "category",
     "postal_code",
     "skills",
-    "service_areas",
-    "availability_days",
-    "availability_hours",
-    "website",
-    "address",
-    "description",
+    // "service_areas",
+    // "availability_days",
+    // "availability_hours",
+    // "website",
     "trust_seal",
     "city",
+    "address",
+    "description",
   ];
   const [error, setErrors] = useState([
-    false,
-    false,
     false,
     false,
     false,
@@ -48,15 +46,13 @@ const Details = ({ id, response }) => {
     postal_code: "",
     category: "",
     skills: "",
-    availability_days: "",
-    availability_hours: "",
     website: "",
     description: "",
     trust_seal: 0,
-    city:''
+    city: "",
   });
 
-  console.log('detail data' , detailsData);
+  console.log("detail data", detailsData);
 
   useEffect(() => {
     if (id) {
@@ -71,20 +67,20 @@ const Details = ({ id, response }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [cities , setCities] = useState([])
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
-      const getCities = async () => {
-          try {
-              const response = await cityService.fetchAll();
-              setCities(response.cities);
-              console.log('cities ', response)
-          } catch (error) {
-              console.error(error);
-          }
-      };
-      getCities()
-  },[])
+    const getCities = async () => {
+      try {
+        const response = await cityService.fetchAll();
+        setCities(response.cities);
+        console.log("cities ", response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getCities();
+  }, []);
 
   useEffect(() => {
     if (!categoryResponse.activeFetched) {
@@ -115,20 +111,22 @@ const Details = ({ id, response }) => {
 
   const handleSubmit = (e) => {
     let tempErrors = [...error];
-    for (let i = 0; i < names.length; i++) {
+    for (let i = 0; i < names?.length; i++) {
       let name = names[i];
-      tempErrors[i] = detailsData[name].length === 0;
+      tempErrors[i] = detailsData[name]?.length === 0;
     }
     setErrors(tempErrors);
     if (!tempErrors.includes(true)) {
       setAssignLoading(true);
       if (edit) {
-        dispatch(editContractorDetails(detailsData)).then(() => {
+        dispatch(editContractorDetails(detailsData)).then((res) => {
           setAssignLoading(false);
+          console.log(res);
         });
       } else {
-        dispatch(addContractorDetails(detailsData)).then(() => {
+        dispatch(addContractorDetails(detailsData)).then((res) => {
           setAssignLoading(false);
+          console.log(res);
         });
       }
     }
@@ -148,9 +146,9 @@ const Details = ({ id, response }) => {
               placeholder="Enter Your Company Name"
               value={detailsData.company_name}
               onChange={(e) => handleChange(e)}
-              className={
-                "pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1"
-              }
+              className={`${
+                error[0] ? "border-red-500" : ""
+              } pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1`}
             />
           </div>
 
@@ -162,7 +160,9 @@ const Details = ({ id, response }) => {
               name={names[1]}
               value={detailsData.category}
               onChange={(e) => handleChange(e)}
-              className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+              className={`${
+                error[1] ? "border-red-500" : ""
+              } pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
               id="grid-state"
             >
               <option hidden>Select Category</option>
@@ -183,9 +183,9 @@ const Details = ({ id, response }) => {
               placeholder="Enter Your Postal Code"
               value={detailsData.postal_code}
               onChange={(e) => handleChange(e)}
-              className={
-                "pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1"
-              }
+              className={`${
+                error[2] ? "border-red-500" : ""
+              } pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1`}
             />
           </div>
           <div className="w-[100%] px-5 py-2 mt-2">
@@ -198,9 +198,9 @@ const Details = ({ id, response }) => {
               placeholder="Enter Your Skill"
               value={detailsData.skills}
               onChange={(e) => handleChange(e)}
-              className={
-                "pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1"
-              }
+              className={`${
+                error[3] ? "border-red-500" : ""
+              } pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1`}
             />
           </div>
         </div>
@@ -220,7 +220,7 @@ const Details = ({ id, response }) => {
               }
             />
           </div> */}
-          <div className="w-[100%] px-5 py-2 mt-2">
+          {/* <div className="w-[100%] px-5 py-2 mt-2">
             <label className="block text-[12px] ml-3 font-medium uppercase">
               Availibility Days
             </label>
@@ -231,13 +231,13 @@ const Details = ({ id, response }) => {
               value={detailsData.availability_days}
               onChange={(e) => handleChange(e)}
               className={
-                "pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1"
+                `${error[4] ? 'border-red-500' : ''} pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1`
               }
             />
-          </div>
+          </div> */}
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <div className="w-[100%] px-5 py-2 mt-2">
+          {/* <div className="w-[100%] px-5 py-2 mt-2">
             <label className="block text-[12px] ml-3 font-medium uppercase">
               Availibility Hours
             </label>
@@ -248,17 +248,17 @@ const Details = ({ id, response }) => {
               value={detailsData.availability_hours}
               onChange={(e) => handleChange(e)}
               className={
-                "pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1"
+                `${error[5] ? 'border-red-500' : ''} pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px] focus:border-black focus:outline-none mt-1`
               }
             />
-          </div>
+          </div> */}
           <div className="w-[100%] px-5 py-2 mt-2">
             <label className="block text-[12px] ml-3 font-medium uppercase">
               Website (Optional)
             </label>
             <input
               type="text"
-              name={names[7]}
+              name="website"
               placeholder="Enter Your Website"
               value={detailsData.website}
               onChange={(e) => handleChange(e)}
@@ -269,58 +269,71 @@ const Details = ({ id, response }) => {
           </div>
         </div>
         <div className="flex gap-4">
-        <div className="w-[100%] px-5 py-2 mt-2">
-          <label className="block text-[12px] ml-3 font-medium uppercase">
-            Trust Seal
-          </label>
-          <select
-            name={names[10]}
-            value={detailsData.trust_seal}
-            onChange={(e) => handleChange(e)}
-            className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
-            id="grid-state"
-          >
-            <option value={0}>No</option>
-            <option value={1}>Yes</option>
-          </select>
-        </div>
-        <div className="w-[100%] px-5 py-2 mt-2">
+          <div className="w-[100%] px-5 py-2 mt-2">
+            <label className="block text-[12px] ml-3 font-medium uppercase">
+              Trust Seal
+            </label>
+            <select
+              name={names[4]}
+              value={detailsData.trust_seal}
+              onChange={(e) => handleChange(e)}
+              className={`${
+                error[4] ? "border-red-500" : ""
+              } pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+              id="grid-state"
+            >
+              <option value={0}>No</option>
+              <option value={1}>Yes</option>
+            </select>
+          </div>
+          <div className="w-[100%] px-5 py-2 mt-2">
             <label className="block text-[12px] ml-3 font-medium uppercase">
               City
             </label>
             <select
-              name={names[11]}
+              name={names[5]}
               value={detailsData.city}
-              onChange={(e) => handleChange(e)}
-              className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+              onChange={(e) =>
+                setDetailsData({ ...detailsData, city: parseInt(e.target.value) })
+              }
+              
+              className={` ${
+                error[5] ? "border-red-500" : ""
+              } pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
               id="grid-state"
             >
-              <option hidden>Select Ciry</option>
+              <option hidden>Select City</option>
               {cities.map((value) => (
-                <option value={value.id}>{value.name}</option>
+                <option value={parseInt(value.id)}>{value.name}</option>
               ))}
             </select>
           </div>
-          </div>
+        </div>
         <div className="w-[100%] px-5 py-2 mt-2">
           <label className="block text-[12px] ml-3 font-medium uppercase">
             Address
           </label>
           <input
             type="text"
-            name={names[8]}
+            name={names[6]}
             value={detailsData.address}
-            className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+            className={`${
+              error[6] ? "border-red-500" : ""
+            } pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
             placeholder="Enter Contractor Address"
             onChange={(e) => handleChange(e)}
           />
         </div>
-        
+
         <div className="w-[100%] px-5 py-2 mt-8">
           <label className="block text-[12px] ml-3 font-medium uppercase">
             Description
           </label>
-          <div className={`rounded-[5px] border-[1px]`}>
+          <div
+            className={`${
+              error[7] ? "border-red-500" : ""
+            } rounded-[5px] border-[1px]`}
+          >
             <JoditEditor
               // ref={editor}
               value={detailsData.description}
@@ -328,7 +341,7 @@ const Details = ({ id, response }) => {
                 setDetailsData((data) => ({ ...data, description: e }))
               }
               tabIndex={1}
-              name={names[9]}
+              name={names[8]}
             />
           </div>
         </div>
