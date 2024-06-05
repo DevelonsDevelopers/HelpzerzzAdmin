@@ -12,6 +12,8 @@ import {
 import { getSubcategories } from "../../../api/reducers/subcategory";
 import FileResizer from "react-image-file-resizer";
 import DeleteModal from "../../../components/DeleteModal";
+import { getCategories } from "../../../api/reducers/category";
+import subcategoryService from "../../../api/services/subcategoryService";
 
 const resizeFile = (file) =>
   new Promise((resolve) => {
@@ -30,10 +32,11 @@ const resizeFile = (file) =>
   });
 
 const Projects = ({ id, response }) => {
-  const names = ["title", "details", "subcategory", "date"];
+  const names = ["title", "details", "subcategory", "date", "category"];
   const [open, setOpen] = useState(false);
   const [deleteID, setDeleteID] = useState();
-  const [errors, setErrors] = useState([false, false, false, false]);
+  const [errors, setErrors] = useState([false, false, false, false, false]);
+  const [subCategories, setSubCategories] = useState([]);
   const [projectData, setProjectData] = useState({
     contractor: 0,
     title: "",
@@ -41,11 +44,22 @@ const Projects = ({ id, response }) => {
     subcategory: "",
     date: "",
     images: "",
+    category: 0,
   });
   const initiateDelete = (id) => {
     setOpen(!open);
     setDeleteID(id);
   };
+
+  useEffect(() => {
+    const fetchSubCategory = async () => {
+      const response = await subcategoryService.byCategory(
+        projectData?.category
+      );
+      setSubCategories(response?.subcategories);
+    };
+    fetchSubCategory();
+  }, [projectData?.category]);
 
   const handleDelete = () => {
     dispatch(deleteProject(deleteID));
@@ -57,6 +71,7 @@ const Projects = ({ id, response }) => {
   const [invalidFile, setInvalidFile] = useState(false);
 
   const subcategoryResponse = useSelector((state) => state.subcategory);
+  const categoryResponse = useSelector((state) => state.category);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -66,6 +81,11 @@ const Projects = ({ id, response }) => {
       dispatch(getSubcategories());
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+  // console.log("category response ", categoryResponse);
 
   useEffect(() => {
     if (id) {
@@ -200,24 +220,8 @@ const Projects = ({ id, response }) => {
                   }`}
                 />
               </div>
-              <div className="w-[100%] px-5 py-2 mt-2">
-                <label className="block text-[12px] ml-3 font-medium uppercase">
-                  Subcategory
-                </label>
-                <select
-                  name={names[2]}
-                  value={projectData.subcategory}
-                  onChange={(e) => handleChange(e)}
-                  className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
-                  id="grid-state"
-                >
-                  <option hidden>Select Category</option>
-                  {subcategoryResponse.subcategories.map((value) => (
-                    <option value={value.id}>{value.name}</option>
-                  ))}
-                </select>
-              </div>
             </div>
+
             <div>
               <div className="min-w-[250px] w-[100%] ">
                 <label
@@ -278,7 +282,6 @@ const Projects = ({ id, response }) => {
                     type="file"
                     id="dropzone-file"
                     accept="image/*"
-
                     name={names[3]}
                     className="hidden"
                     onChange={(e) => handleFileChange(e)}
@@ -286,6 +289,50 @@ const Projects = ({ id, response }) => {
                   />
                 </label>
               </div>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <div className="w-[100%] px-5 py-2 mt-2">
+              <label className="block text-[12px] ml-3 font-medium uppercase">
+                Category
+              </label>
+              <select
+                name={names[4]}
+                value={projectData.category}
+                onChange={(e) => handleChange(e)}
+                className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                id="grid-state"
+              >
+                <option value="" disabled selected hidden>
+                  Select Category
+                </option>
+                {categoryResponse.activeCategories.map((value) => (
+                  <option key={value.id} value={value.id}>
+                    {value.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="w-[100%] px-5 py-2 mt-2">
+              <label className="block text-[12px] ml-3 font-medium uppercase">
+                Subcategory
+              </label>
+              <select
+                name={names[2]}
+                value={projectData.subcategory}
+                onChange={(e) => handleChange(e)}
+                className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
+                id="grid-state"
+              >
+                <option value="" selected hidden>
+                  Select SubCategory
+                </option>
+                {subCategories.map((value) => (
+                  <option key={value.id} value={value.id}>
+                    {value.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="flex justify-center mt-12">
@@ -317,9 +364,7 @@ const Projects = ({ id, response }) => {
                 >
                   {value.title}
                 </span>
-                {/* <span className={`mt-1 font-medium text-[12px]`}>
-                  {value.subtitle}
-                </span> */}
+
                 <div
                   className={` flex flex-col py-6 justify-center items-center`}
                 >
