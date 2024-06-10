@@ -51,6 +51,8 @@ const CityCategory = ({ search }) => {
     }
   }, [search, searchData]);
 
+  // console.log(data );
+
   return (
     <>
       {response.loading ? (
@@ -107,16 +109,16 @@ const CityCategory = ({ search }) => {
                                   `add/?cityid=${value.city_id}&categoryid=${value.category_id}`
                                 )
                               }
-                              className="flex bg-[#0D14FD] cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
+                              className="flex bg-red-400 cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
                             >
                               SET SEO
                             </button>
                           ) : (
                             <button
-                              onClick={() => navigate(`edit/?cityid=${value.city_id}&categoryid=${value.category_id}&seoid=${value.SEO}`)}
-                              className="flex bg-red-400 cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
+                              onClick={() => navigate(`edit/?seoid=${value.SEO}`)}
+                              className="flex bg-green-400 cursor-pointer py-2 sm:px-[1rem] px-2 text-white font-[500] rounded-xl ml-auto items-center sm:text-lg text-xs justify-center hover:scale-110"
                             >
-                              Edit SEO
+                              Update SEO
                             </button>
                           )}
                         </div>

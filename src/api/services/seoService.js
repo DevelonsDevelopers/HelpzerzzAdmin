@@ -59,11 +59,19 @@ const seoService = {
     },
     editCityCategorySEO: async (data) => {
         try {
-            const response = await axiosInstance.post('/seo/editCityCategory/', data)
+            const response = await axiosInstance.put('/seo/updateCityCategory/', data)
             return response.data
         } catch (error) {
             throw error.response.data
         }
-    }
+    },
+    fetchSingleCityCategorySEO: async (id) => {
+        try {
+            const response = await axiosInstance.get('/seo/singleCityCategory/'+ id)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
 }
 export default seoService

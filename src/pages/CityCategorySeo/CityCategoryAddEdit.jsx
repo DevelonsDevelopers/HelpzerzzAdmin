@@ -17,8 +17,8 @@ const CityCategoryAddEdit = ({ edit = false }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    city: params.get("cityid"),
-    category: params.get("categoryid"),
+    city: edit ? '' :  params.get("cityid"),
+    category: edit ? '' : params.get("categoryid"),
     meta_title: "",
     meta_description: "",
     page_description: "",
@@ -26,8 +26,9 @@ const CityCategoryAddEdit = ({ edit = false }) => {
 
   useEffect(() => {
     if (edit) {
-      seoService.fetch(params.get("seoid")).then((res) => {
-        console.log("res of fetch seo ",res );
+      seoService.fetchSingleCityCategorySEO(params.get("seoid")).then((res) => {
+        console.log("res of fetch seo ", res);
+        setEditFormData(res?.seo)
       });
     }
   }, []);
@@ -36,18 +37,20 @@ const CityCategoryAddEdit = ({ edit = false }) => {
     if (edit) {
       setFormData({
         ...formData,
+        city:editFormData?.city,
+        category:editFormData?.category,
         meta_title: editFormData?.meta_title,
         meta_description: editFormData?.meta_description,
         page_description: editFormData?.page_description,
       });
     }
-  },[editFormData]);
+  }, [editFormData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setAssignLoading(true);
     if (edit) {
-        seoService
+      seoService
         .createCityCategorySEO(formData)
         .then((res) => {
           console.log("res of edit", res);
@@ -57,10 +60,9 @@ const CityCategoryAddEdit = ({ edit = false }) => {
         })
         .finally(() => {
           setAssignLoading(false);
-          toast.success("city category seo edit successfuly");
+          toast.success("SEO updated successfuly");
           navigate("/cityCategory");
         });
-
     } else {
       seoService
         .createCityCategorySEO(formData)
@@ -72,7 +74,7 @@ const CityCategoryAddEdit = ({ edit = false }) => {
         })
         .finally(() => {
           setAssignLoading(false);
-          toast.success("city category seo added successfuly");
+          toast.success("SEO created successfuly");
           navigate("/cityCategory");
         });
     }
