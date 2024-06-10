@@ -39,6 +39,7 @@ import Seo from "./pages/Seo/SeoAddEdit";
 import SeoAddEdit from "./pages/Seo/SeoAddEdit";
 import SeoList from "./pages/Seo/SeoList";
 import CityCategory from "./pages/CityCategorySeo/CityCategory";
+import CityCategoryAddEdit from "./pages/CityCategorySeo/CityCategoryAddEdit";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -147,6 +148,9 @@ function App() {
 
 
         <Route path="/cityCategory" element={<CityCategory />} />
+
+        <Route path="/cityCategory/add" element={<CityCategoryAddEdit />} />
+        <Route path="/cityCategory/edit" element={<CityCategoryAddEdit edit={true} />} />
       </Routes>
     </PortalLayout>
   );

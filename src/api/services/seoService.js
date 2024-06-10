@@ -48,6 +48,22 @@ const seoService = {
         } catch (error) {
             throw error.response.data
         }
+    },
+    createCityCategorySEO: async (data) => {
+        try {
+            const response = await axiosInstance.post('/seo/createCityCategory/', data)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
+    editCityCategorySEO: async (data) => {
+        try {
+            const response = await axiosInstance.post('/seo/editCityCategory/', data)
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
     }
 }
 export default seoService
