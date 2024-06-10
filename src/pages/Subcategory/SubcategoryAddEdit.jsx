@@ -12,13 +12,14 @@ import ButtonLoading from "../../components/ButtonLoading";
 import Loading from "../../components/Loading";
 
 const SubcategoryAddEdit = ({edit = false}) => {
-    const names = ["category", "name", "meta_title", "meta_description"];
-    const [error, setErrors] = useState([false, false, false, false]);
+    const names = ["category", "name", "meta_title", "meta_description", "page_description"];
+    const [error, setErrors] = useState([false, false, false, false, false]);
     const [subcategoryData, setSubcategoryData] = useState({
         category: "",
         name: "",
         meta_title: "",
-        meta_description: ""
+        meta_description: "",
+        page_description: ""
     });
     const [assignLoading, setAssignLoading] = useState(false);
     const response = useSelector((state) => state.subcategory);
@@ -175,6 +176,21 @@ const SubcategoryAddEdit = ({edit = false}) => {
                                             error[3] ? "border-red-600" : "border-gray-300"
                                         }`}
                                         placeholder="Enter Meta Description Here"
+                                    />
+                                </div>
+                                <div className="sm:w-[50%] w-full px-5 py-2 mt-2 mx-auto">
+                                    <label className="block text-[12px] ml-3 font-medium uppercase">
+                                        Page Description
+                                    </label>
+                                    <textarea
+                                        value={subcategoryData.page_description}
+                                        rows={5}
+                                        name={names[4]}
+                                        onChange={(e) => handleChange(e)}
+                                        className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
+                                            error[4] ? "border-red-600" : "border-gray-300"
+                                        }`}
+                                        placeholder="Enter Page Description Here"
                                     />
                                 </div>
                             </div>
