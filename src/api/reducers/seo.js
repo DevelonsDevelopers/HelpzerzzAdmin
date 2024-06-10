@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
-    ALL_SEO,
+    ALL_SEO, CITY_CATEGORY,
     CREATE_SEO, DELETE_LANGUAGE, DELETE_SEO,
     SEO_REDUCER, SINGLE_SEO,
     UPDATE_SEO
@@ -11,14 +11,18 @@ import languageService from "../services/languageService";
 
 const initialState = {
     loading: false,
+    cityCategoryLoading: false,
     seoLoading: false,
     deleting: false,
     noData: false,
     success: false,
     fetched: false,
+    cityCategoryFetched: false,
     allSEO: [],
+    cityCategory: [],
     seo: null,
     error: '',
+    cityCategoryError: '',
     seoError: '',
 };
 
@@ -38,6 +42,10 @@ export const updateSEO = createAsyncThunk(UPDATE_SEO, (seo) => {
 
 export const getAllSEO = createAsyncThunk(ALL_SEO, async () => {
     return await seoService.fetchAllSeo();
+});
+
+export const getCityCategory = createAsyncThunk(CITY_CATEGORY, async () => {
+    return await seoService.fetchCityCategory();
 });
 
 export const getSEO = createAsyncThunk(SINGLE_SEO, (id) => {
@@ -75,8 +83,24 @@ const seo = createSlice({
         })
         builder.addCase(getAllSEO.rejected, (state, action) => {
             state.loading = false
-            state.languages = []
+            state.allSEO = []
             state.error = action.error.message
+        })
+
+        //GET ALL SEO /////////////////////////////////
+        builder.addCase(getCityCategory.pending, state => {
+            state.cityCategoryLoading = true
+        })
+        builder.addCase(getCityCategory.fulfilled, (state, action) => {
+            state.cityCategoryLoading = false
+            state.cityCategory = action.payload.cityCategory
+            state.cityCategoryError = ''
+            state.cityCategoryFetched = true
+        })
+        builder.addCase(getCityCategory.rejected, (state, action) => {
+            state.cityCategoryLoading = false
+            state.cityCategory = []
+            state.cityCategoryError = action.error.message
         })
 
         //GET SEO /////////////////////////////////////

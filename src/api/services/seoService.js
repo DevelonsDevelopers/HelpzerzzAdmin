@@ -33,6 +33,14 @@ const seoService = {
             throw error.response.data
         }
     },
+    fetchCityCategory: async () => {
+        try {
+            const response = await axiosInstance.get('/seo/cityCategory')
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    },
     delete: async (id) => {
         try {
             const response = await axiosInstance.delete('/seo/delete/' + id)

@@ -10,7 +10,7 @@ const SEO = ({ id, response }) => {
 
     const names = [
         "title",
-        "description",
+        "description"
     ];
     const [error, setErrors] = useState([
         false,
@@ -20,6 +20,7 @@ const SEO = ({ id, response }) => {
         contractor: "",
         title: "",
         description: "",
+        page_description: ""
     });
 
     useEffect(() => {
@@ -83,7 +84,7 @@ const SEO = ({ id, response }) => {
                 <div className="grid grid-cols-2 gap-2">
                     <div className="w-[100%] px-5 py-2">
                         <label className="block text-[12px] ml-3 font-medium uppercase">
-                            Title
+                            Meta Title
                         </label>
                         <input
                             type="text"
@@ -99,7 +100,7 @@ const SEO = ({ id, response }) => {
 
                     <div className="w-[100%] px-5 py-2">
                         <label className="block text-[12px] ml-3 font-medium uppercase">
-                            Description
+                            Meta Description
                         </label>
                         <input
                             type="text"

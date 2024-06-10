@@ -118,7 +118,7 @@ const CostGuideList = ({search}) => {
                                     <th className="py-[2%] bg-gray-50 text-center text-lg w-[2%]">
                                         Actions
                                     </th>
-                                 </tr>
+                                </tr>
                                 </thead>
 
                                 <tbody>
@@ -192,7 +192,7 @@ const CostGuideList = ({search}) => {
                                                 </div>
                                             </div>
                                         </td>
-                                         
+
                                     </tr>
                                 ))}
                                 </tbody>

@@ -13,7 +13,7 @@ import ButtonLoading from "../../components/ButtonLoading";
 import Loading from "../../components/Loading";
 
 const CostGuideAddEdit = ({ edit = false }) => {
-  const names = ["title", "subtitle", "content", "image" , "seo_image" , "seo_description"];
+  const names = ["title", "subtitle", "content", "image" , "seo_title" , "seo_description"];
   const [error, setErrors] = useState([false, false, false, false , false , false]);
   const [assignLoading, setAssignLoading] = useState(false);
   const [costGuideData, setCostGuideData] = useState({

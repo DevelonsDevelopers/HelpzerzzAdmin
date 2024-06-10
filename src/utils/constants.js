@@ -65,6 +65,7 @@ export const CONTACT_US = "CONTACT_US"
 
 //SEO
 export const ALL_SEO = "ALL_SEO"
+export const CITY_CATEGORY = "CITY_CATEGORY"
 export const SINGLE_SEO = "SINGLE_SEO"
 export const CREATE_SEO = "CREATE_SEO"
 export const UPDATE_SEO = "UPDATE_SEO"
