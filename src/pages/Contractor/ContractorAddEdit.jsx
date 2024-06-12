@@ -70,16 +70,16 @@ const ContractorAddEdit = ({ edit = false }) => {
     }
   }, [response.contractor]);
 
-  useEffect(() => {
-    if (response.success) {
-      if (edit) {
-        navigate("/contractors");
-      } else {
-        navigate("/contractors/details?id=" + response.successID);
-      }
-      dispatch(successListener());
-    }
-  }, [response.success]);
+  // useEffect(() => {
+  //   if (response.success) {
+  //     if (edit) {
+  //       navigate("/contractors");
+  //     } else {
+  //       navigate("/contractors/details?id=" + response.successID);
+  //     }
+  //     dispatch(successListener());
+  //   }
+  // }, [response.success]);
 
   const handleChange = (e) => {
     let tempErrors = [...error];
@@ -104,13 +104,7 @@ const ContractorAddEdit = ({ edit = false }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let tempErrors = [...error];
-    for (let i = 0; i < names.length; i++) {
-      let name = names[i];
-      tempErrors[i] = contractorData[name].length === 0;
-    }
-    setErrors(tempErrors);
-    if (!tempErrors.includes(true)) {
+
       setAssignLoading(true);
 
       if (edit) {
@@ -118,15 +112,16 @@ const ContractorAddEdit = ({ edit = false }) => {
           updateContractor({ file: file, contractor: contractorData })
         ).then(() => {
           setAssignLoading(false);
+          navigate("/contractors");
         });
       } else {
         dispatch(
           addContractor({ file: file, contractor: contractorData })
         ).then(() => {
           setAssignLoading(false);
+          navigate("/contractors/details?id=" + response.successID);
         });
       }
-    }
   };
   console.log('contractor data' , contractorData);
 
@@ -193,6 +188,7 @@ const ContractorAddEdit = ({ edit = false }) => {
                     type="tel"
                     format="+1 (###) ###-####"
                     name={names[2]}
+                    value={contractorData?.phone}
                     placeholder="Enter Contractor Phone"
                     onChange={(e) => handleChange(e)}
                      className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]  ${
@@ -301,7 +297,7 @@ const ContractorAddEdit = ({ edit = false }) => {
                       type="file"
                       id="dropzone-file"
                       accept="image/*"
-                      required
+                    
                       name={names[5]}
                       className="hidden"
                       onChange={(e) => convertToBase64(e)}
@@ -341,7 +337,7 @@ const ContractorAddEdit = ({ edit = false }) => {
                   type="submit"
                   value={"Submit"}
                   disabled={assignLoading}
-                  className="bg-blue-600 text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
+                  className="bg-blue-600 cursor-pointer text-white py-2 px-8 rounded-xl font-semibold text-[15px] uppercase"
                 />
               )}
             </div>
