@@ -14,6 +14,7 @@ import FileResizer from "react-image-file-resizer";
 import DeleteModal from "../../../components/DeleteModal";
 import { getCategories } from "../../../api/reducers/category";
 import subcategoryService from "../../../api/services/subcategoryService";
+import ProjectUpdate from "./ProjectsUpdate";
 
 const resizeFile = (file) =>
   new Promise((resolve) => {
@@ -72,6 +73,8 @@ const Projects = ({ id, response }) => {
 
   const subcategoryResponse = useSelector((state) => state.subcategory);
   const categoryResponse = useSelector((state) => state.category);
+
+  const [update , setUpdate] = useState(false)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -303,7 +306,7 @@ const Projects = ({ id, response }) => {
                 className={`pl-4 block py-[9px] w-full text-sm bg-gray-50 rounded-[9px] border-[1px]`}
                 id="grid-state"
               >
-                <option value="" disabled selected hidden>
+                <option value=""   selected >
                   Select Category
                 </option>
                 {categoryResponse.activeCategories.map((value) => (
@@ -346,6 +349,9 @@ const Projects = ({ id, response }) => {
         </div>
       ) : (
         <>
+        {update ? (
+<>
+
           <div className="">
             <button
               onClick={() => setAdd(true)}
@@ -392,6 +398,11 @@ const Projects = ({ id, response }) => {
               </div>
             ))}
           </div>
+
+        </>
+      ) :  (
+        <ProjectUpdate />
+      )}
         </>
       )}
     </div>

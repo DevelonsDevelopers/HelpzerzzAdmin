@@ -151,7 +151,8 @@ function App() {
 
         <Route path="/cityCategory/add" element={<CityCategoryAddEdit />} />
         <Route path="/cityCategory/edit" element={<CityCategoryAddEdit edit={true} />} />
-      </Routes>
+
+       </Routes>
     </PortalLayout>
   );
 }
