@@ -44,11 +44,11 @@ const SEO = ({ id, response }) => {
     }, [response.contractorDetails]);
 
     useEffect(() => {
-        if (response.detailSuccess) {
+        if (response.seoSuccess) {
             navigate("/contractors");
             dispatch(seoSuccessListener());
         }
-    }, [response.detailSuccess]);
+    }, [response.seoSuccess]);
 
     const handleChange = (e) => {
         let tempErrors = [...error];

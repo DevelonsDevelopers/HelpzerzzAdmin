@@ -17,7 +17,8 @@ const Details = ({id, response}) => {
 
     const [assignLoading, setAssignLoading] = useState(false);
     const [subcategory, setSubcategory] = useState([])
-    const [subcategoryValue, setSubcategoryValue] = useState()
+    const [subcategoryValue, setSubcategoryValue] = useState([])
+    const [onceDone, setOnceDone] = useState(false)
 
     const names = [
         "company_name",
@@ -32,6 +33,7 @@ const Details = ({id, response}) => {
         "city",
         "address",
         "description",
+        "subcategories",
     ];
     const [error, setErrors] = useState([
         false,
@@ -47,6 +49,7 @@ const Details = ({id, response}) => {
     const [detailsData, setDetailsData] = useState({
         contractor: id,
         company_name: "",
+        subcategories: "",
         address: "",
         postal_code: "",
         category: "",
@@ -72,10 +75,6 @@ const Details = ({id, response}) => {
             console.error(error);
         }
     };
-
-    useEffect(() => {
-        console.log("here", subcategoryValue)
-    }, [subcategoryValue]);
 
     useEffect(() => {
         if (detailsData.category) {
@@ -104,6 +103,39 @@ const Details = ({id, response}) => {
         };
         getCities();
     }, []);
+
+    useEffect(() => {
+        if (!onceDone) {
+            if (subcategory.length > 0) {
+                if (detailsData.subcategories) {
+                    let arr = [];
+                    detailsData.subcategories.split(",").map(value => {
+                        let sub = subcategory.filter(v => parseInt(v.id) === parseInt(value))
+                        arr.push({label: sub[0].name, value: sub[0].id})
+                    })
+                    setSubcategoryValue(arr)
+                    setOnceDone(true)
+                }
+            }
+        }
+    }, [subcategory, detailsData.subcategories]);
+
+    useEffect(() => {
+        let subs = []
+        if (subcategoryValue.length > 0) {
+            subcategoryValue.map(value => {
+                subs.push(value.value)
+            })
+            setDetailsData((data) => ({...data, subcategories: subs}));
+            let tempErrors = [...error];
+            tempErrors[9] = false;
+            setErrors(tempErrors);
+        } else {
+            let tempErrors = [...error];
+            tempErrors[9] = true;
+            setErrors(tempErrors);
+        }
+    }, [subcategoryValue]);
 
     useEffect(() => {
         if (!categoryResponse.activeFetched) {
