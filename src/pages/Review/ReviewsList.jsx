@@ -12,6 +12,7 @@ import {
   deleteReview,
 } from "../../api/reducers/review";
 import deleteImage from "../../components/assets/delete.png";
+import {AiOutlineArrowRight} from "react-icons/ai";
 
 const ReviewsList = ({ search }) => {
   const [open, setOpen] = useState(false);
@@ -211,6 +212,19 @@ const ReviewsList = ({ search }) => {
                           onClick={() => initiateDelete(value.id)}
                         >
                           <img src={deleteImage} alt="Delete" />
+                        </div>
+                      </td>
+                      <td className="py-[2%] w-[1%] border-t-[1px]">
+                        <div
+                            className="flex items-center lg:text-lg md:text-md text-sm justify-center text-center text-blue-700 cursor-pointer hover:scale-110"
+                            onClick={() =>
+                                navigate("/reviews/details?id=" + value.id)
+                            }
+                        >
+                          <div className="flex">
+                            Details{" "}
+                            <AiOutlineArrowRight className="ml-2 mt-1"/>
+                          </div>
                         </div>
                       </td>
                     </tr>

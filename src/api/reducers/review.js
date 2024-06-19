@@ -1,5 +1,12 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ALL_REVIEWS, APPROVE_REVIEW, DELETE_REVIEW, REJECT_REVIEW, REVIEW_REDUCER} from "../../utils/constants";
+import {
+    ALL_REVIEWS,
+    APPROVE_REVIEW,
+    DELETE_REVIEW,
+    REJECT_REVIEW,
+    REVIEW_REDUCER,
+    SINGLE_REVIEW
+} from "../../utils/constants";
 import reviewService from "../services/reviewService";
 
 const initialState = {
@@ -14,6 +21,10 @@ const initialState = {
     error: '',
     reviewError: '',
 }
+
+export const getReview = createAsyncThunk(SINGLE_REVIEW, (id) => {
+    return reviewService.fetch(id)
+})
 
 export const getReviews = createAsyncThunk(ALL_REVIEWS, () => {
     return reviewService.fetchAll()
@@ -73,6 +84,21 @@ const review = createSlice({
             state.reviews = []
             state.error = action.error.message
         })
+
+        //GET REVIEW /////////////////////////////////////
+        builder.addCase(getReview.pending, (state) => {
+            state.reviewLoading = true;
+        });
+        builder.addCase(getReview.fulfilled, (state, action) => {
+            state.reviewLoading = false;
+            state.review = action.payload.contractorReview;
+            state.reviewError = "";
+        });
+        builder.addCase(getReview.rejected, (state, action) => {
+            state.reviewLoading = false;
+            state.review = null;
+            state.reviewError = action.error.message;
+        });
 
         //APPROVE REVIEW ////////////////////////////////////////
         builder.addCase(approveReview.pending, state => {
