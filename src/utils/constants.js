@@ -1,5 +1,5 @@
 
-export const IMAGE_PATH = "https://api.helperzz.com/public/uploads/"
+export const IMAGE_PATH = "https://api.helperzz.in/public/uploads/"
 
 export const SESSION_USER = "HELPERZZZ_ADMIN_USER"
 
